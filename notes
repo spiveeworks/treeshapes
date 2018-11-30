@@ -255,3 +255,9 @@ ubiquitous for large enough n.
 
 It seems unlikely that there would be _no_ synonymity, which is the only way
 for there to be _anything less than ubiquitous_ synonymity.
+
+
+minimum determinant
+-------------------
+
+each row of a balanced tree with 2^n leaves, is 2^i lots of 2^(n-i)... right?

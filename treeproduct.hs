@@ -1,4 +1,5 @@
 import Data.Function
+import Data.List
 
 data Tree = Leaf | Node Tree Tree deriving Show
 
@@ -10,8 +11,12 @@ specDet :: Tree -> Integer
 specDet Leaf = 1
 specDet (Node x y) = (count x + count y) * specDet x * specDet y
 
+diag :: Tree -> [Integer]
+diag Leaf = []
+diag t@(Node x y) = count t : diag x ++ diag y
+
 similar :: Tree -> Tree -> Bool
-similar = (==) `on` specDet
+similar = (==) `on` (sort . diag)
 
 same :: Tree -> Tree -> Bool
 same Leaf Leaf = True
@@ -52,21 +57,11 @@ main = do
   let n = read inp
   putStrLn (mainPure n)
 
+ch = Node Leaf Leaf
+q1 = Node ch ch
+q2 = Node Leaf (Node Leaf ch)
 
-resultl =
- Node
-  (Node Leaf Leaf)
-  (Node Leaf
-   (Node
-    (Node Leaf Leaf)
-    (Node Leaf
-     (Node Leaf Leaf))))
+result1 = Node (Node q1 Leaf) q2
 -- is similar to
-resultr =
- Node
-  (Node Leaf
-   (Node Leaf Leaf))
-  (Node Leaf
-   (Node Leaf
-    (Node Leaf
-     (Node Leaf Leaf))))
+result2 = Node q1 (Node Leaf q2)
+
