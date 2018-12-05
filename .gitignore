@@ -1,0 +1,10 @@
+*.hi
+*.o
+
+treeproduct
+
+
+*.aux
+*.dvi
+*.log
+*.pdf
