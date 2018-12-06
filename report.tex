@@ -412,4 +412,36 @@ for there to be \emph{anything less than ubiquitous} synonymity.
 
 each row of a balanced tree with $2^n$ leaves, is $2^i$ lots of $2^(n-i)$\ldots right?
 
+\section{Meeting 2}
+
+
+looking at spectra generated for trees of size 4 and 5 confirmed the result
+that spectral matrices are upper triangular, and that diagonals are the
+negative of the size of the subtree corresponding to that node
+
+the determinants seem to measure how balanced the trees are, from maximally
+balanced: (expr?), to maximally unbalanced: n!
+
+
+However since the matrices are triangular, it does look like the determinants
+coincide at 8 leaves
+another permutation-independant measure is the trace, which coincides at 6
+leaves.
+
+This discussion splits two ways, first is the fact that the trace does depend
+on how eigenvectors are associated with basis matrices, changing the relation
+creates different trace values.
+Second is the fact that the trace and the determinant are symmetric functions
+of the diagonal, i.e.\ of the eigenvalues \emph{of the spectral matrix}.
+
+It turns out that there is a pair of trees with 9 leaves that have their whole
+diagonal the same! (modulo ordering)
+this means that any function which is symmetric (and hence doesn't depend on
+relabelling) will be non-injective as well.
+
+On the other hand the matrix as a whole appears to be injective, so it is worth
+asking how much could be removed from the matrix without breaking injectivity.
+Could you reconstruct the tree from an ordered spectrum?
+
+
 \end{document}
