@@ -2,6 +2,13 @@
 \usepackage{amsmath, dsfont, qtree}
 \begin{document}
 
+\section{Abstract}
+
+We investigate representations of binary trees related to a particular matrix
+algebra representation demonstrated previously.
+
+[finish report first then finish abstract]
+
 \section{Background}
 
 The paper ``Ubiquity of synonymity'' dealth with 3 different matrix
@@ -35,46 +42,52 @@ might be useful.
 
 \section{Canonical Forms of Spectra}
 
-(Assuming that the algebra is diagonalizable at all)
+If we assume that the matrices in the algebra are diagonalizable for now, (we
+can show this later) then we can start to reason about the spectra of these
+matrices.
+With this assumption, it will also follow that all of the matrices in the
+algebra are simultaneously diagonalizable, and hence that a set of eigenvectors
+can be found common to the whole algebra.
+We shall therefore refer to these as the Algebra's eigenvectors.
 
-One consideration with spectral representations, is how to order the
-eigenvalues, and their corresponding eigenvectors.  When saying that two
-matrices have the same eigenvalues, what one means is that there is an ordering
-of one matrices eigenvalues that correspond identically with the eigenvalues of
-the other matrix. This will account for the multiplicity of each eigenvalue.
-This suggests 3 ways of canonicalizing the spectra, one is to check the
-necessary condition that each eigenvalue in the first has at least one
-corresponding eigenvalue in the second, by representing the spectra as a set
-of eigenvalues. This shall be immediately discarded, since it could so easily
-compromise the injectivity of the representation, since
-$\{1, 1, 2\} = \{1, 2, 2\}$
+With this in place, we consider the spectra of the matrices in the algebra.
+When representing each tree as a single matrix, comparing the spectra of these
+matrices was a simple matter of comparing the multiplicity of each eigenvalue.
+This could be thought of as either comparing the spectrum as a multiset, or as
+a sorted sequence of values.
+Then since the order of the eigenvectors doesn't matter, we can freely relabel
+trees without changing their representation.
+%     I keep changing my wording, I should try to stick to the original wording
+% of the reference papers. "invariance under relabelling" etc.
 
-The other two ways are to sort the list (choose a canonical rearrangement) and
-equivalently to use a multiset.
+We, on the other hand, are considering a multidimensional space of matrices,
+and it might be nice to have this same property of invariance under
+relabelling.
+As such we might consider the set of sorted spectra of the whole algebra.
 
-Sorting the list will definitely work for the single matrix representations
-above, but for the algebra representation, this would compromise the
-motivating linearity property that emerges from the simultaneous
-diagonalizability of the algebras.
-In particular $<1, 1> - <0, 1> = <1, 0>$ which isn't sorted.
-Sorting the result will restore the equality, but at this point the set of
-spectra is looking a lot less convenient, though it could still be of interest.
+This representation seems to be useful, but once we consider the simultaneous
+diagonalization of the algebra, we see a missed opportunity to generate a
+homomorphism from the algebra to the vector space $\mathds{C}^n$.
+That is, by taking the algebra's eigenvectors under some ordering, and
+generating the spectra of matrices corresponding to these eigenvectors, we will
+get the property that the spectrum of a linear combination of matrices is the
+same linear combination of the individual spectra.
+This means the ``spectrum'' map is a homomorphism, and so its image will be a
+vector space.
 
-Without sorting, the image of the algebra forms a vector space, whose dimension
-could range from 1 to n-1 where n is the number of leaves on the trees in
-question.
-Since the matrices are simultaneously diagonalizable, we can pick a single set
-of eigenvectors in advance, and use this to compute all the spectra, resulting
-in a single vector space, however different permutations of these eigenvectors
-will be valid and will permute the coordinates in $\mathds{C}^n$.
+This will not apply to the sorted image, e.g. $<1, 1> - <0, 1> = <1, 0>$
+	% <> notation?
+So as an alternative, we could consider this vector space, and look for
+properties that are invariant under relabelling of the original tree, and
+invariant under different choices of eigenvector.
+This is the same as finding properties that are invariant under permutation of
+the axes of the vector space.
 
-It is unclear how to apply this to get a distance formula..
+% note that we have strayed from any sense of distance formula?
+% a possible distance formula was discovered after this first meeting though.
 
-so the question of identifying similar spectra becomes a question of similar
-vector spaces generated from spectra\ldots
-from this perspective it is clear that sorting no longer works.
+\section{subspace triviality}
 
-In any case then the important stuff:
 \begin{itemize}
 	\item subspace has at most n-1 dimensions
 	\item subspace could have less if there is degeneracy
