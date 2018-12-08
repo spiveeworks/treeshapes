@@ -31,6 +31,7 @@ that it is at least substantially non-trivial.
 The Tas Phylo group has shown in another paper that trees can be represented as
 an algebra of matrices, and that this algebra is commutative.
 % algebra definition?
+% proper references?
 
 Similar to the previous paper, these matrices relate rows/columns to leaf
 labels, and hence are similar to matrices associated with relabellings of the
@@ -86,21 +87,48 @@ the axes of the vector space.
 % note that we have strayed from any sense of distance formula?
 % a possible distance formula was discovered after this first meeting though.
 
-\section{subspace triviality}
+\section{Subspace Triviality}
 
-\begin{itemize}
-	\item subspace has at most n-1 dimensions
-	\item subspace could have less if there is degeneracy
-	\item in particular if two subtrees have the same shape then their roots
-		will have the same corresponding matrices.
-	\item further all algebras of a given n will have one consistent
-		eigenvalue of 0,
-	\item this means that if there is no degeneracy the image will always be
-		$\mathds{C}^{n-1}$
-	\item this means the representation is definitely not injective, however
-		the dimension will still be a measure of degeneracy
-	\item also degenerate trees may have distinct images?
-\end{itemize}
+When looking at this vector space, the most obvious measurement we could apply
+to it is its dimension.
+It will turn out that its dimension is always the same as the algebra, which
+seems odd when the algebra seems to contain matrices that are just relabellings
+of eachother.
+As an example every cherry in a tree will correspond to a matrix equivalent to
+the following:
+
+\[
+	\left[ \begin{matrix}
+		-1 & 1\\
+		1 & -1
+	\end{matrix} \right]
+\]
+
+The exact matrices are simply the above with arbitrary rows and columns of
+zero.
+The spectrum of any matrix in this form should be the same as any other, and in
+the sorted-list representation they will be, but our vector space will
+distinguish these, in the same way that $<0, 1>$ and $<1, 0>$ are linearly
+independent.
+
+This means that symmetries in the tree might have created interesting
+redundancies in the set of sorted spectra, but our vector space will not
+reflect these symmetries in the same way.
+
+In particular if we say that the number of leaves on the original tree is $n$,
+then our algebra will be generated from $n-1$ internal nodes, and will be a set
+of $n \times n$ matrices.
+
+This means that the vector space will be an $n-1$ dimensional subspace of
+$\mathds{C}^n$.
+
+Unfortunately since the matrices all have zero row-sum, that corresponds to an
+eigenvector of all 1s, and an eigenvalue of zero, which means the subspace will
+simply be $\mathds{C}^{n-1}$ extended by a zero, regardless of the tree in
+question.
+
+Not only is the vector space not a fair representation of the binary tree, it
+is a trivial representation.
 
 \section{eigenvalues}
 
