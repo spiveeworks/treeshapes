@@ -208,67 +208,56 @@ When working towards a simultaneous diagonalization of the algebra, the first
 thing we need is to show that the matrices can be diagonalized at all.
 In showing this we expect to get the eigenvalues as well.
 
-For simplicity we will 
-The matrix representations simply correspond $\{i_l\} \times \{i_r\}$
-the leaf descendents of the left child of the node,
-multiplied by the leaf descendents of the right child of the node
-if we consider these matrices invariant under relabelling (which they aren't
-quite) then it looks like this is just representing the size of each child
-tree, and we could canonicalize as such:
+For simplicity we will assume that the tree leaves have been labelled ``from
+left to right'', i.e.\ such that at any internal node, its left descendants are
+less than its right descendants.
 
-any subtree's matrix is similar by permutation to a matrix of the form:
+Formally, that there is a total order of the tree such that the ``left'' child
+of any node (being the minimum of the two children) has descendents that are
+all less than the ``right'' child of that node.
+
+Other labellings will simply permute the coordinates of the eigenvectors we
+derive here.
+
+Then we can see that the matrix that corresponds to a node with $x$ left
+descendents, $y$ right descendents, and minimum descendent $l+1$. (so that
+there are $l$ leaves to the left of the node's minimum descendent)
 
 \[ M_{ij} = \begin{cases}
--y & i = j \leq x\\
--x & x < i = j \leq x + y\\
-1 & i \leq x < j \leq x + y\\
-1 & j \leq x < i \leq x + y\\
+-y & l < i = j \leq l + x\\
+-x & l + x < i = j \leq l + x + y\\
+1 & l < i \leq l + x < j \leq l + x + y\\
+1 & l < j \leq l + x < i \leq l + x + y\\
 0 & otherwise
-\end{cases}
-\]
+\end{cases} \]
 
-where x is the number of leaves on the left of the subtree's root,
-and y is the number of leaves on the right
-$x + y = n_i <= n$
+So for example if we take the tree:
 
-this could be very useful computationally, especially since these matrices can
-be extended or retracted by the rows and columns of zero
+\Tree[. 1 [. [.i [. 2 3 ] 4 ] 5 ]]
 
-such an extension simply adds a zero eigenvalue corresponding to
-$[0\ldots 0, 1]$
-and a zero coordinate to each existing eigenvector without changing the
-eigenvalue
+Then the node marked $i$ will have
+$l=1$, $x=2$, $y=1$
+which gives
+\[ L_i = M = \left[ \begin{matrix}
+	0 & 0 & 0 & 0 & 0\\
+	0 & -1 & 0 & 1 & 0\\
+	0 & 0 & -1 & 1 & 0\\
+	0 & 1 & 1 & -2 & 0\\
+	0 & 0 & 0 & 0 & 0
+\end{matrix} \right] \]
 
-this means that each spectrum will only have $x + y - 1$ non-zero eigenvalues,
-so the matrix of eigenvalues will be about half zeroes
+From this it becomes clear that all but $x+y$ of the eigenvalues will be zero,
+and zero-rowsum brings this down to $x+y-1$ non-zero eigenvalues.
 
-in fact for the case of the balanced 4-tree, the nodes and eigenvectors can be
-rearranged so that the matrix has the form:
-
-\begin{equation*}
-\left[ \begin{matrix}
-a & 0 & b\\
-0 & c & d\\
-0 & 0 & e
-\end{matrix} \right]
-\end{equation*}
-
-which will clearly have a determinant of $ace$
-
-it is not at all clear whether these upper triangular forms exist for all
-trees, since the eigenvectors don't clearly correspond to leaves of the tree,
-(if they did we might want to order the trees from smallest to largest, or
-order the leaves of the tree by the number of subtrees they sit inside)
-in fact eigenvectors in the null space may be an arbitrary basis of the null
-space, however computing the eigenvalue matrices of more trees may provide
-insight
-
-
+As a side note this means that the matrix of all of the eigenvalues will be
+at least half zeroes, which simplifies a lot of calculations on this
+matrix, especially once we find a way of permuting the eigenvalue matrix to be
+upper triangular.
 
 \subsection{closed form eigenvectors}
 
-given the simple $M_{ij}$ form above, it becomes possible to find eigenvectors for
-these algebras in general.
+given the simple $M_{ij}$ form above, it becomes possible to find eigenvectors
+for these algebras in general.
 
 If we take the root of the 3-tree for example, we get the following
 eigenvectors:
@@ -462,7 +451,7 @@ $0$ in $L_1$. % or whatever the root node is... this is getting so wordy
 Then we need to show that this set $u_0$ through to $u_n$ is exactly $U$.
 This is true provided that no two $u_i = u_j$ unless $i = j$.
 
-So suppose that $u_i = u_j$ for some $i, j \in \mathds{Z} \intersection [0, n]$
+So suppose that $u_i = u_j$ for some $i, j \in \mathds{Z} \cap [0, n]$
 Then since $v_i$ is proportional to $u_i$ and similarly for $j$, we know that
 $v_i$ and $v_j$ must be proportional to \emph{eachother}.
 
