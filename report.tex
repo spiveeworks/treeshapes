@@ -9,7 +9,9 @@ algebra representation demonstrated previously.
 
 [finish report first then finish abstract]
 
-\section{Background}
+\section{Constructing Measurements of the Algebra}
+
+\subsection{Background}
 
 The paper ``Ubiquity of synonymity'' dealth with 3 different matrix
 representations of trees: the adjacency matrix, laplacian matrix, and distance
@@ -41,7 +43,7 @@ diagonalizable at all, then it is simultaneously diagonalizable.
 Together these properties suggest that the spectra of matrices in this algebra
 might be useful.
 
-\section{Canonical Forms of Spectra}
+\subsection{Canonical Forms of Spectra}
 
 If we assume that the matrices in the algebra are diagonalizable for now, (we
 can show this later) then we can start to reason about the spectra of these
@@ -77,17 +79,17 @@ This means the ``spectrum'' map is a homomorphism, and so its image will be a
 vector space.
 
 This will not apply to the sorted image, e.g. $<1, 1> - <0, 1> = <1, 0>$
-	% <> notation?
+	% <tuple> notation?
 So as an alternative, we could consider this vector space, and look for
 properties that are invariant under relabelling of the original tree, and
 invariant under different choices of eigenvector.
 This is the same as finding properties that are invariant under permutation of
 the axes of the vector space.
 
-% note that we have strayed from any sense of distance formula?
-% a possible distance formula was discovered after this first meeting though.
+% note that it might look like we have strayed from any sense of distance formula
+% measurements later on will have potential for distance formulae
 
-\section{Subspace Triviality}
+\subsection{Subspace Triviality}
 
 When looking at this vector space, the most obvious measurement we could apply
 to it is its dimension.
@@ -104,8 +106,7 @@ the following:
 	\end{matrix} \right]
 \]
 
-The exact matrices are simply the above with arbitrary rows and columns of
-zero.
+The exact matrices are simply the above with added rows and columns of zero.
 The spectrum of any matrix in this form should be the same as any other, and in
 the sorted-list representation they will be, but our vector space will
 distinguish these, in the same way that $<0, 1>$ and $<1, 0>$ are linearly
@@ -130,45 +131,75 @@ question.
 Not only is the vector space not a fair representation of the binary tree, it
 is a trivial representation.
 
+\subsection{Parameter-Free Representations}
+
+While it is not useful to map the whole algebra to $\mathds{C}^n$, if we just
+look at the basis it turns out to be more useful.
+% addressing the fact that other bases exist than the one the algebra was
+% defined with? once we're talking about determinants this can be dealt with
+% specifically, but the trace and spectrum of the eigenvalue matrix are heavily
+% dependent on the basis chosen
+As such we shall consider the basis that was used to define the algebra.
+
+If the original tree has $n$ leaves, then we have
+\begin{itemize}
+	\item $n-1$ internal nodes
+	\item $n-1$ basis matrices
+	\item $n$ common eigenvectors
+	\item $(n-1) \times n$ eigenvalues
+\end{itemize}
+
+This could be summarized in a pair of matrices:
+\begin{itemize}
+	\item An $n \times n$ matrix of eigenvectors, and
+	\item an $(n-1) \times n$ matrix of eigenvalues.
+\end{itemize}
+
+This second matrix will always have a column of zeroes in it, corresponding to
+the eigenvector of all 1s, since the algebra has zero row-sum.
+As such we do not lose any information by removing this column, and getting a
+square $(n-1) \times (n-1)$ matrix.
+We could do the same for the eigenvector and get an $n \times (n-1)$ matrix,
+but obviously this has the opposite effect.
+
+These matrices are not invariant under relabelling:
+\begin{itemize}
+	\item relabelling leaves permutes the rows of the eigenvector matrix
+	\item relabelling internal nodes permutes the rows of the eigenvalue matrix
+	\item relabelling eigenvectors permutes the columns of both matrices.
+\end{itemize}
+
+It seems like either of these matrices on their own would be enough to
+reconstruct the algebra, and hence the tree, so on their own they are
+interesting representations of a tree.
+Further still, measurements that are invariant under the row/column
+permutations above have potential for distinguishing tree-shapes as was
+originally desired.
+
+One clear possibility is to take the determinant of either of these matrices,
+and remove the effect of row/column permutations with an absolute value.
+For now we shall derive the exact value of both of the matrices.
+
+% not included currently, could be a useful analogy:
+% Geometrically we can consider this to be the volume spanned by the spectrum vectors.
+
 \section{eigenvalues}
 
-\subsection{eig matrix}
-
-For an n leaf tree, we have $\dim(A)=n-1$ for the tree algebra.
-
-Let $s(L_i)$ be the ith (ordered/include multiplicity) spectrum of the basis
-matrix $L_i$. So $s(L_i)$ is an n-vector.
-
-Each $L_i$ has a 0 as an eigenvalue corresponding to the col vector of all 1s.
-Remove this from the spectrum vectors.
-
-Thus we have (n-1) (n-1)-vectors.
-
-Form a square matrix out of these and take the absolute value of its
-determinant.
-
-Then this value will only depend on the tree shape, since the determinant simply acquires +/- under permutation of rows/columns.
-
-(Geometrically we can consider this to be the volume spanned by the spectrum vectors.)
-
-
-
-\subsection{basis variance}
-
-If $detsubst(L*) =$ the determinant as described, but with respect to basis
-$L*, L_2, L_3\ldots L_n-1$, so that $detsubst(L_1)$ is exactly the
-determinant as described.
-
-Then $detsubst(L_1 + L_2)$ expanded on the first column seems to give the same
-expression as $detsubst(L_1) + detsubst(L_2)$ expanded on their first columns.
-
-But $detsubst(L_2)$ is the determinant of a singular matrix:
-\[[spec(L_2), spec(L_2), spec(L_3)\ldots]\]
-so equals zero.
-
-The same doesn't seem to apply to $detsubst(L_1 + L_1)$ though, so we might
-need to normalize the $L_i$ matrices somehow?
-
+%\subsection{basis variance}
+%
+%If $detsubst(L*) =$ the determinant as described, but with respect to basis
+%$L*, L_2, L_3\ldots L_n-1$, so that $detsubst(L_1)$ is exactly the
+%determinant as described.
+%
+%Then $detsubst(L_1 + L_2)$ expanded on the first column seems to give the same
+%expression as $detsubst(L_1) + detsubst(L_2)$ expanded on their first columns.
+%
+%But $detsubst(L_2)$ is the determinant of a singular matrix:
+%\[[spec(L_2), spec(L_2), spec(L_3)\ldots]\]
+%so equals zero.
+%
+%The same doesn't seem to apply to $detsubst(L_1 + L_1)$ though, so we might
+%need to normalize the $L_i$ matrices somehow?
 
 
 \subsection{degenerecy and eig matrix}
