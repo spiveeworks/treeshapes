@@ -512,54 +512,72 @@ matrix form, take two trees with 4 leaves:
 	0 & 0 & 0 & -2
 \end{matrix} \right] \]
 
-\section{injectivity}
+\section{Deciding Fairness}
+
+\subsection{Ubiquity in Eigenvalue Matrix}
 
 The reference paper ``ubiquity of synonymity'' used an induction-like argument,
-that if two trees are synonymous, then adding branches around those trees will
-create further pairs of synonymous trees, which looks almost trivial to show
-for this spectral determinant.
+that if two trees are synonymous, then they sometimes also have an `exchange'
+property, that adding branches around those trees will create further pairs of
+synonymous trees.
+%not really induction like now that i think about it
 
-As such if there is any synonymity then as the paper showed, it will become
-ubiquitous for large enough n.
+Then as tree size gets larger, the probability of containing a subtree with the
+exchange property goes to 1, and hence so does the probability of another tree
+existing with the same measurement.
 
-It seems unlikely that there would be \emph{no} synonymity, which is the only way
-for there to be \emph{anything less than ubiquitous} synonymity.
+In that case the measurement being used was the spectrum of a direct matrix
+representation of the tree, but in our case one possible measurement is the
+spectrum of the matrix of eigenvalues we have constructed.
 
+This measurement for us immediately has the exchange property, as the spectrum
+of our upper triangular matrices is simply the diagonal, and this diagonal is
+simply the number of leaves in each subtree.
+
+So then as long as there is a pair of trees with the same spectrum, we'll get
+the same strong negative result for the spectrum.
+
+\Tree[.    [. [. 1 2 ] [. 3 4 ]] [. 5   [. [. 6 [. 7 [. 8 9 ]]]]]]
+\Tree[. [. [. [. 1 2 ] [. 3 4 ]]    5 ] [. [. 6 [. 7 [. 8 9 ]]]]]
+
+As a result any measurement which is a symmetric function of the diagonal, such
+as the determinant or the trace, will be at least as likely to coincide.
+
+%note about these functions being (known?) measurements of balance
+
+The two exceptions to this are, the trace of the eigenvalue matrix when not
+triangular, and the spectrum of the eigenvalue matrix with ordering
+information.
+
+\subsection{Fairness of Eig Matrices}
+
+It looks like both the eigenvector matrix, and the eigenvalue matrix, can be
+used independent of eachother to reconstruct the tree structure.
+
+The eigenvector matrix can be used to recover the leaf labels as well, whereas
+the eigenvalue matrix can be used to recover the branch labels.
+
+[no proof currently]
+
+\section{loose notes}
 
 \subsection{minimum determinant}
 
-each row of a balanced tree with $2^n$ leaves, is $2^i$ lots of $2^(n-i)$\ldots right?
+each row of a balanced tree with $2^n$ leaves, is $2^i$ lots of $2^{n-i}$\ldots right?
 
-\section{Meeting 2}
-
-
-looking at spectra generated for trees of size 4 and 5 confirmed the result
-that spectral matrices are upper triangular, and that diagonals are the
-negative of the size of the subtree corresponding to that node
+\subsection{Meeting 2}
 
 the determinants seem to measure how balanced the trees are, from maximally
 balanced: (expr?), to maximally unbalanced: n!
 
+The original question still remains, how much could be removed from the matrix
+without breaking injectivity. Could you reconstruct the tree from an ordered
+spectrum?
 
-However since the matrices are triangular, it does look like the determinants
-coincide at 8 leaves
-another permutation-independant measure is the trace, which coincides at 6
-leaves.
+\subsection{eig matrices}
 
-This discussion splits two ways, first is the fact that the trace does depend
-on how eigenvectors are associated with basis matrices, changing the relation
-creates different trace values.
-Second is the fact that the trace and the determinant are symmetric functions
-of the diagonal, i.e.\ of the eigenvalues \emph{of the spectral matrix}.
-
-It turns out that there is a pair of trees with 9 leaves that have their whole
-diagonal the same! (modulo ordering)
-this means that any function which is symmetric (and hence doesn't depend on
-relabelling) will be non-injective as well.
-
-On the other hand the matrix as a whole appears to be injective, so it is worth
-asking how much could be removed from the matrix without breaking injectivity.
-Could you reconstruct the tree from an ordered spectrum?
-
+why do the two matrices need leaf/branch info to recover the original? could
+you get rid of it? if you cant is it impossible to use these matrices to
+distinguish tree shapes?
 
 \end{document}
