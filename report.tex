@@ -456,17 +456,63 @@ eigenvectors described previously for $L_i$
 
 So we have the exact value of our $n$ eigenvectors and eigenvalues.
 
-\subsection{Returning to the determinant}
-
+\subsection{Ordering the Nodes}
 
 If we can order these nodes so that their children always come after them, then
-the matrix of eigenvalues will be upper triangular, and so its determinant will
-simply be
+the matrix of eigenvalues will be upper triangular. (Once the zero-rowsum
+column is removed)
+
+One consequence of this is that the determinant will simply be
 
 \[\prod_{i=1}^n d_i\]
 
-this is simply the pre-order of the nodes, and so we have a closed form of the
+This is simply the pre-order of the nodes, and so we have a closed form for the
 determinant.
+
+As an example of what all of the eigenvectors and eigenvalues look like in
+matrix form, take two trees with 4 leaves:
+
+\Tree[. [. 1 2 ] [. 3 4 ]]
+
+\nopagebreak[4]
+
+\[ \text{eigenvectors} = \left[ \begin{matrix}
+	1 & 2 & 1 & 0\\
+	1 & 2 & -1 & 0\\
+	1 & -2 & 0 & 1\\
+	1 & -2 & 0 & -1
+\end{matrix} \right] \]
+
+\nopagebreak[4]
+
+\[ \text{eigenvalues} = \left[ \begin{matrix}
+	0 & -4 & -2 & -2\\
+	0 & 0 & -2 & 0\\
+	0 & 0 & 0 & -2
+\end{matrix} \right] \]
+
+
+
+\Tree[. [. [. 1 2 ] 3 ] 4 ]
+
+\nopagebreak[4]
+
+\[ \text{eigenvectors} = \left[ \begin{matrix}
+	1 & 1 & 1 & 1\\
+	1 & 1 & 1 & -1\\
+	1 & 1 & -2 & 0\\
+	1 & -3 & 0 & 0
+\end{matrix} \right] \]
+
+\nopagebreak[4]
+
+\[ \text{eigenvalues} = \left[ \begin{matrix}
+	0 & -4 & -1 & -1\\
+	0 & 0 & -3 & -1\\
+	0 & 0 & 0 & -2
+\end{matrix} \right] \]
+
+\section{injectivity}
 
 The reference paper ``ubiquity of synonymity'' used an induction-like argument,
 that if two trees are synonymous, then adding branches around those trees will
