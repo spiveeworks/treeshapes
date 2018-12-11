@@ -201,12 +201,12 @@ For now we shall derive the exact value of both of the matrices.
 %The same doesn't seem to apply to $detsubst(L_1 + L_1)$ though, so we might
 %need to normalize the $L_i$ matrices somehow?
 
-
-\subsection{Eigenvalues}
-
 When working towards a simultaneous diagonalization of the algebra, the first
 thing we need is to show that the matrices can be diagonalized at all.
 In showing this we expect to get the eigenvalues as well.
+
+
+\subsection{Simple Matrix Format}
 
 For simplicity we will assume that the tree leaves have been labelled ``from
 left to right'', i.e.\ such that at any internal node, its left descendants are
@@ -254,7 +254,7 @@ at least half zeroes, which simplifies a lot of calculations on this
 matrix, especially once we find a way of permuting the eigenvalue matrix to be
 upper triangular.
 
-\subsection{closed form eigenvectors}
+\subsection{Diagonalization}
 
 given the simple $M_{ij}$ form above, it becomes possible to find eigenvectors
 for these algebras in general.
@@ -318,19 +318,22 @@ only term that doesn't become a zero in the series.
 In the last row the repeated 1s sum the coordinates of the matrix, which give
 zero.
 
-This form of $<1, -1, 0\ldots 0>$ will generalize to any $M_{ij}$ as above, as long as
-$x \geq 2$, with an eigenvalue of -y
-similarly if y >= 2 we could reverse the labels temporarily and use the same
-argument, we get an eigenvector of $<0\ldots 0, -1, 1>$ with an eigenvalue of -x
-further still we can get $x-1$ of the former and $y-1$ of the latter by moving the
--1 coordinate to any other row $\leq$ x, and the above argument would still apply.
+This form of $<1, -1, 0\ldots 0>$ will generalize to any $M_{ij}$ as above, as
+long as $x \geq 2$, with an eigenvalue of -y.
+Similarly if y >= 2 we could reverse the labels temporarily and use the same
+argument, we get an eigenvector of $<0\ldots 0, -1, 1>$ with an eigenvalue of
+-x.
+
+Further still, we can get $x-1$ of the former and $y-1$ of the latter by moving
+the -1 coordinate to any other row $\leq$ x, and the above argument would still
+apply.
 
 This gives $x-1$ repeated eigenvalues of $-y$, $y-1$ repeated eigenvalues of $-x$,
 which when combined with the 0 eigenvalue shown, and the $n - (x + y)$ trivial $0$
 eigenvalues coming from rows that are all zero, we get $n-1$ total eigenvalues,
-meaning there is 1 more.
+meaning there is 1 more before we have a general solution.
 
-This must be the third eigenvector we get in the simple 3-tree case:
+This must correspond to the third eigenvector we get in the simple 3-tree case:
 
 $
 \left[\begin{matrix}
@@ -352,16 +355,26 @@ $
 \end{matrix}\right]
 $
 
-it's hard to understand exactly why this is an eigenvector, but if we guess
-that the general form is $<a, a\ldots a, b, b\ldots b>$ so that the a repeats y
-times, and the b repeats x times, then upon application of M as above, we get
+If we guess that the general form is $<a, a\ldots a, b, b\ldots b>$ so that the
+a repeats y times, and the b repeats x times, then upon application of M as
+above, we get
 
-if $i <= x$
-then ${(Mv)}_{ij} = -y*a + y*b$
-if $i > x$
-then ${(Mv)}_{ij} = x*a - x*b$
+\[ {[Mv]}_i = \begin{cases}
+	-y*a + y*b & \text{if } i <= x\\
+	x*a - x*b & \text{if } i > x
+\end{cases} \]
 
-then if we suppose that these equal l*a and l*b respectively, we get:
+Then if we suppose this vector $Mv$ equals $\lambda v$ then that gives two
+equations:
+
+\begin{equation}
+	\lambda a = (yb - ay)
+\end{equation}
+\begin{equation*}
+	\lambda b = (ax - xb)
+\end{equation*}
+
+Next we eliminate $\lambda$ and start to solve for $b$
 
 \begin{equation*}
 	(yb - ay)/a = (ax - xb)/b\\
@@ -372,100 +385,76 @@ then if we suppose that these equal l*a and l*b respectively, we get:
 \begin{equation*}
 	b^2y + ab(x - y) - a^2x = 0
 \end{equation*}
-let $r = \frac{b}{a}$
 \begin{align*}
-	r &= \frac{-(x-y) \pm \sqrt{{(x-y)}^2 + 4xy}}{2y}\\
-	  &= \frac{y - x \pm (x + y)}{2y}\\
-	  &= 1 or \frac{-x}{y}
+	r &= \frac{-a(x-y) \pm \sqrt{{a(x-y)}^2 + 4a^2xy}}{2y}\\
+	  &= a\frac{y - x \pm (x + y)}{2y}\\
+	  &= a or a\frac{-x}{y}
 \end{align*}
 
-$r = 1$ corresponds to our common eigenvector from above, so it is not new.
-$r = \frac{-x}{y}$ is new however, so set $b = -x$, $a = y$,
+$b = a$ corresponds to the zero-rowsum eigenvector from above, so it is not
+new.
+$b = a\frac{-x}{y}$ is new however, so set $a = y$, $b = -x$.
 
-then our eigenvalue l:
+then our eigenvalue $\lambda$ can be derived from (1):
 \begin{align*}
-	l &= \frac{y(b - a)}{a}
-	  &= -(x + y)
+	\lambda &= \frac{y(b - a)}{a}
+			&= -(x + y)
 \end{align*}
 
 This is our last eigenvalue, corresponding to the following eigenvector:
 
 $\langle y, y\ldots y, -x, -x\ldots -x\rangle$
 
-where y is repeated x times, and x is repeated y times.
+where $y$ is repeated $x$ times, and $-x$ is repeated $y$ times.
 
+This means that all of our basis vectors are fully diagonalizable, as we have
+$x+y$ nontrivial eigenvectors, plus $n-x+y$ empty rows, giving a total of $n$
+eigenvectors.
 
 \subsection{Simultaneous Diagonalization}
 
 The matrices that we are looking at form a commutative algebra, which means
 there is some set of n linearly independent vectors that are eigenvectors for
-all n-1 of our basis matrices.
+all n-1 of our basis matrices at once.
 
 If we look at each matrix $L_i$, we can observe that the last eigenvalue in our
-list above, $\lambda = -(x + y)$ is unique, and hence the eigenvector that corresponds
-to it is uniquely determined by it. (modulo scaling)
+list above, $\lambda = -(x + y)$ is unique, and hence the eigenvector that
+corresponds to it is uniquely determined by it. (modulo scaling)
 
-Since each matrix will give a different, uniquely determined vector for its
-most unique eigenvalue, we have $n-1$ eigenvectors, which are also distinct from
-our other uniquely determined vector $<1, 1\ldots 1>$.
-
-So we know that that all of our eigenvectors are determined, and can use this
-set of eigenvectors for diagonalization of any basis matrix.
-
-
-If we number these vectors $v_i$, and set $v_0$ to be $<1, 1\ldots 1>$, then we can
-understand which eigenvalues will correspond to different eigenvectors.
-
-For $L_i$, $v_i$ will by definition give $L_i v_i = -(x+y) v_i$
-
-for nodes descending from the left child of i, $L_i v_l = -y v_l$
-and similarly on the right, $L_i v_r = -x v_r$
-this can be seen both by the quantities of nodes, and more rigorously by the
-fact that each of these $v_l$ is a linear combination of vectors constructed
-above, with eigenvalue -y, and similarly for $v_r$ and $-x$
-
-for nodes above and anywhere else, the nontrivial part of $L_i v_j$ will be
-entirely within one of the four consistent sections of $v_j$, so $v_j$ might as
-well be a multiple of $v_0$, giving $L_i v_j = 0 v_j$
-
-So we know all n of our eigenvalues, and all of their corresponding
+Further in the matrix corresponding to the root of the tree, the $0$ eigenvalue
+is also unique, so this node will actually give 2 uniquely determined
 eigenvectors.
 
-\subsection{Simultaneous Diagonalization Proof}
+So in total we have determined $n$ eigenvectors!
 
-Since we can diagonalize any matrix in the basis, we can rely on the existence
-of a simultaneously diagonalizing set of eigenvectors. Call this $U$.
-With this set we can prove that each of our concrete eigenvectors is
-proportional to a vector in $U$.
+Inspection of these shows that none of them are proportional to eachother,
+since they all contain zeroes or negatives in different places to eachother.
 
-Then for each matrix $L_i$, we know that its $i$th eigenvalue is unique, so set
-$u_i$ to be the eigenvector in $U$ with this eigenvalue, so that $v_i$ is
-proportional to it.
-We know this $u_i$ must exist and be unique otherwise $U$ would not be linearly
-independent.
+Then we know that:
+\begin{itemize}
+	\item a set of linearly independent eigenvectors must exist,
+	\item each of our eigenvalues is proportional to one of these vectors
+	\item none of our eigenvalues are proportional to eachother
+\end{itemize}
+From this we can conclude that this must be a rescaling of some linearly
+independent set of simultaneous eigenvectors, and hence is also a linearly
+independent set of simultaneous eigenvectors.
 
-Similarly take $u_0$ to be the element of $U$ proportional to $v_0$. We know
-this exists and is unique because it corresponds to the unique eigenvalue of
-$0$ in $L_1$. % or whatever the root node is... this is getting so wordy
+If we label each eigenvector with the basis matrix that determined it, plus
+$v_0$ as the zero-rowsum eigenvector, then the the eigenvalues of these
+eigenvectors has a novel relationship with the structure of the binary tree:
+\begin{itemize}
+	\item $L_iv_i = -(x_i + y_i)v_i$ noting $v_i$ and $L_i$ come from the same
+		node
+	\item $L_iv_j = -x_iv_j$ if $j$ sits on the left subtree under $i$
+	\item $L_iv_j = -y_iv_j$ if $j$ sits on the right subtree under $i$
+	\item $L_iv_j = 0$ if $j$ sits outside of the subtree under $i$, or $j=0$
+\end{itemize}
 
-Then we need to show that this set $u_0$ through to $u_n$ is exactly $U$.
-This is true provided that no two $u_i = u_j$ unless $i = j$.
+These results follow from constructing $v_j$ as a linear combination of the
+eigenvectors described previously for $L_i$
 
-So suppose that $u_i = u_j$ for some $i, j \in \mathds{Z} \cap [0, n]$
-Then since $v_i$ is proportional to $u_i$ and similarly for $j$, we know that
-$v_i$ and $v_j$ must be proportional to \emph{eachother}.
-
-Since all of the eigenvectors we have found have zero values for all leaves
-outside of some subtree of the tree, we can simply use the tree-structure to
-see that $v_i$ needs to be derived from the same subtree as $v_j$.
-
-So unless one of the vectors is $v_0$ we know that $i = j$
-
-Then if one is $v_0$ and the other is the eigenvector corresponding to the root
-node, they clearly aren't proportional, as one contains positives and
-negatives, while the other only contains zeroes.
-
-%This proof is everything I hate in the world, I'd rather just cut it completely
+So we have the exact value of our $n$ eigenvectors and eigenvalues.
 
 \subsection{Returning to the determinant}
 
