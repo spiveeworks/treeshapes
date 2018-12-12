@@ -1,5 +1,5 @@
 \documentclass{report}
-\usepackage{amsmath, dsfont, qtree}
+\usepackage{amsmath, amssymb, dsfont, qtree}
 \begin{document}
 
 \section{Abstract}
@@ -549,7 +549,7 @@ The two exceptions to this are, the trace of the eigenvalue matrix when not
 triangular, and the spectrum of the eigenvalue matrix with ordering
 information.
 
-\subsection{Fairness of Eig Matrices}
+\subsection{Fairness of Eigenvalue Matrix}
 
 It looks like both the eigenvector matrix, and the eigenvalue matrix, can be
 used independent of eachother to reconstruct the tree structure.
@@ -557,7 +557,60 @@ used independent of eachother to reconstruct the tree structure.
 The eigenvector matrix can be used to recover the leaf labels as well, whereas
 the eigenvalue matrix can be used to recover the branch labels.
 
-[no proof currently]
+We know that the eigenvalue matrix is a fair representation of the tree with
+internal nodes labelled, so long as we can reconstruct the tree and labels from
+the eigenvalue matrix.
+
+The eigenvalue matrix has 3 non-redundant sets of data in it:
+\begin{itemize}
+	\item The most extreme number in a row indicates the number of leaves under
+		a node
+	\item The column of that most extreme number indicates the eigenvector
+		labelling
+	\item Nonzero cells indicate that that column's node exists in the subtree
+		of that row's node
+\end{itemize}
+
+So the first thing one could do is decompose the matrix into those 3 functions.
+
+Define $W$ to be the matrix of eigenvalues, \emph{without the zero-rowsum
+column}, and with negated (and hence positive) entries.
+
+Define $I$ to be the set of integers $1$ thru $n-1$, i.e. $\mathds{Z} \cap [1,
+n-1]$
+
+\[\mathit{Size}(i) := \max\{W_{ij} | j \in I\}\]
+\[\mathit{Col}: I \rightarrow I\]
+\[\forall i \in I, W_{i \mathit{Col}(i)} = \mathit{Size}(i)\]
+\[j \preccurlyeq i \Leftrightarrow W_{i \mathit{Col}(j)} > 0\]
+
+$\mathit{Col}$ is well defined since we know $\mathit{Size}(i)$ is the unique
+eigenvalue of $L_i$.
+
+$\preccurlyeq$ is the original tree understood as a partial order, but with
+leaves removed.
+
+Simply reconstructing the tree from this partial order, and supplementing nodes
+with leaves until it is a binary tree, should give the original tree.
+
+On the other hand, one can use the $\mathit{Size}$ function, by taking the two
+largest descendants as the children of each node, again supplemented with
+leaves until each node has 2 children.
+
+We know that this is in fact the original tree, as we've shown that the
+eigenvalues of each matrix correspond to the structure of the tree.
+% TODO show that the eigenvalues of each matrix correspond to the structure of
+% the tree a bit more rigorously
+
+\subsection{Fairness of Eigenvector Matrix}
+
+The construction here is simple, if we use the eigenvector column indeces as
+labels for the internal nodes, then the partial order is defined as:
+\[j_1 \preccurlyeq j_2 \Leftrightarrow \forall i \in J, V_{ij_1} > 0
+\Rightarrow V_{ij_2} > 0 \]
+
+Then as before each node neads to be supplemented with any leaves, taking their
+labels from the row indeces of $V$.
 
 \section{loose notes}
 
@@ -579,5 +632,9 @@ spectrum?
 why do the two matrices need leaf/branch info to recover the original? could
 you get rid of it? if you cant is it impossible to use these matrices to
 distinguish tree shapes?
+
+well chosen matrix norms of either matrix might stifle the exchange property
+matrix differences might be useful once the matrices have been sorted? but then
+a tree will not have 0 distance from its own relabellings.
 
 \end{document}
