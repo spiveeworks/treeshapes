@@ -614,6 +614,43 @@ labels from the row indeces of $V$.
 
 \section{loose notes}
 
+\subsection{proof notes}
+
+theres a bunch of things that could help some of the proofs above become more
+clear.
+
+First eigenvectors with non-zero eigenvalues have $v_{j} \neq 0 \Rightarrow$
+leaf $j$ is a descendant of node $i$
+
+In particular for the most extreme/unique eigenvalue the converse is also true.
+
+Recovering tree structure from the vectors is then simple.
+Recover the set of leaf descendants from above, then all if the descendants of
+one node are also descendants of another node, the former is a descendant of
+the latter.
+
+Further we know that none of these can be proportional to eachother, or they
+would belong to the same node, and hence be the same anyway.
+The exception here is the zero-rowsum eigenvector, but we know none of the
+constructed eigenvectors are proportional to that because its eigenvalue is
+always 0.
+
+Second the non-unique eigenspaces of the matrices correspond to tree structure
+as well.
+Leaves that dont descend from the node form an eigenspace on 0.
+leaves that descend from the left child, restricted to have a sum of zero, form
+An eigenspace on the size of the left subtree.
+Likewise for the right child.
+
+Then each of the eigenvectors in our set will sit in one of these three spaces
+for all other nodes in the tree, which is very convenient.
+
+This gives us the structural information we need to show that the eigenvalue
+matrix is a fair representation of the original tree.
+
+The fact that a binary tree can be reconstructed from the tree of its internal
+nodes is probably a reference?
+
 \subsection{minimum determinant}
 
 each row of a balanced tree with $2^n$ leaves, is $2^i$ lots of $2^{n-i}$\ldots right?
