@@ -674,4 +674,41 @@ well chosen matrix norms of either matrix might stifle the exchange property
 matrix differences might be useful once the matrices have been sorted? but then
 a tree will not have 0 distance from its own relabellings.
 
+\subsection{eigenvalue polynomials}
+
+the eigenvectors can be discovered through a polynomial process, by looking at
+the product of each pair of basis matrices, as a linear combination of the
+basis
+
+\subsection{hierarchies}
+
+the eigenvector subset argument could be quite simple if described in terms of
+hierarchies?
+
+\subsection{Symmetries under relabelling}
+
+The eig spaces of the basis matrices all have a sum of zero, except the all-1
+eigenvector
+
+corresponds exactly to the symmetries of the tree under the action of leaf
+relabellings.
+
+In particular each node is agnostic to relabellings of its left subtree, and of
+its right subtree, so each node restricts the eigenspaces only with local
+knowledge, until eventually the full structure of the tree has been
+represented.
+
+\subsection{Different kind of symmetric function}
+
+When trying to summarize the eigenvalue matrix, we specifically want an
+operation that is symmetric under row permutations, and under column
+permutations, but not on arbitrary value permutations.
+
+$f(X) = f(K_1XK_2)$
+
+Then we can take further restrictions like ``must be homogeneous'' or whatever.
+
+Under the wrong restrictions, we should get imanant polynomials out, but
+steering clear of that might give something useful?
+
 \end{document}
