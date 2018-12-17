@@ -1,24 +1,24 @@
 module Tree
 ( Tree(Leaf, Branch)
+, subtrees
 , count
-, diag
+, counts
 , same
 , exhaust
 ) where
 
 data Tree = Leaf | Branch Tree Tree deriving Show
 
+subtrees :: Tree -> [Tree]
+subtrees Leaf = [Leaf]
+subtrees t@(Branch l r) = t : subtrees l ++ subtrees r
+
 count :: Tree -> Integer
 count Leaf = 1
 count (Branch x y) = count x + count y
 
-specDet :: Tree -> Integer
-specDet Leaf = 1
-specDet (Branch x y) = (count x + count y) * specDet x * specDet y
-
-diag :: Tree -> [Integer]
-diag Leaf = []
-diag t@(Branch x y) = count t : diag x ++ diag y
+counts :: Tree -> [Integer]
+counts = map count . subtrees
 
 same :: Tree -> Tree -> Bool
 same Leaf Leaf = True

@@ -4,7 +4,7 @@ import Data.List
 import Tree
 
 similar :: Tree -> Tree -> Bool
-similar = (==) `on` (sort . diag)
+similar = (==) `on` (sort . counts)
 
 findSynonym :: [Tree] -> Maybe (Tree, Tree)
 findSynonym ts = foldr retSynonym Nothing tps
