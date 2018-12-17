@@ -1,7 +1,7 @@
 *.hi
 *.o
 
-treeproduct
+det_of_values
 
 
 *.aux
