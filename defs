@@ -1,0 +1,33 @@
+
+Definitions
+- binary trees, leaf/branch labelled (map V -> Z)
+ - different labellings of trees, leaves, branches
+- mrca = most recent common ancestor
+- hierarchy idea
+- in degree, out degree, root, branch, leaf
+- tree shape = equivalence class of labelled trees (group actions)
+- V_n = set of trees with n leaves
+- S_n, S{n+1, n2-1}, their product both act on V_n
+- orbits under this action give three different sets of shapes
+- one can be recovered from values, one from vectors, yet to find the last one
+
+- matrix on each vertex
+- trivial in leaf nodes
+- label internal nodes L_1 .. L_n-1
+- matrix on vertex
+ - effect of tree shape
+  - S_n acts on C^n
+- isomorphic under tree relabelling
+- if we permute rows we stay in tree classes
+
+eigen stuff, spectra, dets etc
+
+
+Review
+-matsen
+ - what has established? key example
+- steel chapter
+ - measures of tree shape balance etc.
+
+
+
