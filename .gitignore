@@ -2,7 +2,7 @@
 *.o
 
 det_of_values
-
+formatVectors
 
 *.aux
 *.dvi

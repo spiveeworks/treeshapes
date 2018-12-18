@@ -3,6 +3,7 @@ module Vectors
 , vectorsMat
 ) where
 import Tree
+import Data.List
 
 vec :: Integer -> a -> [a]
 vec size val = take (fromInteger size) (repeat val)
@@ -24,8 +25,3 @@ root l r = vec l r ++ vec r (-l)
 
 vectorsMat :: Tree -> [[Integer]]
 vectorsMat = transpose . vectors
-
-transpose :: [[Integer]] -> [[Integer]]
-transpose [] = []
-transpose xs@([] : _) = []
-transpose xs = map head xs : transpose (map tail xs)
