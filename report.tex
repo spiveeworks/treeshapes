@@ -9,6 +9,48 @@ algebra representation demonstrated previously.
 
 [finish report first then finish abstract]
 
+\section{Tree Construction}
+
+Trees will be represented as directed graphs, that is a set of ordered pairs.
+
+A graph is binary tree with $n$ leaves if and only if
+\begin{itemize}
+	\item every node but one has a predecessor
+	\item every node has eiter 0 children (a leaf) or 2 children (a branch)
+	\item there are no cycles (nontrivial paths with equal endpoints)
+	\item there are $n$ leaves
+\end{itemize}
+
+For convenience we will also assume that the tree is labelled with leaves $1$ through to $n-1$,
+hence leaves are labelled $n$ through to $2n-1$.
+
+Hence define $B$ to be the set of branch labels, $\{b | b \in \mathds{Z}, 1 \leq b < n\}$.
+Similarly $L$ to be the leaf labels, $\{l | l \in \mathds{Z}, n \leq l < 2n-1\}$.
+
+\subsection{Most Recent Common Ancestor}
+
+Define the ancestry of a node to be the ordered list of predecessors of a node, starting with itself, and ending with the root of the tree.
+
+% if r = node then anc(r) = [r] else anc(r) = r : anc(pred(r))
+
+Then the common ancestry of two nodes is the largest ordered list of nodes that is a suffix of both nodes.
+
+The most recent common ancestor (MRCA) of two nodes (in particular two leaves) is the first node in the common ancestry of the two nodes.
+
+\subsection{Equivalence}
+
+Trees can be relabelled by injective functions on their node labels.
+
+Given a subgroup of permutations $S \subseteq S_{2n-1}$, two trees are equivalent if one is in the orbit of the other under permutations in $S$.
+
+In particular $S_L$, $S_B$, and $S_LS_B$ partition the set of binary trees with $n$ leaves, into equivalence classes with the same structure, but different leaf or branch labels.
+
+\subsection{Hierarchy}
+
+Each element of the partition under $S_B$ has consistent leaf labels among its elements, and we can easily map these partition elements to hierarchies based on the leaves.
+
+[briefly define hierarchies and maybe argue for their equivalence]
+
 \section{Constructing Measurements of the Algebra}
 
 \subsection{Background}
