@@ -1,6 +1,8 @@
 \documentclass{report}
-\usepackage{amsmath, amssymb, dsfont, qtree}
+\usepackage{amsmath, amssymb, amsthm, dsfont, qtree}
 \begin{document}
+
+\newtheorem{definition}{Definition}
 
 \section{Abstract}
 
@@ -13,13 +15,17 @@ algebra representation demonstrated previously.
 
 Trees will be represented as directed graphs, that is a set of ordered pairs.
 
-A graph is binary tree with $n$ leaves if and only if
-\begin{itemize}
-	\item every node but one has a predecessor
-	\item every node has eiter 0 children (a leaf) or 2 children (a branch)
-	\item there are no cycles (nontrivial paths with equal endpoints)
-	\item there are $n$ leaves
-\end{itemize}
+\begin{definition}
+	Binary Tree with $n$ leaves
+
+	A graph is binary tree with $n$ leaves if and only if
+	\begin{itemize}
+		\item there are no cycles (nontrivial paths with equal endpoints)
+		\item every node but one has a predecessor
+		\item every node has eiter 0 children (a leaf) or 2 children (a branch)
+		\item there are $n$ leaves
+	\end{itemize}
+\end{definition}
 
 For convenience we will also assume that the tree is labelled with leaves $1$ through to $n-1$,
 hence leaves are labelled $n$ through to $2n-1$.
