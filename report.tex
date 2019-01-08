@@ -122,7 +122,21 @@ that it is at least substantially non-trivial.
 
 The Tas Phylo group has shown in another paper that trees can be represented as
 an algebra of matrices, and that this algebra is commutative.
-% algebra definition?
+
+The algebra is as follows:
+
+\begin{definition} Algebra of a Tree
+
+	Given a binary tree with $n$ leaves, that tree's algebra is an $n-1$-dimensional commutative algebra spanned by $n-1$ basis matrices corresponding to the $n-1$ branch nodes of the tree.
+
+	The basis matrix $r$ in a tree with $n$ leaves has the following definition:
+	\[ L_{ij} = \begin{cases}
+		1 & i \neq j \and MRCA(i, j) = r
+		0 & i \neq j \and MRCA(i, j) \neq r
+		-\sum_{k \neq j} L_{ik} & otherwise
+	\end{cases} \]
+\end{definition}
+
 % proper references?
 
 Similar to the previous paper, these matrices relate rows/columns to leaf
