@@ -15,15 +15,14 @@ algebra representation demonstrated previously.
 
 Trees will be represented as directed graphs, that is a set of ordered pairs.
 
-\begin{definition}
-	Binary Tree with $n$ leaves
+\begin{definition} Binary Tree with $n$ leaves
 
 	A graph is binary tree with $n$ leaves if and only if
 	\begin{itemize}
 		\item there are no cycles (nontrivial paths with equal endpoints)
-		\item every node but one has a predecessor
-		\item every node has eiter 0 children (a leaf) or 2 children (a branch)
-		\item there are $n$ leaves
+		\item every node has exactly one predecessor, except one node called the root, which has no predecessor
+		\item every node has either 0 children (a leaf) or 2 children (a branch)
+		\item there are exactly $n$ leaves
 	\end{itemize}
 \end{definition}
 
@@ -35,27 +34,70 @@ Similarly $L$ to be the leaf labels, $\{l | l \in \mathds{Z}, n \leq l < 2n-1\}$
 
 \subsection{Most Recent Common Ancestor}
 
-Define the ancestry of a node to be the ordered list of predecessors of a node, starting with itself, and ending with the root of the tree.
+\begin{definition} Ancestry
 
-% if r = node then anc(r) = [r] else anc(r) = r : anc(pred(r))
+	If a node r is the root of a tree, then its ancestry is simply the singleton ordered list $(r)$.
 
-Then the common ancestry of two nodes is the largest ordered list of nodes that is a suffix of both nodes.
+	If a node r is not the root of a tree, then its ancestry is acquired by taking the ancestry of its predecessor, and prepending r itself.
 
-The most recent common ancestor (MRCA) of two nodes (in particular two leaves) is the first node in the common ancestry of the two nodes.
+	In other words the ancestry of a node is the list of nodes above that node, starting with itself, and ending with the root of the tree.
+\end{definition}
 
-\subsection{Equivalence}
+\begin{definition} Common Ancestry
+
+	The common ancestry of two nodes is the largest ordered list of nodes that is a suffix of both nodes' ancestries.
+\end{definition}
+
+\begin{definition} Most Recent Common Ancestor
+
+	The MRCA of two nodes (in particular two leaves) is the first node in the common ancestry of the two nodes.
+\end{definition}
+
+% is it ok to take graph concepts like predecessor for granted
+% also self explanatory concepts used later such as descendants, children, descendant leaves, etc.
+
+\subsection{Relabelling}
 
 Trees can be relabelled by injective functions on their node labels.
 
-Given a subgroup of permutations $S \subseteq S_{2n-1}$, two trees are equivalent if one is in the orbit of the other under permutations in $S$.
+\DeclareMathOperator{\relabel}{relabel}
 
-In particular $S_L$, $S_B$, and $S_LS_B$ partition the set of binary trees with $n$ leaves, into equivalence classes with the same structure, but different leaf or branch labels.
+\begin{definition} Relabel
+
+	We can use a permutation $\sigma \in S_{2n-1}$ to relabel a tree by taking the group action of $S_{2n-1}$ on a graph.
+
+	\[
+		\relabel(\sigma, G) := \{(\sigma(i), \sigma(j)) | (i, j) \in G\}
+	\]
+\end{definition}
+
+Just as group actions give us a concept of relabelling, the orbits of these actions will give a set of trees that are relabellings of eachother.
+
+This can give us an exhaustive set of trees with the same structure, which we can take to represent the structure itself:
+
+\begin{definition} Tree Structure
+
+	The structure of a tree with $n$ leaves, is simply the orbit of that tree under the $\relabel$ action of the group $S_BS_L$.
+
+	Similarly the group $S_B$ could be thought of as that tree without branch labels, and $S_L$ as that tree without leaf labels.
+\end{definition}
+
+\begin{definition} Invariance Under Relabelling
+
+	A function or operation on binary trees with n leaves, is invariant under relabelling, if and only if trees with the same structure map to the same result.
+
+	Similarly a function or operation is invariant under branch/leaf relabellings if trees that are equal with their branches/leaves removed, map to the same result.
+
+	These properties could also be invoked "up to isomorphism" or up to some other class of operations.
+
+	This simply means that the results of the function don't need to be exactly the same, they just need to be mapped to eachother by some operation in the specified class.
+\end{definition}
 
 \subsection{Hierarchy}
 
-Each element of the partition under $S_B$ has consistent leaf labels among its elements, and we can easily map these partition elements to hierarchies based on the leaves.
+There is another way of representing a tree without its branch labels, which is by representing it as a hierarchy based on sets of leaves under a node.
 
-[briefly define hierarchies and maybe argue for their equivalence]
+[briefly define hierarchies and maybe argue for their equivalence to trees without branch labels]
 
 \section{Constructing Measurements of the Algebra}
 
