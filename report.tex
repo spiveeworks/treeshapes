@@ -82,6 +82,14 @@ This can give us an exhaustive set of trees with the same structure, which we ca
 	Similarly the group $S_B$ could be thought of as that tree without branch labels, and $S_L$ as that tree without leaf labels.
 \end{definition}
 
+\subsection{Representation}
+
+Our goal is to find measurements of trees that can identify if trees are relabellings of eachother, and potentially how close they are to being relabellings of eachother.
+
+Such a measurement would, at least, map trees with the same structure to the same values, and map trees with different structures to different values.
+
+Hence we define the following concepts, noting some caveats:
+
 \begin{definition} Invariance Under Relabelling
 
 	A function or operation on binary trees with n leaves, is invariant under relabelling, if and only if trees with the same structure map to the same result.
@@ -92,6 +100,35 @@ This can give us an exhaustive set of trees with the same structure, which we ca
 
 	This simply means that the results of the function don't need to be exactly the same, they just need to be mapped to eachother by some operation in the specified class.
 \end{definition}
+
+\begin{definition} Distinction of Tree Shapes
+
+	A function or operation on binary trees with n leaves, distinguishes tree shapes, if and only if trees with different structures map to different results.
+
+	As before we also define distinguishing trees ignoring leaves/branches, and distinguishing all of these up to isomorphism/permutation/etc.
+\end{definition}
+
+Note that distinguishing tree shapes up to a class of operations is \emph{stronger} than distinguishing tree shapes in general, whereas invariance under tree shapes up to a class of operations is \emph{weaker} than distinguishing tree shapes.
+
+What we will find in this paper is that our representations either have both properties up to row/column permutation of matrices, or fail to distinguish tree shapes at all. (and become near-trivial as defined below)
+
+In addition to the above properties, if a function doesn't distinguish tree shapes, then there is a stronger failure condition shown in Matsen, which we will call "near triviality":
+
+\begin{definition} Near-Trivial
+
+	A function or operation on binary trees with n leaves, is near trivial, if and only if the proportion of 'failures to distinguish' approaches 1 as n gets larger.
+
+	That is, if the proportion of pairs of trees that have different tree shapes but map to the same result, out of all pairs with different shapes, approaches 1.
+\end{definition}
+
+\begin{definition} Exchange
+
+	Given a function that is invariant under relabelling, regardless of tree size, but does not always distinguish tree shapes, a pair of tree structures $A$ and $B$ 'exchange' if they not only map to the same result under the function, but any tree that contains $A$ as a subtree will map to the same result as that tree with $A$ replaced with $B$.
+\end{definition}
+
+[Note that subtrees break our assumption that branch labels are 1..n-1, and leaf labels are n..2n-1. it may be useful to explicitly define subtrees in terms of \emph{tree structure} along with this concept of "replacing" a subtree]
+
+In Matsen it was shown that if a pair of trees exchange then the function for which they exchange will be near-trivial.  % was it?
 
 \subsection{Hierarchy}
 
@@ -142,6 +179,15 @@ The algebra is as follows:
 Similar to the previous paper, these matrices relate rows/columns to leaf
 labels, and hence are similar to matrices associated with relabellings of the
 tree.
+
+That is, this algebra representation is invariant under relabelling up to simultaneous row/column permutation.
+
+It also distinguishes tree shapes up to row/column permutation.
+
+As a set of matrices, the algebra no longer has branch information, however the basis as an ordered set will still have branch information, so we can see that the basis is not invariant under tree shapes, but will distinguish tree shapes, and that the algebra will in fact be invariant under branch relabelling.
+
+[also the basis is invariant under branch relabelling up to basis permutations, invariant under leaf relabelling up to row/column permutation, these properties seem too expressive to thoroughly explore]
+
 Further, since the algebra is commutative, we have the property that if it
 diagonalizable at all, then it is simultaneously diagonalizable.
 Together these properties suggest that the spectra of matrices in this algebra
