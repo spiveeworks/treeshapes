@@ -228,21 +228,32 @@ same linear combination of the individual spectra.
 This means the ``spectrum'' map is a homomorphism, and so its image will be a
 vector space.
 
+\begin{definition}Spectral Space
+
+	The spectral space of a binary tree will here mean the set of spectra of matrices from the tree's algebra.
+
+	This set is a vector space since the algebra is commutative.
+\end{definition}
+
+
 This will not apply to the sorted image, e.g. $<1, 1> - <0, 1> = <1, 0>$
 	% <tuple> notation?
-So as an alternative, we could consider this vector space, and look for
-properties that are invariant under relabelling of the original tree, and
-invariant under different choices of eigenvector.
-This is the same as finding properties that are invariant under permutation of
-the axes of the vector space.
+
+This spectral space will be invariant under relabelling, up to permutation of the axes of the space.
+
+Additionally, since it was constructed from the algebra and not from an ordered basis, it will be invariant under branch relabelling.
+
+This seems like a promising representation; if we could find a convenient measurement of the space to get rid of the axis labels, that would be very useful.
+
+One such measurement would be the dimension, but considering the dimension shows something else about these spaces...
 
 % note that it might look like we have strayed from any sense of distance formula
 % measurements later on will have potential for distance formulae
 
 \subsection{Subspace Triviality}
 
-When looking at this vector space, the most obvious measurement we could apply
-to it is its dimension.
+%When looking at this vector space, the most obvious measurement we could apply
+%to it is its dimension.
 It will turn out that its dimension is always the same as the algebra, which
 seems odd when the algebra seems to contain matrices that are just relabellings
 of eachother.
