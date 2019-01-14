@@ -15,11 +15,36 @@ algebra representation demonstrated previously.
 
 Trees will be represented as directed graphs, that is a set of ordered pairs.
 
+\begin{definition} Predecessor/Child
+
+	Given a graph $G$ over verteces $V$, and a vertex $v \in V$, the predecessors of $v$ are the set $P_v \subset V$ with $u \in P_v \Leftrightarrow (u, v) \in G$
+
+	Similarly the children $C_v$ are given by $(v, u) \in G$
+\end{definition}
+
+The following definitions are not used other than to define a binary tree. [this may change as later reconstruction of trees becomes more rigorous]
+
+\begin{definition} Path
+
+	A path is an ordered list of vertices with the property that adjacent vertices are also adjacent in the tree.
+
+	\begin{itemize}
+		\item $[v]$ is a trivial path in $G$ if $v \in V$
+		\item $[u, v, ...]$ is a path in $G$ if and only if $(u, v) \in G$ and $[v, ...]$ is a path in $G$
+		\item if neither of the above cases are met, the list is not a path
+	\end{itemize}
+\end{definition}
+
+\begin{definition} Cycle
+
+	A cycle is simply a path with at least 2 elements, and equal endpoints
+\end{definition}
+
 \begin{definition} Binary Tree with $n$ leaves
 
 	A graph is binary tree with $n$ leaves if and only if
 	\begin{itemize}
-		\item there are no cycles (nontrivial paths with equal endpoints)
+		\item there are no cycles
 		\item every node has exactly one predecessor, except one node called the root, which has no predecessor
 		\item every node has either 0 children (a leaf) or 2 children (a branch)
 		\item there are exactly $n$ leaves
