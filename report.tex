@@ -39,9 +39,9 @@ This is shown by making 3 important arguments, from which the failure of these r
 
 \subsection{Results}
 
-The first result of the paper is that adjacency/laplacian matrices with the same spectrum will have the same immanantal polynomials.
+The first result of the paper is that adjacency/laplacian matrices with the same spectrum will have the same immanantal polynomials and vice versa.
 
-The second result of the paper is the definition and existence of an exchange property, wherein some trees not only have the same spectrum, but any tree that contain those subtrees will also have the same spectrum.
+The second result of the paper is the definition and existence of an exchange property, wherein some trees not only have the same spectrum, but any tree that contain those subtrees will also have the same spectrum. (this result applied to both distance matrices, and to emph{linear combinations} of adjacency/laplacian matrices)
 
 The third result is that the proportion of trees that contains a specified subtree will approach 1 as tree size gets larger.
 
@@ -61,6 +61,15 @@ To say that a representation is "near trivial" only says that for large enough t
 In particular the paper showed that the rate of approach is fairly slow, so as long as your trees are small enough or your use case is sufficiently permissive of collisions, or some combination of the two, these 5 measurements might still be viable.
 
 Otherwise these representations will not help.
+
+\subsection{Usage in This Project}
+
+The three main points we use from this paper are as follows:
+\begin{enumerate}
+	\item Trees have many convenient representations that are invariant under relabelling and many that are able to distinguish trees that have different shape, but not many with both
+	\item Matrix spectra are a promising way of removing permutations from a matrix without reducing the matrix to a single number
+	\item If a tree representation has an exchange property for some pair of trees, then the representation will be near trivial for large trees.
+\end{enumerate}
 
 \section{Tree Construction}
 
