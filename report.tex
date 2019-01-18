@@ -894,11 +894,18 @@ the same strong negative result for the spectrum.
 As a result any measurement which is a symmetric function of the diagonal, such
 as the determinant or the trace, will be at least as likely to coincide.
 
-%note about these functions being (known?) measurements of balance
-
 The two exceptions to this are, the trace of the eigenvalue matrix when not
 triangular, and the spectrum of the eigenvalue matrix with ordering
 information.
+
+\subsection{Spectrum as Measure of Balance}
+
+Interestingly, the trace will equal to the Sackin index of the tree, which is the sum of the path lengths from the root to each leaf of the tree.
+
+The determinant seems quite unrelated to path lengths, but will still measure tree balance for similar reasons to the trace.
+
+As an example the two trees of order four have a spectrum of $(4, 2, 2)$ and $(4, 3, 2)$ respectively.
+The larger nodes in unbalanced trees can be expected to make both the trace and the determinant larger.
 
 \subsection{Fairness of Eigenvalue Matrix}
 
@@ -1029,8 +1036,8 @@ a tree will not have 0 distance from its own relabellings.
 \subsection{eigenvalue polynomials}
 
 the eigenvectors can be discovered through a polynomial process, by looking at
-the product of each pair of basis matrices, as a linear combination of the
-basis
+the product of each pair of basis matrices, as a linear combination of other
+basis matrices
 
 \subsection{hierarchies}
 
