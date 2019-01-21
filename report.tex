@@ -1,4 +1,4 @@
-\documentclass{report}
+\documentclass{article}
 \usepackage{amsmath, amssymb, amsthm, dsfont, qtree}
 
 \DeclareMathOperator{\MRCA}{MRCA}
@@ -12,14 +12,14 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 
-%\chapter{Abstract}
+%\section{Abstract}
 
 %We investigate representations of binary trees related to a particular matrix
 %algebra representation demonstrated previously.
 
 %[finish report first then finish abstract]
 
-\chapter{Ubiquity of Synonymity}
+\section{Ubiquity of Synonymity}
 
 This project is based on the paper ``Ubiquity of synonymity: almost all large
 binary trees are not uniquely identified by their spectra or their immanantal
@@ -29,7 +29,7 @@ This paper shows that three different matrix representations of a binary tree
 fail to distinguish different trees based on, as the title would suggest, their
 spectra or their immanantal polynomials.
 
-\section{Representations}
+\subsection{Representations}
 
 The 3 matrix representations are the Adjacency matrix, the Laplacian matrix,
 and the Distance matrix.
@@ -59,7 +59,7 @@ paper.
 This is shown by making 3 important arguments, from which the failure of these
 results can be directly inferred.
 
-\section{Results}
+\subsection{Results}
 
 The first result of the paper is that adjacency/laplacian matrices with the
 same spectrum will have the same immanantal polynomials and vice versa.
@@ -73,7 +73,7 @@ adjacency/laplacian matrices)
 The third result is that the proportion of trees that contains a specified
 subtree will approach 1 as tree size gets larger.
 
-\section{Conclusions}
+\subsection{Conclusions}
 
 Clearly from this the paper has shown that the following 5 functions are what
 we will later define as ``near trivial'' representations:
@@ -96,7 +96,7 @@ be viable.
 
 Otherwise these representations will not help.
 
-\section{Usage in This Project}
+\subsection{Usage in This Project}
 
 The three main points we use from this paper are as follows:
 \begin{enumerate}
@@ -109,7 +109,7 @@ The three main points we use from this paper are as follows:
 		trees, then the representation will be near trivial for large trees.
 \end{enumerate}
 
-\chapter{Tree Construction}
+\section{Tree Construction}
 
 Trees will be represented as directed graphs, that is a set of ordered pairs.
 
@@ -164,7 +164,7 @@ Hence define $B$ to be the set of branch labels.
 Similarly $L$ to be the leaf labels.
 \[\{l | l \in \mathds{Z}, n \leq l < 2n-1\}\]
 
-\section{Most Recent Common Ancestor}
+\subsection{Most Recent Common Ancestor}
 
 \begin{definition} Ancestry
 
@@ -194,7 +194,7 @@ Similarly $L$ to be the leaf labels.
 % also self explanatory concepts used later such as descendants, children,
 % descendant leaves, etc.
 
-\section{Relabelling}
+\subsection{Relabelling}
 
 Trees can be relabelled by injective functions on their node labels.
 
@@ -223,7 +223,7 @@ can take to represent the structure itself:
 	labels, and $S_L$ as that tree without leaf labels.
 \end{definition}
 
-\section{Representation}
+\subsection{Representation}
 
 Our goal is to find measurements of trees that can identify if trees are
 relabellings of eachother, and potentially how close they are to being
@@ -303,7 +303,7 @@ subtree]
 In Matsen it was shown that if a pair of trees exchange then the function for
 which they exchange will be near-trivial.
 
-\section{Hierarchy}
+\subsection{Hierarchy}
 
 There is another way of representing a tree without its branch labels, which is
 by representing it as a hierarchy based on sets of leaves under a node.
@@ -311,9 +311,9 @@ by representing it as a hierarchy based on sets of leaves under a node.
 [briefly define hierarchies and maybe argue for their equivalence to trees
 without branch labels]
 
-\chapter{Constructing Measurements of the Algebra}
+\section{Constructing Measurements of the Algebra}
 
-\section{Background}
+\subsection{Background}
 
 The paper ``Ubiquity of synonymity'' dealth with 3 different matrix
 representations of trees: the adjacency matrix, laplacian matrix, and distance
@@ -377,7 +377,7 @@ diagonalizable at all, then it is simultaneously diagonalizable.
 Together these properties suggest that the spectra of matrices in this algebra
 might be useful.
 
-\section{Canonical Forms of Spectra}
+\subsection{Canonical Forms of Spectra}
 
 If we assume that the matrices in the algebra are diagonalizable for now, (we
 can show this later) then we can start to reason about the spectra of these
@@ -440,7 +440,7 @@ we find something else about these spaces\ldots
 % note that it might look like we have strayed from any sense of distance formula
 % measurements later on will have potential for distance formulae
 
-\section{Subspace Triviality}
+\subsection{Subspace Triviality}
 
 %When looking at this vector space, the most obvious measurement we could apply
 %to it is its dimension.
@@ -490,7 +490,7 @@ is a trivial representation.
 
 The proof of this will come later once we have the eigenvalues in closed form.
 
-\section{Parameter-Free Representations}
+\subsection{Parameter-Free Representations}
 
 While it is not useful to map the whole algebra to $\mathds{C}^n$, if we just
 look at the basis it turns out to be more useful.
@@ -543,9 +543,9 @@ As such we shall first derive the exact value of both of the matrices.
 % Geometrically we can consider this to be the volume spanned by the spectrum
 % vectors.
 
-\chapter{Simultaneous Diagonalization}
+\section{Simultaneous Diagonalization}
 
-%\section{basis variance}
+%\subsection{basis variance}
 %
 %If $detsubst(L*) =$ the determinant as described, but with respect to basis
 %$L*, L_2, L_3\ldots L_n-1$, so that $detsubst(L_1)$ is exactly the
@@ -566,7 +566,7 @@ thing we need is to show that the matrices can be diagonalized at all.
 In showing this we expect to get the eigenvalues as well.
 
 
-\section{Simple Matrix Format}
+\subsection{Simple Matrix Format}
 
 For simplicity we will assume that the tree leaves have been labelled ``from
 left to right''.
@@ -689,7 +689,7 @@ at least half zeroes, which simplifies a lot of calculations on this
 matrix, especially once we find a way of permuting the eigenvalue matrix to be
 upper triangular.
 
-\section{Diagonalization}
+\subsection{Diagonalization}
 
 Once we are working with the $M$ form, the eigenvalues become straight-forward to enumerate.
 
@@ -853,7 +853,7 @@ This means that all of our basis vectors are fully diagonalizable, as we have
 $x+y$ nontrivial eigenvectors, plus $n-x+y$ empty rows, giving a total of $n$
 eigenvectors.
 
-\section{Simultaneous Diagonalization}
+\subsection{Simultaneous Diagonalization}
 
 \begin{theorem} Simultaneous Diagonalization
 
@@ -906,7 +906,7 @@ eigenvectors described previously for $L_i$
 
 So we have the exact value of our $n$ eigenvectors and eigenvalues.
 
-\section{Ordering the Nodes}
+\subsection{Ordering the Nodes}
 
 \begin{theorem} Spectrum Matrix is Upper Triangular
 
@@ -969,9 +969,9 @@ matrix form, take two trees with 4 leaves:
 	0 & 0 & 0 & -2
 \end{matrix} \right] \]
 
-\chapter{Deciding Fairness}
+\section{Deciding Fairness}
 
-\section{Ubiquity in Eigenvalue Matrix}
+\subsection{Ubiquity in Eigenvalue Matrix}
 
 As we will see, this eigenvalue matrix can be used to reconstruct the tree \emph{with labels}, and so we would like to remove some more information to reach our goal of having a finite representation of tree shapes.
 
@@ -999,7 +999,7 @@ The two exceptions to this are, the trace of the eigenvalue matrix when not
 triangular, and the spectrum of the eigenvalue matrix with ordering
 information.
 
-\section{Spectrum as Measure of Balance}
+\subsection{Spectrum as Measure of Balance}
 
 Interestingly, the trace of these upper triangular matrices will equal to the Sackin index of the tree, which is the sum of the path lengths from the root to each leaf of the tree.
 
@@ -1008,7 +1008,7 @@ The determinant seems quite unrelated to path lengths, but will still measure tr
 As an example the two trees of order four have a spectrum of $(4, 2, 2)$ and $(4, 3, 2)$ respectively.
 The larger nodes in unbalanced trees can be expected to make both the trace and the determinant larger.
 
-\section{Fairness of Matrices}
+\subsection{Fairness of Matrices}
 
 \begin{theorem} Fairness of eigenvalue matrix.
 
@@ -1069,9 +1069,9 @@ labels for the internal nodes, then the partial order is defined as:
 Then as before each node neads to be supplemented with any leaves, taking their
 labels from the row indeces of $V$.
 
-\chapter{loose notes}
+\section{loose notes}
 
-\section{proof notes}
+\subsection{proof notes}
 
 theres a bunch of things that could help some of the proofs above become more
 clear.
@@ -1108,12 +1108,12 @@ matrix is a fair representation of the original tree.
 The fact that a binary tree can be reconstructed from the tree of its internal
 nodes is probably a reference?
 
-\section{minimum determinant}
+\subsection{minimum determinant}
 
 each row of a balanced tree with $2^n$ leaves, is $2^i$ lots of $2^{n-i}$\ldots
 right?
 
-\section{Meeting 2}
+\subsection{Meeting 2}
 
 the determinants seem to measure how balanced the trees are, from maximally
 balanced: (expr?), to maximally unbalanced: n!
@@ -1122,7 +1122,7 @@ The original question still remains, how much could be removed from the matrix
 without breaking injectivity. Could you reconstruct the tree from an ordered
 spectrum?
 
-\section{eig matrices}
+\subsection{eig matrices}
 
 why do the two matrices need leaf/branch info to recover the original? could
 you get rid of it? if you cant is it impossible to use these matrices to
@@ -1132,18 +1132,18 @@ well chosen matrix norms of either matrix might stifle the exchange property
 matrix differences might be useful once the matrices have been sorted? but then
 a tree will not have 0 distance from its own relabellings.
 
-\section{eigenvalue polynomials}
+\subsection{eigenvalue polynomials}
 
 the eigenvectors can be discovered through a polynomial process, by looking at
 the product of each pair of basis matrices, as a linear combination of other
 basis matrices
 
-\section{hierarchies}
+\subsection{hierarchies}
 
 the eigenvector subset argument could be quite simple if described in terms of
 hierarchies?
 
-\section{Symmetries under relabelling}
+\subsection{Symmetries under relabelling}
 
 The eig spaces of the basis matrices all have a sum of zero, except the all-1
 eigenvector
@@ -1156,7 +1156,7 @@ its right subtree, so each node restricts the eigenspaces only with local
 knowledge, until eventually the full structure of the tree has been
 represented.
 
-\section{Different kind of symmetric function}
+\subsection{Different kind of symmetric function}
 
 When trying to summarize the eigenvalue matrix, we specifically want an
 operation that is symmetric under row permutations, and under column
