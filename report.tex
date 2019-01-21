@@ -9,6 +9,8 @@
 \begin{document}
 
 \newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
 
 %\section{Abstract}
 
@@ -527,7 +529,7 @@ originally desired.
 
 One clear possibility is to take the determinant of either of these matrices,
 and remove the effect of row/column permutations with an absolute value.
-For now we shall derive the exact value of both of the matrices.
+As such we shall first derive the exact value of both of the matrices.
 
 % not included currently, could be a useful analogy:
 % Geometrically we can consider this to be the volume spanned by the spectrum
@@ -559,27 +561,100 @@ In showing this we expect to get the eigenvalues as well.
 \subsection{Simple Matrix Format}
 
 For simplicity we will assume that the tree leaves have been labelled ``from
-left to right'', i.e.\ such that at any internal node, its left descendants are
-less than its right descendants.
+left to right''.
 
-Formally, that there is a total order of the tree such that the ``left'' child
-of any node (being the minimum of the two children) has descendents that are
-all less than the ``right'' child of that node.
+As an example of a tree that isn't labelled left to right, take the following tree:
+
+\Tree[.1 [.2 3 5 ] 4]
+
+The issue we have is that $2$ has a descendant that belongs to the left of $4$ and another to the right of $4$, but $4$ is not itself a descendant.
+
+\begin{definition} Left to Right
+
+	A binary tree with $n$ leaves is labelled Left to Right if and only if the descendents of any vertex are a set of consecutive integers.
+\end{definition}
 
 Other labellings will simply permute the coordinates of the eigenvectors we
 derive here.
 
-Then we can see that the matrix that corresponds to a node with $x$ left
-descendents, $y$ right descendents, and minimum descendent $l+1$. (so that
-there are $l$ leaves to the left of the node's minimum descendent)
+Then if we consider a vertex in such a tree, and suppose that:
+\begin{itemize}
+	\item its descendents are in the range $(l, l + x + y]$,
+	\item its left child's descendents are in the range $(l, l + x]$,
+	\item its right child's are in the range $(l + x, l + x + y]$
+\end{itemize}
+where the above ranges are taken to be $subset \mathds{Z}$, then we can infer the following basis matrix corresponding to this vertex:
 
-\[ M_{ij} = \begin{cases}
--y & l < i = j \leq l + x\\
--x & l + x < i = j \leq l + x + y\\
-1 & l < i \leq l + x < j \leq l + x + y\\
-1 & l < j \leq l + x < i \leq l + x + y\\
-0 & otherwise
-\end{cases} \]
+\begin{definition} The $M$ form of a basis matrix
+
+	\[ M_{ij} = \begin{cases}
+		-y & l < i = j \leq l + x\\
+		-x & l + x < i = j \leq l + x + y\\
+		1 & l < i \leq l + x < j \leq l + x + y\\
+		1 & l < j \leq l + x < i \leq l + x + y\\
+		0 & otherwise
+	\end{cases} \]
+\end{definition}
+
+\begin{lemma} The $\MRCA$ of two leaves $i$ and $j$ is $r$ if and only if they are descendants of different children of $r$.
+\end{lemma}
+
+Proof:
+
+If $i$ and $j$ descend from the same child of $r$, then that child will also be in the common ancestry of $i$ and $j$, and hence $r$ will not be the most recent one.
+
+If $i$ and $j$ descend from different children of $r$, say $v_L$ and $v_R$ respectively, and we suppose that $j$ is \emph{also} a descendant of $v_L$, then the ancestry of $j$ would show either a path from $v_L$ to $v_R$ or the other way around.
+A path ending in either $v_L$ or $v_R$ must contain $r$ penultimately, since vertices in a tree only have one predecessor, which means we can construct a non-trivial path from $r$ to itself.
+Since such a cycle is also impossible, it must \emph{not} be the case that $j$ descends from $v_L$, and similarly we would see that $i$ does not descend from $v_R$.
+In other words, neither one is a common ancestor of $i$ and $j$, and yet $r$ \emph{is} a common ancestor, so $r$ is the most recent common ancestor.
+
+\begin{lemma} The $M$ form matrix on a node $r$ is a basis matrix
+\end{lemma}
+
+	%\[ L_{ij} = \begin{cases}
+		%1 & i \neq j \textit{and} \MRCA(i, j) = r\\
+		%0 & i \neq j \textit{and} \MRCA(i, j) \neq r\\
+		%-\sum_{k \neq j} L_{ik} & \textit{otherwise}
+	%\end{cases} \]
+Proof:
+
+Our basis matrix was defined by 3 cases, the first two of which:
+
+\begin{equation} \label{L_eqn_yes}
+	L_{ij} = 1 \textit{if} i \neq j \textit{and} \MRCA(i, j) = r
+\end{equation}
+\begin{equation} \label{L_eqn_no}
+	L_{ij} = 0 \textit{if} i \neq j \textit{and} \MRCA(i, j) \neq r
+\end{equation}
+
+correspond to 3 of the cases in our $M$ form matrix:
+
+\begin{equation} \label{M_eqn_lr}
+	M_{ij} = 1 \textit{if} l < i \leq l + x < j \leq l + x + y
+\end{equation}
+\begin{equation} \label{M_eqn_rl}
+	M_{ij} = 1 \textit{if} l < j \leq l + x < i \leq l + x + y
+\end{equation}
+\begin{equation} \label{M_eqn_no}
+	M_{ij} = 0 \textit{otherwise, as long as} i \neq j
+\end{equation}
+
+We see that the conditions for \ref{M_eqn_lr} in a left to right labelled tree directly correspond to $i$ descending from the left child of $r$ and $j$ from the right child of $r$.
+\ref{M_eqn_rl} instead shows these for $j$ and $i$ respectively.
+\ref{M_eqn_no} takes up the remaining cases, so we conclude that in $M$ if $i \neq j$, then $M_{ij} = 1$ if and only if $i$ and $j$ descend from different children of $r$, and $M_{ij} = 0$ otherwise.
+
+By the lemma above this means that $\MRCA(i, j) = r$ when $M_{ij} = 1$, and $MRCA(i, j) \neq r$ when $M_{ij} = 0$, so in these cases $M_{ij} = L_{ij}$
+
+The remaining case is $i = j$, which in our basis matrix is:
+
+\begin{equation} \label{L_eqn_diag}
+	L_{ii} = -\sum_{k \neq i} L_{ik}
+\end{equation}
+
+By inspecting the cases of $M_{ik}$ one can see that if $i \leq l$ or $l + x + y < i$ then $L_{ii} = 0 = M_{ii}$
+similarly if $l < i \leq l + x$ then $L_{ii} = -sum_{l+x < k \leq l+x+y} 1 = -y = M_{ii}$ and so on.
+
+So $M$ is in fact the basis matrix corresponding to $r$.
 
 So for example if we take the tree:
 
