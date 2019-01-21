@@ -347,9 +347,9 @@ The algebra is as follows:
 	definition:
 \end{definition}
 	\[ L_{ij} = \begin{cases}
-		1 & i \neq j \textit{and} \MRCA(i, j) = r\\
-		0 & i \neq j \textit{and} \MRCA(i, j) \neq r\\
-		-\sum_{k \neq j} L_{ik} & \textit{otherwise}
+		1 & i \neq j \textrm{ and } \MRCA(i, j) = r\\
+		0 & i \neq j \textrm{ and } \MRCA(i, j) \neq r\\
+		-\sum_{k \neq j} L_{ik} & \textrm{ otherwise}
 	\end{cases} \]
 
 % proper references?
@@ -484,7 +484,8 @@ is a trivial representation.
 
 \begin{theorem} The spectral space is trivial.
 
-	Given a binary tree with $n$ leaves, its spectral space will always be $\mathds{C}^{n-1} \cross {0}$.
+	Given a binary tree with $n$ leaves, its spectral space will always be
+	$\mathds{C}^{n-1} \prod {0}$.
 \end{theorem}
 
 The proof of this will come later once we have the eigenvalues in closed form.
@@ -572,7 +573,7 @@ left to right''.
 
 As an example of a tree that isn't labelled left to right, take the following tree:
 
-\Tree[.1 [.2 3 5 ] 4]
+\Tree[.1 [.2 3 5 ] 4 ]
 
 The issue we have is that $2$ has a descendant that belongs to the left of $4$ and another to the right of $4$, but $4$ is not itself a descendant.
 
@@ -619,36 +620,38 @@ In other words, neither one is a common ancestor of $i$ and $j$, and yet $r$ \em
 \end{lemma}
 
 	%\[ L_{ij} = \begin{cases}
-		%1 & i \neq j \textit{and} \MRCA(i, j) = r\\
-		%0 & i \neq j \textit{and} \MRCA(i, j) \neq r\\
-		%-\sum_{k \neq j} L_{ik} & \textit{otherwise}
+		%1 & i \neq j \textrm{ and } \MRCA(i, j) = r\\
+		%0 & i \neq j \textrm{ and } \MRCA(i, j) \neq r\\
+		%-\sum_{k \neq j} L_{ik} & \textrm{otherwise}
 	%\end{cases} \]
 Proof:
 
 Our basis matrix was defined by 3 cases, the first two of which:
 
 \begin{equation} \label{L_eqn_yes}
-	L_{ij} = 1 \textit{if} i \neq j \textit{and} \MRCA(i, j) = r
+	L_{ij} = 1 \textrm{ if } i \neq j \textrm{ and } \MRCA(i, j) = r
 \end{equation}
 \begin{equation} \label{L_eqn_no}
-	L_{ij} = 0 \textit{if} i \neq j \textit{and} \MRCA(i, j) \neq r
+	L_{ij} = 0 \textrm{ if } i \neq j \textrm{ and } \MRCA(i, j) \neq r
 \end{equation}
 
 correspond to 3 of the cases in our $M$ form matrix:
 
 \begin{equation} \label{M_eqn_lr}
-	M_{ij} = 1 \textit{if} l < i \leq l + x < j \leq l + x + y
+	M_{ij} = 1 \textrm{ if } l < i \leq l + x < j \leq l + x + y
 \end{equation}
 \begin{equation} \label{M_eqn_rl}
-	M_{ij} = 1 \textit{if} l < j \leq l + x < i \leq l + x + y
+	M_{ij} = 1 \textrm{ if } l < j \leq l + x < i \leq l + x + y
 \end{equation}
 \begin{equation} \label{M_eqn_no}
-	M_{ij} = 0 \textit{otherwise, as long as} i \neq j
+	M_{ij} = 0 \textrm{ otherwise, as long as } i \neq j
 \end{equation}
 
-We see that the conditions for \ref{M_eqn_lr} in a left to right labelled tree directly correspond to $i$ descending from the left child of $r$ and $j$ from the right child of $r$.
-\ref{M_eqn_rl} instead shows these for $j$ and $i$ respectively.
-\ref{M_eqn_no} takes up the remaining cases, so we conclude that in $M$ if $i \neq j$, then $M_{ij} = 1$ if and only if $i$ and $j$ descend from different children of $r$, and $M_{ij} = 0$ otherwise.
+We see that the conditions for (\ref{M_eqn_lr}) in a left to right labelled tree directly correspond to $i$ descending from the left child of $r$ and $j$ from the right child of $r$.
+
+(\ref{M_eqn_rl}) instead shows these for $j$ and $i$ respectively.
+
+(\ref{M_eqn_no}) takes up the remaining cases, so we conclude that in $M$ if $i \neq j$, then $M_{ij} = 1$ if and only if $i$ and $j$ descend from different children of $r$, and $M_{ij} = 0$ otherwise.
 
 By the lemma above this means that $\MRCA(i, j) = r$ when $M_{ij} = 1$, and $MRCA(i, j) \neq r$ when $M_{ij} = 0$, so in these cases $M_{ij} = L_{ij}$
 
