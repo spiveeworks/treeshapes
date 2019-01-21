@@ -482,6 +482,13 @@ question.
 Not only is the vector space not a fair representation of the binary tree, it
 is a trivial representation.
 
+\begin{theorem} The spectral space is trivial.
+
+	Given a binary tree with $n$ leaves, its spectral space will always be $\mathds{C}^{n-1} \cross {0}$.
+\end{theorem}
+
+The proof of this will come later once we have the eigenvalues in closed form.
+
 \subsection{Parameter-Free Representations}
 
 While it is not useful to map the whole algebra to $\mathds{C}^n$, if we just
@@ -681,8 +688,15 @@ upper triangular.
 
 \subsection{Diagonalization}
 
-given the simple $M_{ij}$ form above, it becomes possible to find eigenvectors
-for these algebras in general.
+Once we are working with the $M$ form, the eigenvalues become straight-forward to enumerate.
+
+\begin{theorem} Eigenvalues of a basis matrix.
+
+	In a binary tree with $n$ leaves, the basis matrix $L_r$ has $0$, $-x$, $-y$, $-(x + y)$ as eigenvalues, with multiplicity $n-(x+y)+1$, $y-1$, $x-1$, and $1$ respectively, where $x$ is the number of leaves descending from the left child of $r$, and $y$ is the number of leaves descending from the right child.
+
+	In addition to this, the $n$ corresponding eigenvectors are linearly independent.
+\end{theorem}
+
 
 If we take the root of the 3-tree for example, we get the following
 eigenvectors:
@@ -838,6 +852,13 @@ eigenvectors.
 
 \subsection{Simultaneous Diagonalization}
 
+\begin{theorem} Simultaneous Diagonalization
+
+	The eigenvectors of the basis are exactly the eigenvectors for the $-(x+y)$ values above.
+
+	[could we use symmetry concepts to create a simple description of the eigenvectors?]
+\end{theorem}
+
 The matrices that we are looking at form a commutative algebra, which means
 there is some set of n linearly independent vectors that are eigenvectors for
 all n-1 of our basis matrices at once.
@@ -884,6 +905,13 @@ So we have the exact value of our $n$ eigenvectors and eigenvalues.
 
 \subsection{Ordering the Nodes}
 
+\begin{theorem} Spectrum Matrix is Upper Triangular
+
+	The spectrum matrix is similar to an upper triangular matrix by simultaneous row + column permutation.
+
+	In other words there is a relabelling of any tree that gives it an upper triangular spectrum.
+\end{theorem}
+
 If we can order these nodes so that their children always come after them, then
 the matrix of eigenvalues will be upper triangular. (Once the zero-rowsum
 column is removed)
@@ -892,7 +920,7 @@ One consequence of this is that the determinant will simply be
 
 \[\prod_{i=1}^n d_i\]
 
-This is simply the pre-order of the nodes, and so we have a closed form for the
+This is simply the pre-order traversal of the vertices, and so we have a closed form for the
 determinant.
 
 As an example of what all of the eigenvectors and eigenvalues look like in
@@ -942,32 +970,27 @@ matrix form, take two trees with 4 leaves:
 
 \subsection{Ubiquity in Eigenvalue Matrix}
 
-The reference paper ``ubiquity of synonymity'' used an induction-like argument,
-that if two trees are synonymous, then they sometimes also have an `exchange'
-property, that adding branches around those trees will create further pairs of
-synonymous trees.
-%not really induction like now that i think about it
+As we will see, this eigenvalue matrix can be used to reconstruct the tree \emph{with labels}, and so we would like to remove some more information to reach our goal of having a finite representation of tree shapes.
 
-Then as tree size gets larger, the probability of containing a subtree with the
-exchange property goes to 1, and hence so does the probability of another tree
-existing with the same measurement.
 
-In that case the measurement being used was the spectrum of a direct matrix
-representation of the tree, but in our case one possible measurement is the
-spectrum of the matrix of eigenvalues we have constructed.
 
-This measurement for us immediately has the exchange property, as the spectrum
+\begin{theorem} Near Triviality of Determinant
+
+	The spectrum of the eigenvalue matrix of a tree algebra is near trivial under relabelling, up to reordering.
+\end{theorem}
+
+The spectrum of the eigenvalue immediately has the exchange property, as the spectrum
 of our upper triangular matrices is simply the diagonal, and this diagonal is
 simply the number of leaves in each subtree.
 
 So then as long as there is a pair of trees with the same spectrum, we'll get
-the same strong negative result for the spectrum.
+the same strong negative result for spectra in general.
 
 \Tree[.    [. [. 1 2 ] [. 3 4 ]] [. 5   [. [. 6 [. 7 [. 8 9 ]]]]]]
 \Tree[. [. [. [. 1 2 ] [. 3 4 ]]    5 ] [. [. 6 [. 7 [. 8 9 ]]]]]
 
 As a result any measurement which is a symmetric function of the diagonal, such
-as the determinant or the trace, will be at least as likely to coincide.
+as the determinant or the trace, will be at least as likely to coincide as the spectrum itself, and so these functions will also be near-trivial.
 
 The two exceptions to this are, the trace of the eigenvalue matrix when not
 triangular, and the spectrum of the eigenvalue matrix with ordering
@@ -975,24 +998,19 @@ information.
 
 \subsection{Spectrum as Measure of Balance}
 
-Interestingly, the trace will equal to the Sackin index of the tree, which is the sum of the path lengths from the root to each leaf of the tree.
+Interestingly, the trace of these upper triangular matrices will equal to the Sackin index of the tree, which is the sum of the path lengths from the root to each leaf of the tree.
 
 The determinant seems quite unrelated to path lengths, but will still measure tree balance for similar reasons to the trace.
 
 As an example the two trees of order four have a spectrum of $(4, 2, 2)$ and $(4, 3, 2)$ respectively.
 The larger nodes in unbalanced trees can be expected to make both the trace and the determinant larger.
 
-\subsection{Fairness of Eigenvalue Matrix}
+\subsection{Fairness of Matrices}
 
-It looks like both the eigenvector matrix, and the eigenvalue matrix, can be
-used independent of eachother to reconstruct the tree structure.
+\begin{theorem} Fairness of eigenvalue matrix.
 
-The eigenvector matrix can be used to recover the leaf labels as well, whereas
-the eigenvalue matrix can be used to recover the branch labels.
-
-We know that the eigenvalue matrix is a fair representation of the tree with
-internal nodes labelled, so long as we can reconstruct the tree and labels from
-the eigenvalue matrix.
+	Construction of the eigenvalue matrix distinguishes and is invariant under tree shapes without leaf labels.
+\end{theorem}
 
 The eigenvalue matrix has 3 non-redundant sets of data in it:
 \begin{itemize}
@@ -1035,7 +1053,10 @@ eigenvalues of each matrix correspond to the structure of the tree.
 % TODO show that the eigenvalues of each matrix correspond to the structure of
 % the tree a bit more rigorously
 
-\subsection{Fairness of Eigenvector Matrix}
+\begin{theorem} Fairness of eigenvector matrix.
+
+	Construction of the eigenvector matrix distinguishes and is invariant under tree shapes without \emph{branch} labels.
+\end{theorem}
 
 The construction here is simple, if we use the eigenvector column indeces as
 labels for the internal nodes, then the partial order is defined as:
