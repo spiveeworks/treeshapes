@@ -9,7 +9,7 @@
 \begin{document}
 
 \newtheorem{definition}{Definition}
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem-wip}{Theorem [WIP]}
 \newtheorem{lemma}{Lemma}
 
 %\chapter{Abstract}
@@ -482,11 +482,11 @@ question.
 Not only is the vector space not a fair representation of the binary tree, it
 is a trivial representation.
 
-\begin{theorem} The spectral space is trivial.
+\begin{theorem-wip} The spectral space is trivial.
 
 	Given a binary tree with $n$ leaves, its spectral space will always be
 	$\mathds{C}^{n-1} \prod {0}$.
-\end{theorem}
+\end{theorem-wip}
 
 The proof of this will come later once we have the eigenvalues in closed form.
 
@@ -693,12 +693,15 @@ upper triangular.
 
 Once we are working with the $M$ form, the eigenvalues become straight-forward to enumerate.
 
-\begin{theorem} Eigenvalues of a basis matrix.
+[The theorems haven't had their proofs changed since when the report was pure
+prose. They will be rewritten.]
+
+\begin{theorem-wip} Eigenvalues of a basis matrix.
 
 	In a binary tree with $n$ leaves, the basis matrix $L_r$ has $0$, $-x$, $-y$, $-(x + y)$ as eigenvalues, with multiplicity $n-(x+y)+1$, $y-1$, $x-1$, and $1$ respectively, where $x$ is the number of leaves descending from the left child of $r$, and $y$ is the number of leaves descending from the right child.
 
 	In addition to this, the $n$ corresponding eigenvectors are linearly independent.
-\end{theorem}
+\end{theorem-wip}
 
 
 If we take the root of the 3-tree for example, we get the following
@@ -855,12 +858,12 @@ eigenvectors.
 
 \section{Simultaneous Diagonalization}
 
-\begin{theorem} Simultaneous Diagonalization
+\begin{theorem-wip} Simultaneous Diagonalization
 
 	The eigenvectors of the basis are exactly the eigenvectors for the $-(x+y)$ values above.
 
 	[could we use symmetry concepts to create a simple description of the eigenvectors?]
-\end{theorem}
+\end{theorem-wip}
 
 The matrices that we are looking at form a commutative algebra, which means
 there is some set of n linearly independent vectors that are eigenvectors for
@@ -908,12 +911,12 @@ So we have the exact value of our $n$ eigenvectors and eigenvalues.
 
 \section{Ordering the Nodes}
 
-\begin{theorem} Spectrum Matrix is Upper Triangular
+\begin{theorem-wip} Spectrum Matrix is Upper Triangular
 
 	The spectrum matrix is similar to an upper triangular matrix by simultaneous row + column permutation.
 
 	In other words there is a relabelling of any tree that gives it an upper triangular spectrum.
-\end{theorem}
+\end{theorem-wip}
 
 If we can order these nodes so that their children always come after them, then
 the matrix of eigenvalues will be upper triangular. (Once the zero-rowsum
@@ -977,10 +980,10 @@ As we will see, this eigenvalue matrix can be used to reconstruct the tree \emph
 
 
 
-\begin{theorem} Near Triviality of Determinant
+\begin{theorem-wip} Near Triviality of Determinant
 
 	The spectrum of the eigenvalue matrix of a tree algebra is near trivial under relabelling, up to reordering.
-\end{theorem}
+\end{theorem-wip}
 
 The spectrum of the eigenvalue immediately has the exchange property, as the spectrum
 of our upper triangular matrices is simply the diagonal, and this diagonal is
@@ -1010,10 +1013,10 @@ The larger nodes in unbalanced trees can be expected to make both the trace and 
 
 \section{Fairness of Matrices}
 
-\begin{theorem} Fairness of eigenvalue matrix.
+\begin{theorem-wip} Fairness of eigenvalue matrix.
 
 	Construction of the eigenvalue matrix distinguishes and is invariant under tree shapes without leaf labels.
-\end{theorem}
+\end{theorem-wip}
 
 The eigenvalue matrix has 3 non-redundant sets of data in it:
 \begin{itemize}
@@ -1056,10 +1059,10 @@ eigenvalues of each matrix correspond to the structure of the tree.
 % TODO show that the eigenvalues of each matrix correspond to the structure of
 % the tree a bit more rigorously
 
-\begin{theorem} Fairness of eigenvector matrix.
+\begin{theorem-wip} Fairness of eigenvector matrix.
 
 	Construction of the eigenvector matrix distinguishes and is invariant under tree shapes without \emph{branch} labels.
-\end{theorem}
+\end{theorem-wip}
 
 The construction here is simple, if we use the eigenvector column indeces as
 labels for the internal nodes, then the partial order is defined as:
