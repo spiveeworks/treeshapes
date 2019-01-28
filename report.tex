@@ -1,5 +1,5 @@
-\documentclass{report}
-\usepackage{amsmath, amssymb, amsthm, dsfont, qtree}
+\documentclass[10pt,a4paper]{report}
+\usepackage{fullpage, amsmath, amssymb, amsthm, dsfont, qtree}
 
 \DeclareMathOperator{\MRCA}{MRCA}
 
@@ -67,7 +67,7 @@ same spectrum will have the same immanantal polynomials and vice versa.
 The second result of the paper is the definition and existence of an exchange
 property, wherein some trees not only have the same spectrum, but any tree that
 contain those subtrees will also have the same spectrum. (this result applied
-to both distance matrices, and to emph{linear combinations} of
+to both distance matrices, and to \emph{linear combinations} of
 adjacency/laplacian matrices)
 
 The third result is that the proportion of trees that contains a specified
@@ -79,14 +79,14 @@ Clearly from this the paper has shown that the following 5 functions are what
 we will later define as ``near trivial'' representations:
 \begin{itemize}
 	\item immanantal polynomial of adjacency matrix
-	\item immanantal polynomial of adjacency matrix
+	\item immanantal polynomial of laplacian matrix
 	\item spectrum of adjacency matrix
 	\item spectrum of laplacian matrix
 	\item spectrum of distance matrix
 \end{itemize}
 
-To say that a representation is ``near trivial'' only says that for large
-enough trees the representation will have a lot of distinct trees with the same
+To say that a representation is ``near trivial'' says that for large enough
+trees the representation will have a lot of distinct trees with the same
 value.
 
 In particular the paper showed that the rate of approach is fairly slow, so as
@@ -140,7 +140,7 @@ The following definitions are not used other than to define a binary tree.
 
 \begin{definition} Cycle
 
-	A cycle is simply a path with at least 2 elements, and equal endpoints
+	A cycle is a path with at least 2 elements, and equal endpoints
 \end{definition}
 
 \begin{definition} Binary Tree with $n$ leaves
@@ -315,7 +315,7 @@ without branch labels]
 
 \section{Background}
 
-The paper ``Ubiquity of synonymity'' dealth with 3 different matrix
+The paper ``Ubiquity of synonymity'' dealt with 3 different matrix
 representations of trees: the adjacency matrix, laplacian matrix, and distance
 matrix.
 These representations are interesting, since relabellings of the tree result
@@ -382,7 +382,7 @@ might be useful.
 If we assume that the matrices in the algebra are diagonalizable for now, (we
 can show this later) then we can start to reason about the spectra of these
 matrices.
-With this assumption, it will also follow that all of the matrices in the
+With this assumption, it also follows that all of the matrices in the
 algebra are simultaneously diagonalizable, and hence that a set of eigenvectors
 can be found common to the whole algebra.
 We shall therefore refer to these as the Algebra's eigenvectors.
@@ -485,7 +485,7 @@ is a trivial representation.
 \begin{theorem-wip} The spectral space is trivial.
 
 	Given a binary tree with $n$ leaves, its spectral space will always be
-	$\mathds{C}^{n-1} \prod {0}$.
+	$\mathds{C}^{n-1} \times {0}$.
 \end{theorem-wip}
 
 The proof of this will come later once we have the eigenvalues in closed form.

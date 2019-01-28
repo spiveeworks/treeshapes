@@ -1,0 +1,52 @@
+
+definitions:
+ - spectrum (as an ordered list)
+  - unsorted spectrum? for matsen
+ - immanantal polynomial
+ - child
+ - descendant
+  - relationship between ancestry and descendent?
+ - ancestry as the unique path from root to vertex
+ - [n] = {1..n}
+ - symmetric groups
+ - supplementing pruned trees
+  - (dont actually call it pruned... well maybe do)
+
+terminology:
+ - tree with labels, tree with leaf labels, tree without labels
+  - no binary
+  - no n leaves
+  - rephrase the definition "when we say tree with labels we mean a directed
+    graph that represents a rooted binary tree with n leaves" type thing
+  (i just went with the term id defined as both a literal description and as
+  not so convenient term for use within the paper)
+ - operation
+  - no measurements, representations, statistics, etc.
+ - invariant, covariant, distinguishes, something for codistinguishes??
+  - less qualifiers... no more "up to isomorphism"
+  - ideally something to combine the "under leaf relabelling" qualifier in as
+    well
+    maybe everything is covariance with one or both kinds of relabelling
+    corresponding to identity transformations in the image
+  - make sure i figure out which combinations i actually need for important
+    results
+ - internal vertices, leaves
+  - branches are edges... branch points are vertices
+
+examples of things
+ - trivial example for each named property
+  - including one for the converse of a property
+ - examples of other useful phenomena like my existing 9-trees
+
+clarify and rewrite stuff
+ - dont be afraid of making the report very very long
+
+boldface definitions
+mathcal Ss for symmetric groups.. maybe define `\S`
+
+also actually finish the proofs and things....
+any wips, []s and %s
+
+also generally try to make each annotated mistake in the paper clear enough
+that i wouldnt have to justify it in person.. rearrange/reword things so that
+the report speaks for itself.
