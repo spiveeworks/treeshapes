@@ -22,14 +22,22 @@ terminology:
   not so convenient term for use within the paper)
  - operation
   - no measurements, representations, statistics, etc.
- - invariant, covariant, distinguishes, something for codistinguishes??
-  - less qualifiers... no more "up to isomorphism"
-  - ideally something to combine the "under leaf relabelling" qualifier in as
-    well
-    maybe everything is covariance with one or both kinds of relabelling
-    corresponding to identity transformations in the image
-  - make sure i figure out which combinations i actually need for important
-    results
+ - covariant
+  - less qualifiers... no more "up to isomorphism", "under leaf labelling"
+  - find a group action in the image that commutes with the domain
+  - do the leaf and internal relabellings at the same time, one might be
+    trivial
+  - shows that the operation is well defined on the orbits -> orbits
+ - invariant
+  - covariant with singleton orbits
+  - obviously shows orbits -> elements
+ - distinguishes
+  - recover some kind of relation
+   - hierarchy for leaf labels
+   - partial order of internal verteces for branch labels
+   - partial order of all verteces for both (cleanly separable tho)
+   - or proof that hierarchy labels match up to branch labels
+   - proof that each of these actually works...
  - internal vertices, leaves
   - branches are edges... branch points are vertices
 
@@ -45,6 +53,12 @@ boldface definitions
 mathcal Ss for symmetric groups.. maybe define `\S`
 
 also actually finish the proofs and things....
+ - find the leaf and branch actions that satisfy covariance
+ - show that each step in the process can recover descendence/preorder info
+  - construct a map to the partial order based on the previous one
+  - show that this map will give the same result as undoing one step and going
+    back from there?
+ - make the simultaneous diag argument more clear
 any wips, []s and %s
 
 also generally try to make each annotated mistake in the paper clear enough
