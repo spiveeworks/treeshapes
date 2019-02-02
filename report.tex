@@ -232,48 +232,41 @@ relabellings of eachother.
 Such a measurement would, at least, map trees with the same structure to the
 same values, and map trees with different structures to different values.
 
-Hence we define the following concepts, noting some caveats:
+Hence we define the following concepts:
 
-\begin{definition} Invariance Under Relabelling
+\begin{definition} Covariance
 
-	A function or operation on binary trees with n leaves, is invariant under
-	relabelling, if and only if trees with the same structure map to the same
-	result.
+	An operation on binary trees is covariant, if it commutes with the relabel
+	group action on binary trees.
 
-	Similarly a function or operation is invariant under branch/leaf
-	relabellings if trees that are equal with their branches/leaves removed,
-	map to the same result.
-
-	These properties could also be invoked ``up to isomorphism'' or up to some
-	other class of operations.
-
-	This simply means that the results of the function don't need to be exactly
-	the same, they just need to be mapped to eachother by some operation in the
-	specified class.
+	I.e.\ if we map a set of trees $T$ to some set of objects $X$ via the
+	mapping $f$, then for any relabelling $\sigma \in \S_A\S_B$, it is true
+	that $f \circ \sigma = \sigma \circ f$. (where in the LHS $\sigma$ is the
+	action of the permutation on $T$, and in the RHS it acts on $X$)
 \end{definition}
 
-\begin{definition} Distinction of Tree Shapes
+If an operation is covariant then it not only forms a well defined mapping from
+trees to objects in the codomain, but also a well defined mapping
+from orbits of trees to orbits of objects in the codomain.
 
-	A function or operation on binary trees with n leaves, distinguishes tree
-	shapes, if and only if trees with different structures map to different
-	results.
+I.e.\ we get operations that are well defined on trees without labels.
 
-	As before we also define distinguishing trees ignoring leaves/branches, and
-	distinguishing all of these up to isomorphism/permutation/etc.
+\begin{definition} Invariance
+
+	An operation on binary trees is invariant, if it is covariant, but with the
+	additional property that orbits of its image are all singleton sets.
 \end{definition}
 
-Note that distinguishing tree shapes up to a class of operations is
-\emph{stronger} than distinguishing tree shapes in general, whereas invariance
-under tree shapes up to a class of operations is \emph{weaker} than
-distinguishing tree shapes.
+Invariance of course shows that the maps from orbit to orbit, are in fact maps
+from orbit to individual objects.
 
-What we will find in this paper is that our representations either have both
-properties up to row/column permutation of matrices, or fail to distinguish
-tree shapes at all. (and become near-trivial as defined below)
+These orbit maps are sometimes injective, though we find in this paper that
+none of the operations we investigate are both invariant and give injective
+orbit-maps.
 
-In addition to the above properties, if a function doesn't distinguish tree
-shapes, then there is a stronger failure condition shown in Matsen, which we
-will call ``near triviality'':
+Not only that, the invariant maps we investigate happen to have a stronger
+failure condition as described in Matsen, which we will call ``near
+triviality'':
 
 \begin{definition} Near-Trivial
 
