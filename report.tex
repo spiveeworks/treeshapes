@@ -257,8 +257,22 @@ I.e.\ we get operations that are well defined on trees without labels.
 	additional property that orbits of its image are all singleton sets.
 \end{definition}
 
-Invariance of course shows that the maps from orbit to orbit, are in fact maps
-from orbit to individual objects.
+Invariance of course shows that the maps from orbit to orbit, are in a sense
+maps from orbit to individual objects.
+
+\begin{definition} Orbit Map
+
+	Given a covariant operation, and a subgroup of permutations inside
+	$\S_B\S_L$, the orbit map of that operation is the map from the set
+	of orbits in the domain under the subgroup, to the set of orbits in the
+	codomain.
+
+	It is defined to simply apply the covariant operation to each element of
+	the orbit to which it is applied.
+
+	Since the operation is covariant, it can be shown that this new set will
+	itself be an orbit in the codomain.
+\end{definition}
 
 These orbit maps are sometimes injective, though we find in this paper that
 none of the operations we investigate are both invariant and give injective
@@ -270,22 +284,18 @@ triviality'':
 
 \begin{definition} Near-Trivial
 
-	A function or operation on binary trees with n leaves, is near trivial, if
-	and only if the proportion of `failures to distinguish' approaches 1 as n
-	gets larger.
-
-	That is, if the proportion of pairs of trees that have different tree
-	shapes but map to the same result, out of all pairs with different shapes,
-	approaches 1.
+	An operation on binary trees is near trivial, if and only if the proportion
+	of pairs of trees that have different tree shapes but map to the same
+	result, out of all pairs with different shapes, approaches 1, as the tree
+	size $n$ gets larger.
 \end{definition}
 
 \begin{definition} Exchange
 
-	Given a function that is invariant under relabelling, regardless of tree
-	size, but does not always distinguish tree shapes, a pair of tree
-	structures $A$ and $B$ `exchange' if they not only map to the same result
-	under the function, but any tree that contains $A$ as a subtree will map to
-	the same result as that tree with $A$ replaced with $B$.
+	Given an invariant, non-injective operation on binary trees, a pair of
+	tree structures $A$ and $B$ `exchange' if they not only map to the same
+	result under the function, but any tree that contains $A$ as a subtree will
+	map to the same result as that tree with $A$ replaced with $B$.
 \end{definition}
 
 [Note that subtrees break our assumption that branch labels are 1..n-1, and
