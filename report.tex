@@ -10,6 +10,7 @@
 
 \newtheorem{definition}{Definition}
 \newtheorem{theorem-wip}{Theorem [WIP]}
+\newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 
 %\chapter{Abstract}
@@ -861,51 +862,73 @@ eigenvectors.
 
 \section{Simultaneous Diagonalization}
 
-\begin{theorem-wip} Simultaneous Diagonalization
+\begin{definition} Suo Eigenvector
 
-	The eigenvectors of the basis are exactly the eigenvectors for the $-(x+y)$ values above.
+	The suo vector of an internal vertex is the eigenvector corresponding to
+	the $-(x+y)$ eigenvalue written above.
 
-	[could we use symmetry concepts to create a simple description of the eigenvectors?]
-\end{theorem-wip}
+	That is it is the eigenvector associated with the simple eigenvalue that
+	every basis matrix has, equal to the negative of the number of leaves
+	descending from that vertex.
+\end{definition}
 
-The matrices that we are looking at form a commutative algebra, which means
-there is some set of n linearly independent vectors that are eigenvectors for
-all n-1 of our basis matrices at once.
+[could we use symmetry concepts to create a simple description of the eigenvectors?]
 
-If we look at each matrix $L_i$, we can observe that the last eigenvalue in our
-list above, $\lambda = -(x + y)$ is unique, and hence the eigenvector that
-corresponds to it is uniquely determined by it. (modulo scaling)
+\begin{lemma} Simultaneous Suo Vectors
 
-Further in the matrix corresponding to the root of the tree, the $0$ eigenvalue
-is also unique, so this node will actually give 2 uniquely determined
-eigenvectors.
+	The suo vectors are eigenvectors of the whole algebra.
+\end{lemma}
+Proof:
 
-So in total we have determined $n$ eigenvectors!
+Since the algebra is commutative, and any matrix in the algebra is
+diagonalizable, we know that the algebra is simultaneously diagonalizable.
 
-Inspection of these shows that none of them are proportional to eachother,
-since they all contain zeroes or negatives in different places to eachother.
+This simultaneously diagonalizing set of eigenvectors needs to include
+eigenvectors corresponding to the simple eigenvalues of the suo vectors.
 
-Then we know that:
-\begin{itemize}
-	\item a set of linearly independent eigenvectors must exist,
-	\item each of our eigenvalues is proportional to one of these vectors
-	\item none of our eigenvalues are proportional to eachother
-\end{itemize}
-From this we can conclude that this must be a rescaling of some linearly
-independent set of simultaneous eigenvectors, and hence is also a linearly
-independent set of simultaneous eigenvectors.
+This implies that the suo vectors are all proportional to one of these
+eigenvectors, which in turn implies that the suo vectors are themselves
+eigenvectors of the whole algebra. \qed
 
-If we label each eigenvector with the basis matrix that determined it, plus
-$v_0$ as the zero-rowsum eigenvector, then the the eigenvalues of these
-eigenvectors has a novel relationship with the structure of the binary tree:
-\begin{itemize}
-	\item ${L_i}{v_i} = -(x_i + y_i)v_i$ noting $v_i$ and $L_i$ come from the
-		same node
-	\item ${L_i}{v_j} = -{x_i}{v_j}$ if $j$ sits on the left subtree under $i$
-	\item ${L_i}{v_j} = -{y_i}{v_j}$ if $j$ sits on the right subtree under $i$
-	\item ${L_i}{v_j} = 0$ if $j$ sits outside of the subtree under $i$,
-		or $j=0$
-\end{itemize}
+\begin{lemma} Eigenvector Orthogonality
+
+	The suo vectors and the zero-rowsum vector are all orthogonal.
+\end{lemma}
+
+[Proof]
+
+\begin{theorem} Simultaneous Diagonalization
+
+	The eigenvectors of the algebra are exactly the $n-1$ suo vectors, and the
+	zero-rowsum vector.
+\end{theorem}
+
+By the lemmas above, the suo vectors are eigenvectors of the whole algebra, and
+the zero-rowsum vector is also common to the whole algebra.
+
+Additionally they are orthogonal to eachother, and hence clearly not linearly
+dependent.
+
+As such we have $n$ linearly independent eigenvectors and can simultaneously
+diagonalize the algebra.
+
+\begin{lemma} Structural Eigenvalues
+
+	If we label each eigenvector with the basis matrix that determined it, plus
+	$v_0$ as the zero-rowsum eigenvector, then the the eigenvalues of these
+	eigenvectors has a novel relationship with the structure of the binary
+	tree:
+	\begin{itemize}
+		\item ${L_i}{v_i} = -(x_i + y_i)v_i$ noting $v_i$ and $L_i$ come from
+			the same node
+		\item ${L_i}{v_j} = -{x_i}{v_j}$ if $j$ sits on the left subtree under
+			$i$ 
+		\item ${L_i}{v_j} = -{y_i}{v_j}$ if $j$ sits on the right subtree under
+			$i$ 
+		\item ${L_i}{v_j} = 0$ if $j$ sits outside of the subtree under $i$, or
+			$j=0$
+	\end{itemize}
+\end{lemma}
 
 These results follow from constructing $v_j$ as a linear combination of the
 eigenvectors described previously for $L_i$
