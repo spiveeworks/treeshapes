@@ -890,12 +890,43 @@ This implies that the suo vectors are all proportional to one of these
 eigenvectors, which in turn implies that the suo vectors are themselves
 eigenvectors of the whole algebra. \qed
 
+These vectors have a few interesting properties, such as coordinates adding up
+to zero, and subtrees' leaves having equal coordinates.
+
+As such we define another kind of vector, related to suo vectors:
+
+\begin{definition} Leaf Vector
+
+	The leaf vector of a node is the vector whose $i$th coordinate is 1 if the
+	$i$th leaf is a descendant of the node, and 0 otherwise.
+\end{definition}
+
 \begin{lemma} Eigenvector Orthogonality
 
 	The suo vectors and the zero-rowsum vector are all orthogonal.
 \end{lemma}
 
-[Proof]
+Proof:
+
+Since suo vectors are a linear combination of two leaf vectors, and the
+zero-rowsum vector is the leaf vector of the root of the tree, we can consider
+a few cases:
+
+First, if one vertex i is a descendant of another j, then it will also either
+equal or descend from one of the other vertex's children, c, say.  In this case
+the dot product of the $i$th and $j$th suo vector will be the dot product of
+the $c$th leaf vector and the $j$th suo vector.
+
+This will be proportional to the sum of the $j$th vector's coordinates, which
+is zero, so they are orthogonal.
+
+If the two verteces are not descendants of eachother, then they won't share any
+non-zero coordinates, so their product will be zero.
+
+Finally if one vector is the zero-rowsum vector, then again the product will
+simply be the sum of the other vector's coordinates, which is zero.
+
+Therefore all the eigenvectors we have constructed are orthogonal. \qed
 
 \begin{theorem} Simultaneous Diagonalization
 
@@ -910,7 +941,7 @@ Additionally they are orthogonal to eachother, and hence clearly not linearly
 dependent.
 
 As such we have $n$ linearly independent eigenvectors and can simultaneously
-diagonalize the algebra.
+diagonalize the algebra. \qed
 
 \begin{lemma} Structural Eigenvalues
 
@@ -922,16 +953,16 @@ diagonalize the algebra.
 		\item ${L_i}{v_i} = -(x_i + y_i)v_i$ noting $v_i$ and $L_i$ come from
 			the same node
 		\item ${L_i}{v_j} = -{x_i}{v_j}$ if $j$ sits on the left subtree under
-			$i$ 
+			$i$
 		\item ${L_i}{v_j} = -{y_i}{v_j}$ if $j$ sits on the right subtree under
-			$i$ 
+			$i$
 		\item ${L_i}{v_j} = 0$ if $j$ sits outside of the subtree under $i$, or
 			$j=0$
 	\end{itemize}
 \end{lemma}
 
 These results follow from constructing $v_j$ as a linear combination of the
-eigenvectors described previously for $L_i$
+eigenvectors described previously for $L_i$. [maybe leaf vectors would help?]
 
 So we have the exact value of our $n$ eigenvectors and eigenvalues.
 
