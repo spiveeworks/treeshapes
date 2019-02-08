@@ -1,5 +1,5 @@
 \documentclass[10pt,a4paper]{report}
-\usepackage{fullpage, amsmath, amssymb, amsthm, dsfont, qtree}
+\usepackage{fullpage, amsmath, amssymb, amsthm, dsfont, qtree, hyperref}
 
 \DeclareMathOperator{\MRCA}{MRCA}
 
@@ -486,12 +486,6 @@ question.
 Not only is the vector space not a fair representation of the binary tree, it
 is a trivial representation.
 
-\begin{theorem-wip} The spectral space is trivial.
-
-	Given a binary tree with $n$ leaves, its spectral space will always be
-	$\mathds{C}^{n-1} \times {0}$.
-\end{theorem-wip}
-
 The proof of this will come later once we have the eigenvalues in closed form.
 
 \section{Parameter-Free Representations}
@@ -651,7 +645,9 @@ correspond to 3 of the cases in our $M$ form matrix:
 	M_{ij} = 0 \textrm{ otherwise, as long as } i \neq j
 \end{equation}
 
-We see that the conditions for (\ref{M_eqn_lr}) in a left to right labelled tree directly correspond to $i$ descending from the left child of $r$ and $j$ from the right child of $r$.
+We see that the conditions for (\ref{M_eqn_lr}) in a left to right labelled
+tree directly correspond to $i$ descending from the left child of $r$ and $j$
+from the right child of $r$.
 
 (\ref{M_eqn_rl}) instead shows these for $j$ and $i$ respectively.
 
@@ -982,23 +978,56 @@ So we have the exact value of our $n$ eigenvectors and eigenvalues.
 
 \section{Ordering the Nodes}
 
-\begin{theorem-wip} Spectrum Matrix is Upper Triangular
+\begin{theorem} Spectrum Matrix is Upper Triangular
 
 	The spectrum matrix is similar to an upper triangular matrix by simultaneous row + column permutation.
 
 	In other words there is a relabelling of any tree that gives it an upper triangular spectrum.
-\end{theorem-wip}
+\end{theorem}
 
 If we can order these nodes so that their children always come after them, then
 the matrix of eigenvalues will be upper triangular. (Once the zero-rowsum
 column is removed)
 
+This is simply the pre-order traversal of the vertices, a traversal which by
+definition satisfies this requirement.
+
+So if the interior vertices are labelled 1 through to n by one of the preorder
+traversals of the tree, and the eigenvectors are given the same labels as the
+vertex they correspond to, then the matrix of eigenvalues we construct will
+be upper triangular.\qed
+
 One consequence of this is that the determinant will simply be
 
 \[\prod_{i=1}^n d_i\]
+where $d_i$ refers to the $i$th diagonal entry of the matrix of eigenvalues.
 
-This is simply the pre-order traversal of the vertices, and so we have a closed form for the
-determinant.
+Another important consequence is related to our previously defined spectral
+space:
+
+\begin{theorem} The spectral space is trivial.
+
+	Given a binary tree with $n$ leaves, its spectral space will always be some
+	axis relabelling of $\mathds{C}^{n-1} \times \{0\}$.
+\end{theorem}
+
+Proof.
+
+The spectral space is simply the span of the rows of the eigenvalue matrix,
+which can always be permuted to be a column of zeros followed by an upper
+triangular matrix.
+
+Further the diagonal of this triangular matrix has no zeros, so there is no
+linear dependance between these rows.
+
+Clearly the span of these rows will be the set of vectors with zero in their
+first coordinate, and all other $n-1$ coordinates free.
+
+As a result the spectral space of any tree will be some axis relabelling of
+such a vector space, which means an axis relabelling of
+$\mathds{C}^{n-1}\times\{0\}$
+
+\section{Eigenvalue Examples}
 
 As an example of what all of the eigenvectors and eigenvalues look like in
 matrix form, take two trees with 4 leaves:
@@ -1050,37 +1079,77 @@ matrix form, take two trees with 4 leaves:
 As we will see, this eigenvalue matrix can be used to reconstruct the tree \emph{with labels}, and so we would like to remove some more information to reach our goal of having a finite representation of tree shapes.
 
 
+\begin{lemma} Exchange Property of Determinant
 
-\begin{theorem-wip} Near Triviality of Determinant
+	If two binary trees have eigenvalue matrices with the same unordered
+	spectrum, then they also have the exchange property.
+\end{lemma}
 
-	The spectrum of the eigenvalue matrix of a tree algebra is near trivial under relabelling, up to reordering.
-\end{theorem-wip}
+Proof.
 
-The spectrum of the eigenvalue immediately has the exchange property, as the spectrum
-of our upper triangular matrices is simply the diagonal, and this diagonal is
-simply the number of leaves in each subtree.
+Suppose the two trees are called $T_1$ and $T_2$ respectively, and we have a
+larger tree that contains $T_1$ as a subtree, called $T_1\prime$, along with
+this larger tree after substitution of $T_2$ into $T_1$, $T_2\prime$.
 
-So then as long as there is a pair of trees with the same spectrum, we'll get
-the same strong negative result for spectra in general.
+This larger tree must either be $T_1$ itself, or a root vertex with two child
+subtrees, one of which is \emph{smaller, and itself contains $T_1$ as a
+subtree}.
+
+In the former case, the lemma is trivial, as $T_1\prime=T_1$, and clearly
+$T_2\prime=T_2$, and these already have the same spectrum by definition.
+
+In the latter case, we can see that the result also follows, as the spectrum is
+just the multiset containing the order of each subtree of the tree, which will
+be the spectrum of each subtree combined with the order of the whole tree.
+One of the subtrees is already the same in both $T_1\prime$ and $T_2\prime$,
+and the order of the whole tree is the same, so by assuming that the other
+subtree has the same spectrum in each of $T_1\prime$ and $T_2\prime$ as an
+inductive hypothesis, then clearly the spectrum of the whole trees will be the
+same as well.\qed
+
+\begin{theorem} Near Triviality of Determinant
+
+	The spectrum of the eigenvalue matrix of a tree algebra is near trivial.
+\end{theorem}
+[wait how does under-relabelling up-to-reordering work now?]
+
+Since trees with the same spectrum immediately have the exchange property, and
+existance of trees with the exchange property immediately shows
+near-triviality, all we need is to find a pair of trees with the same spectrum.
+
+A simple search gives these trees:
 
 \Tree[.    [. [. 1 2 ] [. 3 4 ]] [. 5   [. [. 6 [. 7 [. 8 9 ]]]]]]
 \Tree[. [. [. [. 1 2 ] [. 3 4 ]]    5 ] [. [. 6 [. 7 [. 8 9 ]]]]]
 
-As a result any measurement which is a symmetric function of the diagonal, such
-as the determinant or the trace, will be at least as likely to coincide as the spectrum itself, and so these functions will also be near-trivial.
+So we have near-triviality.\qed
 
-The two exceptions to this are, the trace of the eigenvalue matrix when not
-triangular, and the spectrum of the eigenvalue matrix with ordering
-information.
+The above search was done in haskell with code at the following locations:
+
+\url{https://github.com/spiveeworks/treeshapes/blob/master/det_of_values.hs/}
+
+\url{https://github.com/spiveeworks/treeshapes/blob/master/Tree.hs/}
+
+One consequence of this result is that any measurement which is a symmetric
+function of the diagonal, such as the determinant or the trace, will be at
+least as likely to coincide as the spectrum itself, and so these functions will
+also be near-trivial.
+
+Two notable cases outside of this are, the trace of the eigenvalue matrix when
+not triangular, and the \emph{ordered} spectrum of the eigenvalue matrix.
 
 \section{Spectrum as Measure of Balance}
 
-Interestingly, the trace of these upper triangular matrices will equal to the Sackin index of the tree, which is the sum of the path lengths from the root to each leaf of the tree.
+Interestingly, the trace of these upper triangular matrices will equal to the
+Sackin index of the tree, which is the sum of the path lengths from the root to
+each leaf of the tree.
 
-The determinant seems quite unrelated to path lengths, but will still measure tree balance for similar reasons to the trace.
+The determinant seems quite unrelated to path lengths, but will still measure
+tree balance for similar reasons to the trace.
 
-As an example the two trees of order four have a spectrum of $(4, 2, 2)$ and $(4, 3, 2)$ respectively.
-The larger nodes in unbalanced trees can be expected to make both the trace and the determinant larger.
+As an example the two trees of order four have a spectrum of $(4, 2, 2)$ and
+$(4, 3, 2)$ respectively.  The larger nodes in unbalanced trees can be expected
+to make both the trace and the determinant larger.
 
 \section{Fairness of Matrices}
 

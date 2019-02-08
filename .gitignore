@@ -7,3 +7,4 @@ formatVectors
 *.aux
 *.dvi
 *.log
+*.out
