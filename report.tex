@@ -697,17 +697,6 @@ upper triangular.
 
 Once we are working with the $M$ form, the eigenvalues become straight-forward to enumerate.
 
-[The theorems haven't had their proofs changed since when the report was pure
-prose. They will be rewritten.]
-
-\begin{theorem-wip} Eigenvalues of a basis matrix.
-
-	In a binary tree with $n$ leaves, the basis matrix $L_r$ has $0$, $-x$, $-y$, $-(x + y)$ as eigenvalues, with multiplicity $n-(x+y)+1$, $y-1$, $x-1$, and $1$ respectively, where $x$ is the number of leaves descending from the left child of $r$, and $y$ is the number of leaves descending from the right child.
-
-	In addition to this, the $n$ corresponding eigenvectors are linearly independent.
-\end{theorem-wip}
-
-
 If we take the root of the 3-tree for example, we get the following
 eigenvectors:
 
@@ -735,12 +724,26 @@ eigenvectors:
 \end{matrix}\right]
 \end{equation*}
 
-the first eigenvector is trivial to understand, having an eigenvalue of 0 it
+The first eigenvector is trivial to understand, having an eigenvalue of 0 it
 simply says that the row-sum of our matrix is 0, an intended feature of its
 construction.
 
 The second and third are more interesting, and can be understood by how they
-act in the first two rows, (where i <= x) vs the last row (where x < i <= x+y)
+act in the rows corresponding to leaves in the left subtree, vs those of the
+right subtree.
+
+The second eigenvector can be generalized to multiple vectors when looking at
+vertices with more descendants:
+
+\begin{lemma} Child Eigenvalues
+
+	The basis matrix corresponding to each node, has an eigenvalue equal to the
+	negative of the order of one child subtree, with an eigenspace whose
+	dimension is at least one less than the order of the other child subtree.
+	(And vice versa)
+\end{lemma}
+
+Proof.
 
 \begin{equation*}
 \left[\begin{matrix}
@@ -777,12 +780,21 @@ Further still, we can get $x-1$ of the former and $y-1$ of the latter by moving
 the -1 coordinate to any other row $\leq$ x, and the above argument would still
 apply.
 
+Then the spans of these vectors gives eigenspaces of the size we require.\qed
+
+
 This gives $x-1$ repeated eigenvalues of $-y$, $y-1$ repeated eigenvalues of
 $-x$, which when combined with the 0 eigenvalue shown, and the $n - (x + y)$
 trivial $0$ eigenvalues coming from rows that are all zero, we get $n-1$ total
 eigenvalues, meaning there is 1 more before we have a general solution.
 
 This must correspond to the third eigenvector we get in the simple 3-tree case:
+
+\begin{lemma} Final Eigenvalue
+
+	The basis matrix of each internal vertex has an eigenvalue equal to the
+	negative of the number of leaves descendant from that vertex.
+\end{lemma}
 
 $
 \left[\begin{matrix}
@@ -854,11 +866,13 @@ This is our last eigenvalue, corresponding to the following eigenvector:
 
 $\langle y, y\ldots y, -x, -x\ldots -x\rangle$
 
-where $y$ is repeated $x$ times, and $-x$ is repeated $y$ times.
+where $y$ is repeated $x$ times, and $-x$ is repeated $y$ times.\qed
 
-This means that all of our basis vectors are fully diagonalizable, as we have
-$x+y$ nontrivial eigenvectors, plus $n-x+y$ empty rows, giving a total of $n$
-eigenvectors.
+\begin{theorem} The Basis Matrices are Diagonalizable \end{theorem}
+
+The previous lemmas mean that all of our basis vectors are fully
+diagonalizable, as we have $x+y$ nontrivial eigenvectors, plus $n-x+y$ empty
+rows, giving a total of $n$ eigenvectors.\qed
 
 \section{Simultaneous Diagonalization}
 
