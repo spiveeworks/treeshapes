@@ -113,8 +113,8 @@ The three main points we use from this paper are as follows:
 		different shape, but not many with both
 	\item Matrix spectra are a promising way of removing permutations from a
 		matrix without reducing the matrix to a single number
-	\item If a tree representation has an exchange property for some pair of
-		trees, then the representation will be near trivial for large trees.
+	\item If an operation applied to a tree has an exchange property for some
+		pair of trees, then the operation will be near trivial for large trees.
 \end{enumerate}
 
 \chapter{Tree Construction}
@@ -151,7 +151,7 @@ The following definitions are not used other than to define a binary tree.
 	A cycle is a path with at least 2 elements, and equal endpoints
 \end{definition}
 
-\begin{definition} Binary Tree with $n$ leaves
+\begin{definition} Binary Tree
 
 	A graph is binary tree with $n$ leaves if and only if
 	\begin{itemize}
@@ -167,40 +167,41 @@ The following definitions are not used other than to define a binary tree.
 For convenience we will also assume that the tree is labelled with leaves $1$
 through to $n-1$, hence leaves are labelled $n$ through to $2n-1$.
 
-Hence define $B$ to be the set of branch labels.
+Hence define $B$ to be the set of interior vertex (`branch') labels.
 \[\{b | b \in \mathds{Z}, 1 \leq b < n\}\]
 Similarly $L$ to be the leaf labels.
 \[\{l | l \in \mathds{Z}, n \leq l < 2n-1\}\]
 
 \section{Most Recent Common Ancestor}
 
+\begin{definition} Ancestor/Descendant
+
+	A vertex $a$ is an ancestor of a vertex $b$, and similarly $b$ is a
+	descendant of $a$ if there is a path from $a$ to $b$.
+\end{definition}
+
 \begin{definition} Ancestry
 
-	If a node r is the root of a tree, then its ancestry is simply the
-	singleton ordered list $(r)$.
+	The ancestry of a vertex is the unique path from the root to that vertex.
 
-	If a node r is not the root of a tree, then its ancestry is acquired by
-	taking the ancestry of its predecessor, and prepending r itself.
-
-	In other words the ancestry of a node is the list of nodes above that node,
-	starting with itself, and ending with the root of the tree.
+	The ancestry is unique in binary trees, since they are defined to only have
+	one predecessor on each vertex.
 \end{definition}
+
+The ancestry gets its name from the fact that it is an ordered list of
+ancestors for a given node.
 
 \begin{definition} Common Ancestry
 
-	The common ancestry of two nodes is the largest ordered list of nodes that
-	is a suffix of both nodes' ancestries.
+	The common ancestry of two verteces is the largest ordered list of verteces
+	that is a prefix of both verteces' ancestries.
 \end{definition}
 
 \begin{definition} Most Recent Common Ancestor
 
-	The MRCA of two nodes (in particular two leaves) is the first node in the
-	common ancestry of the two nodes.
+	The MRCA of two verteces (in particular two leaves) is the last element of
+	the common ancestry of the two verteces.
 \end{definition}
-
-% is it ok to take graph concepts like predecessor for granted
-% also self explanatory concepts used later such as descendants, children,
-% descendant leaves, etc.
 
 \section{Relabelling}
 
