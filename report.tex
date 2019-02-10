@@ -361,33 +361,79 @@ The algebra is as follows:
 	\[ L_{ij} = \begin{cases}
 		1 & i \neq j \textrm{ and } \MRCA(i, j) = r\\
 		0 & i \neq j \textrm{ and } \MRCA(i, j) \neq r\\
-		-\sum_{k \neq j} L_{ik} & \textrm{ otherwise}
+		-\sum_{k \neq j} L_{ik} & i = j
 	\end{cases} \]
 
+[$\MRCA(i, j)$ should really be $\MRCA(n-1+i, n-1+j)$, which requires some explanation]
 % proper references?
 
-Similar to the previous paper, these matrices relate rows/columns to leaf
-labels, and hence are similar to matrices associated with relabellings of the
-tree.
+We have the result that this algebra is commutative, which means that once we know its elements can be diagonalized, it will be simultaneously diagonalizable.
 
-That is, this algebra representation is invariant under relabelling up to
-simultaneous row/column permutation.
+This suggests that similar to Matsen, we may be able to use the spectrum of elements of the algebra in order to distinguish binary trees.
 
-It also distinguishes tree shapes up to row/column permutation.
+But first, in order for such spectra to have distinguishing power, it would need to be true that the algebra still has distinguishing power.
 
-As a set of matrices, the algebra no longer has branch information, however the
-basis as an ordered set will still have branch information, so we can see that
-the basis is not invariant under tree shapes, but will distinguish tree shapes,
-and that the algebra will in fact be invariant under branch relabelling.
+\section{Algebra Covariance}
 
-[also the basis is invariant under branch relabelling up to basis permutations,
-invariant under leaf relabelling up to row/column permutation, these properties
-seem too expressive to thoroughly explore]
+\begin{theorem} Basis Covariance
 
-Further, since the algebra is commutative, we have the property that if it
-diagonalizable at all, then it is simultaneously diagonalizable.
-Together these properties suggest that the spectra of matrices in this algebra
-might be useful.
+	The construction of the basis as an ordered set of matrices, is a covariant operation
+\end{theorem}
+
+Proof.
+
+The basis matrices are defined in terms of the $MRCA$ of two leaves, i and j, against the index of one interior vertex r.
+
+The group action on the trees permutes their labels, which gives matrices based on $\sigma(i)$ and $\sigma(j)$, against the index of one interior vertex $\sigma(r)$.
+
+If we simply define the group action on the sequence of basis matrices to permute the matrices themselves, as well as their rows, and their columns, in the same way, then they will have the exact same definition:
+
+\[ L\prime_{ij}^(r) = \begin{cases}
+	1 & i \neq j \textrm{ and } \MRCA(\sigma(i), \sigma(j)) = \sigma(r)\\
+	0 & i \neq j \textrm{ and } \MRCA(\sigma(i), \sigma(j)) \neq \sigma(r)\\
+	-\sum_{k \neq i} L\prime_{ik} & i = j
+\end{cases} \]
+
+% dont forget to n-1+i here asw
+
+This gives us covariance.\qed
+
+The construction of the algebra itself, as the span of these matrices, will also be covariant, which can be shown with the same reasoning.
+
+\begin{theorem} Basis Injectivity
+
+	If a binary tree with labels is used to generate its sequence of basis matrices, then the binary tree can be recovered exactly from the sequence.
+\end{theorem}
+
+Proof.
+
+Given the basis matrices, we immediately know that a leaf $i$ is a descendant of an interior vertex $r$, if the $i$th row/column of the $r$th matrix is not empty.
+
+This is because the tree is specifically a binary tree:
+
+If $i$ is a descendant of $r$, then whichever child $i$ descends from, there must be another child and hence another leaf descending from that child
+
+This means there is a pair of leaves whose $\MRCA$ is $r$ [shown later]
+
+This in turn means the $i$th row/column of the $r$th matrix is not empty.
+
+Once we know whether any leaf $i$ descends from any interior vertex $r$, the rest of the tree is determined.
+
+The reason for this is that we can construct a hierarchy which is equivalent to the tree, and then apply transitive reduction to recover the tree itself.
+
+[No hierarchy definition or construction]
+
+\qed
+
+This means that if two sequences of basis matrices are different, then the trees they were constructed from must also be different, though they may simply be relabellings.
+
+It can be shown that any orbit maps that come from the action of subgroups of $\S_A\S_B$ will also be injective.
+
+The algebra itself will not have this full injectivity, but its orbit maps under specifically $\S_B$ will be injective.
+
+The proof will not be written here but the approach would be to find the unique basis of the algebra whose non-diagonal entries are each either 0 or 1, then pick an arbitrary order for this basis and repeat the above process.
+
+The reason that this injectivity only applies to $\S_B$'s orbit map is that our choice of basis labels is arbitrary, and so we can only reconstruct the corresponding tree without interior labels. (Trees without interior labels of course being orbits of trees with labels, under the group action of $\S_B$)
 
 \section{Canonical Forms of Spectra}
 
