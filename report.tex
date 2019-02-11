@@ -5,9 +5,10 @@
 
 % used when defining tree shapes as orbits of a group action
 \DeclareMathOperator{\relabel}{relabel}
-\DeclareMathOperator{\S}{\mathcal{S}}
-\DeclareMathOperator{\C}{\mathds{C}}
-\DeclareMathOperator{\Z}{\mathds{Z}}
+
+\newcommand{\S}{\mathcal{S}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
 
 \newtheorem{definition}{Definition}
 \newtheorem{theorem-wip}{Theorem [Sketch]}
@@ -18,13 +19,6 @@
 \date{2019\\ February}
 \author{Jarvis Carroll
 \\ Supervised by Jeremy Sumner}
-
-%\chapter{Abstract}
-
-%We investigate representations of binary trees related to a particular matrix
-%algebra representation demonstrated previously.
-
-%[finish report first then finish abstract]
 
 \begin{document}
 
@@ -119,6 +113,12 @@ The three main points we use from this paper are as follows:
 		pair of trees, then the operation will be near trivial for large trees.
 \end{enumerate}
 
+It should also be noted that a motivation indicated by the paper, and shared by this project, is to derive a distance function between the structure of two trees.
+
+Such a function would have potential use if it was derived from an operation that couldn't perfectly distinguish tree shapes, but should it have a proportion of failures that approaches 1, then of course most trees will have zero distance.
+
+As such while it would be nice to have an operation which perfectly distinguishes tree shapes, it is crucial that it isn't near-trivial, the way that the previous 5 operations are.
+
 \chapter{Tree Construction}
 
 Trees will be represented as directed graphs, that is a set of ordered pairs.
@@ -131,9 +131,6 @@ Trees will be represented as directed graphs, that is a set of ordered pairs.
 
 	Similarly the children $C_v$ are given by $(v, u) \in G$
 \end{definition}
-
-The following definitions are not used other than to define a binary tree.
-[this may change as later reconstruction of trees becomes more rigorous]
 
 \begin{definition} Path
 
@@ -346,13 +343,6 @@ Additionally some concepts are important for explaining some of the background r
 
 \section{Tree Algebras}
 
-A motivation indicated by the Matsen paper is to derive a distance function between
-the structure of two trees.
-Such a function would still have potential use if it was derived from an operation that wasn't injective, but should it be near-trivial then most trees will have zero distance.
-As such while it would be nice to have an operation with injective orbit maps, it is crucial that it isn't near-trivial.
-
-[Where should this paragraph actually go]
-
 The Tas Phylo group has shown in another paper that trees can be represented as
 an algebra of matrices, and that this algebra is commutative.
 
@@ -366,15 +356,15 @@ The algebra is as follows:
 
 	The basis matrix $r$ in a tree with $n$ leaves has the following
 	definition:
-\end{definition}
+
 	\[ L_{ij} = \begin{cases}
-		1 & i \neq j \textrm{ and } \MRCA(i, j) = r\\
-		0 & i \neq j \textrm{ and } \MRCA(i, j) \neq r\\
+		1 & i \neq j \textrm{ and } \MRCA(n-1+i, n-1+j) = r\\
+		0 & i \neq j \textrm{ and } \MRCA(n-1+i, n-1+j) \neq r\\
 		-\sum_{k \neq j} L_{ik} & i = j
 	\end{cases} \]
+\end{definition}
 
-[$\MRCA(i, j)$ should really be $\MRCA(n-1+i, n-1+j)$, which requires some explanation]
-% proper references?
+Note that we don't use $\MRCA(i, j)$ but $\MRCA(n-1+i, n-1+j)$ since $i$ and $j$ are matrix indeces not leaf labels.
 
 We have the result that this algebra is commutative, which means that once we know its elements can be diagonalized, it will be simultaneously diagonalizable.
 
@@ -398,12 +388,10 @@ The group action on the trees permutes their labels, which gives matrices based 
 If we simply define the group action on the sequence of basis matrices to permute the matrices themselves, as well as their rows, and their columns, in the same way, then they will have the exact same definition:
 
 \[ L\prime_{ij}^(r) = \begin{cases}
-	1 & i \neq j \textrm{ and } \MRCA(\sigma(i), \sigma(j)) = \sigma(r)\\
-	0 & i \neq j \textrm{ and } \MRCA(\sigma(i), \sigma(j)) \neq \sigma(r)\\
+	1 & i \neq j \textrm{ and } \MRCA(\sigma(n-1+i), \sigma(n-1+j)) = \sigma(r)\\
+	0 & i \neq j \textrm{ and } \MRCA(\sigma(n-1+i), \sigma(n-1+j)) \neq \sigma(r)\\
 	-\sum_{k \neq i} L\prime_{ik} & i = j
 \end{cases} \]
-
-% dont forget to n-1+i here asw
 
 This gives us covariance.\qed
 
@@ -422,15 +410,13 @@ This is because the tree is specifically a binary tree:
 
 If $i$ is a descendant of $r$, then whichever child $i$ descends from, there must be another child and hence another leaf descending from that child
 
-This means there is a pair of leaves whose $\MRCA$ is $r$ [shown later]
+This means there is a pair of leaves whose $\MRCA$ is $r$ (This kind of reasoning will be made explicit in a later lemma)
 
 This in turn means the $i$th row/column of the $r$th matrix is not empty.
 
 Once we know whether any leaf $i$ descends from any interior vertex $r$, the rest of the tree is determined.
 
 The reason for this is that we can construct a hierarchy which is equivalent to the tree, and then apply transitive reduction to recover the tree itself.
-
-[No hierarchy definition or construction]
 
 \qed
 
@@ -493,7 +479,8 @@ This will not apply to the sorted image, e.g. $(1, 1) - (0, 1) = (1, 0)$
 
 This spectral space will be covariant, with a group action that permutes the axes of the space based on the permutation's effect on leaf labels, and ignores its effect on interior labels.
 
-[Note that the ordering of the eigenvectors is free anyway, so covariance doesn't really apply since you can already permute the axes without relabelling the tree.... our spectral space isn't well defined in that way]
+Note that the ordering of the eigenvectors is free anyway, so covariance doesn't really apply since you can already permute the axes without relabelling the tree.
+In that way our spectral space isn't well defined.
 
 This seems like a promising representation; if we could find a convenient
 measurement of the space to get rid of the label information implicit in the ordering of the axes, that would be very
@@ -548,10 +535,6 @@ The proof of this will come later once we have the eigenvalues in closed form.
 
 While it is not useful to map the whole algebra to $\C^n$, if we just
 look at the basis it turns out to be more useful.
-% addressing the fact that other bases exist than the one the algebra was
-% defined with? once we're talking about determinants this can be dealt with
-% specifically, but the trace and spectrum of the eigenvalue matrix are heavily
-% dependent on the basis chosen
 As such we shall consider the basis that was used to define the algebra.
 
 If the original tree has $n$ leaves, then we have
@@ -591,27 +574,7 @@ One clear possibility is to take the determinant of either of these matrices,
 and remove the effect of row/column permutations with an absolute value.
 As such we shall first derive the exact value of both of the matrices.
 
-% not included currently, could be a useful analogy:
-% Geometrically we can consider this to be the volume spanned by the spectrum
-% vectors.
-
 \chapter{Simultaneous Diagonalization}
-
-%\section{basis variance}
-%
-%If $detsubst(L*) =$ the determinant as described, but with respect to basis
-%$L*, L_2, L_3\ldots L_n-1$, so that $detsubst(L_1)$ is exactly the
-%determinant as described.
-%
-%Then $detsubst(L_1 + L_2)$ expanded on the first column seems to give the same
-%expression as $detsubst(L_1) + detsubst(L_2)$ expanded on their first columns.
-%
-%But $detsubst(L_2)$ is the determinant of a singular matrix:
-%\[[spec(L_2), spec(L_2), spec(L_3)\ldots]\]
-%so equals zero.
-%
-%The same doesn't seem to apply to $detsubst(L_1 + L_1)$ though, so we might
-%need to normalize the $L_i$ matrices somehow?
 
 When working towards a simultaneous diagonalization of the algebra, the first
 thing we need is to show that the matrices can be diagonalized at all.
@@ -670,11 +633,6 @@ In other words, neither one is a common ancestor of $i$ and $j$, and yet $r$ \em
 \begin{lemma} The $M$ form matrix on a vertex $r$ is a basis matrix
 \end{lemma}
 
-	%\[ L_{ij} = \begin{cases}
-		%1 & i \neq j \textrm{ and } \MRCA(i, j) = r\\
-		%0 & i \neq j \textrm{ and } \MRCA(i, j) \neq r\\
-		%-\sum_{k \neq j} L_{ik} & \textrm{otherwise}
-	%\end{cases} \]
 Proof:
 
 Our basis matrix was defined by 3 cases, the first two of which:
@@ -935,8 +893,6 @@ rows, giving a total of $n$ eigenvectors.\qed
 	descending from that vertex.
 \end{definition}
 
-[could we use symmetry concepts to create a simple description of the eigenvectors?]
-
 \begin{lemma} Simultaneous Suo Vectors
 
 	The suo vectors are eigenvectors of the whole algebra.
@@ -1025,7 +981,7 @@ diagonalize the algebra. \qed
 \end{lemma}
 
 These results follow from constructing $v_j$ as a linear combination of the
-eigenvectors described previously for $L_i$. [maybe leaf vectors would help?]
+eigenvectors described previously for $L_i$.
 
 So we have the exact value of our $n$ eigenvectors and eigenvalues.
 
@@ -1165,7 +1121,6 @@ same as well.\qed
 
 	The spectrum of the eigenvalue matrix of a tree algebra is near trivial.
 \end{theorem}
-[wait how does under-relabelling up-to-reordering work now?]
 
 Since trees with the same spectrum immediately have the exchange property, and
 existance of trees with the exchange property immediately shows
