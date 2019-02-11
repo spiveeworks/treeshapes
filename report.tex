@@ -6,7 +6,7 @@
 % used when defining tree shapes as orbits of a group action
 \DeclareMathOperator{\relabel}{relabel}
 
-\newcommand{\S}{\mathcal{S}}
+\newcommand{\Sym}{\mathcal{S}}
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\Z}{\mathbb{Z}}
 
@@ -209,8 +209,8 @@ Trees can be relabelled by injective operations on their vertex labels.
 
 \begin{definition} Relabel
 
-	We can use a permutation $\sigma \in \S_[2n-1]$ to relabel a tree by taking
-	the group action of $\S_[2n-1]$ on a graph.
+	We can use a permutation $\sigma \in \Sym_[2n-1]$ to relabel a tree by taking
+	the group action of $\Sym_[2n-1]$ on a graph.
 
 	\[
 		\relabel(\sigma, G) := \{(\sigma(i), \sigma(j)) | (i, j) \in G\}
@@ -225,9 +225,9 @@ can take to represent the structure itself:
 
 \begin{definition} Trees Without Labels
 
-	A tree without labels is an orbit under the $\relabel$ action of the group ${\S_B}{\S_L}$.
+	A tree without labels is an orbit under the $\relabel$ action of the group ${\Sym_B}{\Sym_L}$.
 
-	Similarly a tree without leaf labels or interior labels is that of the groups $\S_L$ and $\S_B$ respectively.
+	Similarly a tree without leaf labels or interior labels is that of the groups $\Sym_L$ and $\Sym_B$ respectively.
 
 	In addition to this, given a tree with labels, \emph{that} tree without labels is the orbit of that tree. (Without labels, without leaf labels, without interior labels)
 \end{definition}
@@ -248,7 +248,7 @@ Hence we define the following concepts:
 	An operation on binary trees is covariant, if it commutes with some group actions.
 
 	I.e.\ if we map a set of trees $T$ to some set of objects $X$ via the
-	mapping $f$, then for any relabelling $\sigma \in \S_L\S_B$, it is true
+	mapping $f$, then for any relabelling $\sigma \in \Sym_L\Sym_B$, it is true
 	that $f \circ \sigma = \sigma \circ f$. (where in the LHS $\sigma$ is the
 	relabel action of the permutation on $T$, and in the RHS is some other action on $X$)
 \end{definition}
@@ -271,7 +271,7 @@ maps from orbit to individual objects.
 \begin{definition} Orbit Map
 
 	Given a covariant operation, and a subgroup of permutations inside
-	$\S_B\S_L$, the orbit map of that operation is the map from the set
+	$\Sym_B\Sym_L$, the orbit map of that operation is the map from the set
 	of orbits in the domain under the subgroup, to the set of orbits in the
 	codomain.
 
@@ -324,7 +324,7 @@ We also use other graphs/relations to reconstruct trees based on our knowledge o
 
 \begin{definition} Symmetric Group
 
-	The symmetric group $\S_A$ is the set of maps which are bijections on the finite set $A$.
+	The symmetric group $\Sym_A$ is the set of maps which are bijections on the finite set $A$.
 \end{definition}
 
 There are a few group-theoretic concepts such as characters of a permutation, group actions, orbits, and row/column permutations of a matrix, which are not defined here but are crucial to many constructs described in this paper.
@@ -422,13 +422,13 @@ The reason for this is that we can construct a hierarchy which is equivalent to 
 
 This means that if two sequences of basis matrices are different, then the trees they were constructed from must also be different, though they may simply be relabellings.
 
-It can be shown that any orbit maps that come from the action of subgroups of $\S_L\S_B$ will also be injective.
+It can be shown that any orbit maps that come from the action of subgroups of $\Sym_L\Sym_B$ will also be injective.
 
-The algebra itself will not have this full injectivity, but its orbit maps under specifically $\S_B$ will be injective.
+The algebra itself will not have this full injectivity, but its orbit maps under specifically $\Sym_B$ will be injective.
 
 The proof will not be written here but the approach would be to find the unique basis of the algebra whose non-diagonal entries are each either 0 or 1, then pick an arbitrary order for this basis and repeat the above process.
 
-The reason that this injectivity only applies to $\S_B$'s orbit map is that our choice of basis labels is arbitrary, and so we can only reconstruct the corresponding tree without interior labels. (Trees without interior labels of course being orbits of trees with labels, under the group action of $\S_B$)
+The reason that this injectivity only applies to $\Sym_B$'s orbit map is that our choice of basis labels is arbitrary, and so we can only reconstruct the corresponding tree without interior labels. (Trees without interior labels of course being orbits of trees with labels, under the group action of $\Sym_B$)
 
 \section{Canonical Forms of Spectra}
 
@@ -602,8 +602,8 @@ derive here.
 
 Then if we consider a vertex in such a tree, and suppose that:
 \begin{itemize}
-	\item its left child's descendents are in the range $[l + x]\setdifference[l]$,
-	\item its right child's are in the range $[l + x + y]\setdifference[l+x]$
+	\item its left child's descendents are in the range $[l + x]\setminus[l]$,
+	\item its right child's are in the range $[l + x + y]\setminus[l+x]$
 \end{itemize}
 then we can infer the following basis matrix corresponding to this vertex:
 
@@ -1162,7 +1162,7 @@ to make both the trace and the determinant larger.
 
 \begin{theorem-wip} Fairness of eigenvalue matrix.
 
-	The group $\S_L$ and the operation of constructing eigenvalue matrices, give injective orbit maps.
+	The group $\Sym_L$ and the operation of constructing eigenvalue matrices, give injective orbit maps.
 \end{theorem-wip}
 
 Proof.
@@ -1211,7 +1211,7 @@ This means that the orbit map must be injective.\qed
 
 \begin{theorem-wip} Fairness of eigenvector matrix.
 
-	The group $\S_B$ and the operation of constructing eigenvector matrices, give injective orbit maps.
+	The group $\Sym_B$ and the operation of constructing eigenvector matrices, give injective orbit maps.
 \end{theorem-wip}
 
 The construction here is simple, if we use the eigenvector column indeces as
