@@ -126,15 +126,18 @@ Trees will be represented as directed graphs, that is a set of ordered pairs.
 \begin{definition} Predecessor/Child
 
 	Given a graph $G$ over verteces $V$, and a vertex $v \in V$, the
-	predecessors of $v$ are the set $P_v \subset V$ with $u \in P_v
+	\underline{predecessors} of $v$ are the set $P_v \subset V$ with $u \in P_v
 	\Leftrightarrow (u, v) \in G$
 
-	Similarly the children $C_v$ are given by $(v, u) \in G$
+	Similarly the \underline{children} $C_v$ are given by $(v, u) \in G$
+
+	A \underline{child} or \underline{parent} is of course an element of the
+	set of children or parents.
 \end{definition}
 
 \begin{definition} Path
 
-	A path is an ordered list of vertices with the property that adjacent
+	A \underline{path} is an ordered list of vertices with the property that adjacent
 	vertices are also adjacent in the tree.
 
 	\begin{itemize}
@@ -147,12 +150,12 @@ Trees will be represented as directed graphs, that is a set of ordered pairs.
 
 \begin{definition} Cycle
 
-	A cycle is a path with at least 2 elements, and equal endpoints
+	A \underline{cycle} is a path with at least 2 elements, and equal endpoints
 \end{definition}
 
 \begin{definition} Binary Tree
 
-	A graph is a binary tree, or a tree with labels, if and only if
+	A graph is a \underline{binary tree}, or a \underline{tree with labels}, if and only if
 	\begin{itemize}
 		\item there are no cycles
 		\item every vertex has exactly one predecessor, except one vertex called
@@ -176,15 +179,15 @@ This notation: \[[n] = \{r|r\in\Z, 1 \leq r \leq n\}\] will be used throughout t
 
 \begin{definition} Ancestor/Descendant
 
-	A vertex $a$ is an ancestor of a vertex $b$, and similarly $b$ is a
-	descendant of $a$ if there is a path from $a$ to $b$.
+	A vertex $a$ is an \underline{ancestor} of a vertex $b$, and similarly $b$ is a
+	\underline{descendant} of $a$ if there is a path from $a$ to $b$.
 \end{definition}
 
 \begin{definition} Ancestry
 
-	The ancestry of a vertex is the unique path from the root to that vertex.
+	The \underline{ancestry} of a vertex is the unique path from the root to that vertex.
 
-	The ancestry is unique in binary trees, since they are defined to only have
+	The ancestry is unique in binary trees, since they are defined to have only
 	one predecessor on each vertex.
 \end{definition}
 
@@ -193,13 +196,13 @@ ancestors for a given vertex.
 
 \begin{definition} Common Ancestry
 
-	The common ancestry of two verteces is the largest ordered list of verteces
+	The \underline{common ancestry} of two verteces is the largest ordered list of verteces
 	that is a prefix of both verteces' ancestries.
 \end{definition}
 
 \begin{definition} Most Recent Common Ancestor
 
-	The MRCA of two verteces (in particular two leaves) is the last element of
+	The \underline{MRCA} of two verteces (in particular two leaves) is the last element of
 	the common ancestry of the two verteces.
 \end{definition}
 
@@ -225,11 +228,13 @@ can take to represent the structure itself:
 
 \begin{definition} Trees Without Labels
 
-	A tree without labels is an orbit under the $\relabel$ action of the group ${\Sym_B}{\Sym_L}$.
+	A \underline{tree without labels} is an orbit under the $\relabel$ action of the group ${\Sym_B}{\Sym_L}$.
 
-	Similarly a tree without leaf labels or interior labels is that of the groups $\Sym_L$ and $\Sym_B$ respectively.
+	Similarly a \underline{tree without leaf labels} or interior labels is that of the groups $\Sym_L$ and $\Sym_B$ respectively.
 
-	In addition to this, given a tree with labels, \emph{that} tree without labels is the orbit of that tree. (Without labels, without leaf labels, without interior labels)
+	In addition to this, given a tree with labels, \emph{that} tree
+	\underline{without labels} is the orbit of that tree. (Without labels,
+	without leaf labels, without interior labels)
 \end{definition}
 
 \section{Representation}
@@ -245,7 +250,7 @@ Hence we define the following concepts:
 
 \begin{definition} Covariance
 
-	An operation on binary trees is covariant, if it commutes with some group actions.
+	An operation on binary trees is \underline{covariant}, if it commutes with some group actions.
 
 	I.e.\ if we map a set of trees $T$ to some set of objects $X$ via the
 	mapping $f$, then for any relabelling $\sigma \in \Sym_L\Sym_B$, it is true
@@ -261,8 +266,9 @@ I.e.\ we get operations that are well defined on trees without labels.
 
 \begin{definition} Invariance
 
-	An operation on binary trees is invariant, if it is covariant, but with the
-	additional property that orbits of its image are all singleton sets.
+	An operation on binary trees is \underline{invariant}, if it is covariant,
+	but with the additional property that orbits of its image are all singleton
+	sets.
 \end{definition}
 
 Invariance of course shows that the maps from orbit to orbit, are in a sense
@@ -271,7 +277,7 @@ maps from orbit to individual objects.
 \begin{definition} Orbit Map
 
 	Given a covariant operation, and a subgroup of permutations inside
-	$\Sym_B\Sym_L$, the orbit map of that operation is the map from the set
+	$\Sym_B\Sym_L$, the \underline{orbit map} of that operation is the map from the set
 	of orbits in the domain under the subgroup, to the set of orbits in the
 	codomain.
 
@@ -299,7 +305,7 @@ As an extreme example we could simply take the orbit of a tree to be an invarian
 
 \begin{definition} Near-Trivial
 
-	An operation on binary trees is near trivial, if and only if the proportion
+	An operation on binary trees is \underline{near trivial}, if and only if the proportion
 	of pairs of trees that are different even without labels, but that give the same result,
 	out of all pairs that are different without labels, approaches 1, as the tree
 	size $n$ gets larger.
@@ -308,9 +314,10 @@ As an extreme example we could simply take the orbit of a tree to be an invarian
 \begin{definition} Exchange
 
 	Given an invariant, non-injective operation on binary trees, a pair of
-	trees without labels $A$ and $B$ `exchange' if they not only map to the same
-	result under the operation, but any tree that contains $A$ as a subtree will
-	map to the same result as that tree with $A$ replaced with $B$.
+	trees without labels $A$ and $B$ \underline{exchange} if they not only map
+	to the same result under the operation, but any tree that contains $A$ as a
+	subtree will map to the same result as that tree with $A$ replaced with
+	$B$.
 \end{definition}
 
 In Matsen it was shown that if a pair of trees exchange then the operation for
@@ -350,7 +357,7 @@ The algebra is as follows:
 
 \begin{definition} Algebra of a Tree
 
-	Given a binary tree with $n$ leaves, that tree's algebra is an
+	Given a binary tree with $n$ leaves, that tree's \underline{algebra} is an
 	$n-1$-dimensional commutative algebra spanned by $n-1$ basis matrices
 	corresponding to the $n-1$ branch verteces of the tree.
 
@@ -468,7 +475,7 @@ vector space.
 
 \begin{definition}Spectral Space
 
-	The spectral space of a binary tree will here mean the set of spectra of
+	The \underline{spectral space} of a binary tree will here mean the set of spectra of
 	matrices from the tree's algebra.
 
 	This set is a vector space since the algebra is commutative.
@@ -594,7 +601,7 @@ The issue we have is that $2$ has a descendant that belongs to the left of $4$ a
 
 \begin{definition} Left to Right
 
-	A binary tree with $n$ leaves is labelled Left to Right if and only if the descendents of any vertex are a set of consecutive integers.
+	A binary tree with $n$ leaves is labelled \underline{Left to Right} if and only if the descendents of any vertex are a set of consecutive integers.
 \end{definition}
 
 Other labellings will simply permute the coordinates of the eigenvectors we
@@ -885,7 +892,7 @@ rows, giving a total of $n$ eigenvectors.\qed
 
 \begin{definition} Suo Eigenvector
 
-	The suo vector of an internal vertex is the eigenvector corresponding to
+	The \underline{suo vector} of an internal vertex is the eigenvector corresponding to
 	the $-(x+y)$ eigenvalue written above.
 
 	That is it is the eigenvector associated with the simple eigenvalue that
@@ -916,7 +923,7 @@ As such we define another kind of vector, related to suo vectors:
 
 \begin{definition} Leaf Vector
 
-	The leaf vector of a vertex is the vector whose $i$th coordinate is 1 if the
+	The \underline{leaf vector} of a vertex is the vector whose $i$th coordinate is 1 if the
 	$i$th leaf is a descendant of the vertex, and 0 otherwise.
 \end{definition}
 
