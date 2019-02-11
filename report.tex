@@ -7,7 +7,7 @@
 \DeclareMathOperator{\relabel}{relabel}
 
 \newtheorem{definition}{Definition}
-\newtheorem{theorem-wip}{Theorem [WIP]}
+\newtheorem{theorem-wip}{Theorem [Sketch]}
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 
@@ -46,20 +46,20 @@ The adjacency matrix takes the tree as an undirected graph, represented simply
 as an adjacency matrix.
 
 The laplacian matrix is the adjacency matrix but with the diagonal changed so
-that the matrix has zero row and column sum.
+that the matrix has zero row and column sum. (i.e. the sum of each row is subtracted from the diagonal)
 
 The distance matrix is a smaller matrix where $D_{ij}$ is the length of the
 shortest path from the $i$th leaf to the $j$th leaf.
 
-All of these representations are one to one representations of the tree except
-for the distance matrix.  
+All of these representations are one to one representations of the tree with labels, except
+for the distance matrix, which corresponds to trees without internal labels.
 
 Relabelling vertices in the tree/graph will simultaneously permute
-corresponding rows and columns of all of these representations.  
+corresponding rows and columns of all of these representations, a concept we will come to define as covariance.
 
 This means that the immanant and spectrum have a lot of potential as
 representations, since they can potentially give the same result under
-permutation, but different results if two trees really have different shapes.
+permutation, but different results if two trees really have different 'shapes'. (i.e. they aren't relabellings of eachother)
 
 Of course this does not turn out to be the case, which is the point of the
 paper.
@@ -73,18 +73,16 @@ The first result of the paper is that adjacency/laplacian matrices with the
 same spectrum will have the same immanantal polynomials and vice versa.
 
 The second result of the paper is the definition and existence of an exchange
-property, wherein some trees not only have the same spectrum, but any tree that
-contain those subtrees will also have the same spectrum. (this result applied
-to both distance matrices, and to \emph{linear combinations} of
-adjacency/laplacian matrices)
+property: some trees not only have the same spectrum, but substituting those subtrees for eachother in larger trees will not change their spectrum either.
+(this result applied to both distance matrices, and to \emph{linear combinations} of adjacency/laplacian matrices)
 
 The third result is that the proportion of trees that contains a specified
 subtree will approach 1 as tree size gets larger.
 
 \section{Conclusions}
 
-Clearly from this the paper has shown that the following 5 functions are what
-we will later define as ``near trivial'' representations:
+Clearly from this the paper has shown that the following 5 operations are what
+we will later define as ``near trivial'':
 \begin{itemize}
 	\item immanantal polynomial of adjacency matrix
 	\item immanantal polynomial of laplacian matrix
@@ -93,16 +91,17 @@ we will later define as ``near trivial'' representations:
 	\item spectrum of distance matrix
 \end{itemize}
 
-To say that a representation is ``near trivial'' says that for large enough
-trees the representation will have a lot of distinct trees with the same
-value.
+They did not prove or disprove triviality for the immanantal polynomial of the distance matrix; it is still an open question.
+
+To say that an operation is ``near trivial'' says that for large enough
+trees the operation will map most pairs of distinct trees to the same
+value despite not being relabellings of eachother. (The proportion of pairs with this property approaches 1)
 
 In particular the paper showed that the rate of approach is fairly slow, so as
-long as your trees are small enough or your use case is sufficiently permissive
-of collisions, or some combination of the two, these 5 measurements might still
-be viable.
+long as your trees are small enough and/or your use case is sufficiently permissive
+of collisions, these 5 measurements might still be viable.
 
-Otherwise these representations will not help.
+Otherwise these operations will not be useful representations of the tree.
 
 \section{Usage in This Project}
 
@@ -153,24 +152,25 @@ The following definitions are not used other than to define a binary tree.
 
 \begin{definition} Binary Tree
 
-	A graph is binary tree with $n$ leaves if and only if
+	A graph is a binary tree, or a tree with labels, if and only if
 	\begin{itemize}
 		\item there are no cycles
 		\item every node has exactly one predecessor, except one node called
 			the root, which has no predecessor
 		\item every node has either 0 children (a leaf) or 2 children
-			(a branch)
-		\item there are exactly $n$ leaves
+			(an interior vertex)
 	\end{itemize}
 \end{definition}
 
-For convenience we will also assume that the tree is labelled with leaves $1$
+For convenience we will also assume that the tree is labelled with interior verteces $1$
 through to $n-1$, hence leaves are labelled $n$ through to $2n-1$.
 
 Hence define $B$ to be the set of interior vertex (`branch') labels.
-\[\{b | b \in \mathds{Z}, 1 \leq b < n\}\]
+\[B := [n-1] := \{b | b \in \mathds{Z}, 1 \leq b \leq n-1\}\]
 Similarly $L$ to be the leaf labels.
-\[\{l | l \in \mathds{Z}, n \leq l < 2n-1\}\]
+\[L := [2n-1] \setminus [n-1]\]
+
+This notation: \[[n] = \{r|r\in\mathds{Z}, 1 \leq r \leq n\}\] will be used throughout this report for dealing with sets of vertex labels and matrix indeces.
 
 \section{Most Recent Common Ancestor}
 
@@ -205,12 +205,12 @@ ancestors for a given node.
 
 \section{Relabelling}
 
-Trees can be relabelled by injective functions on their node labels.
+Trees can be relabelled by injective operations on their vertex labels.
 
 \begin{definition} Relabel
 
-	We can use a permutation $\sigma \in S_{2n-1}$ to relabel a tree by taking
-	the group action of $S_{2n-1}$ on a graph.
+	We can use a permutation $\sigma \in \S_{2n-1}$ to relabel a tree by taking
+	the group action of $\S_{2n-1}$ on a graph.
 
 	\[
 		\relabel(\sigma, G) := \{(\sigma(i), \sigma(j)) | (i, j) \in G\}
@@ -218,40 +218,39 @@ Trees can be relabelled by injective functions on their node labels.
 \end{definition}
 
 Just as group actions give us a concept of relabelling, the orbits of these
-actions will give a set of trees that are relabellings of eachother.
+actions will give a set of labelled trees that are relabellings of eachother.
 
 This can give us an exhaustive set of trees with the same structure, which we
 can take to represent the structure itself:
 
-\begin{definition} Tree Structure
+\begin{definition} Trees Without Labels
 
-	The structure of a tree with $n$ leaves, is simply the orbit of that tree
-	under the $\relabel$ action of the group ${S_B}{S_L}$.
+	A tree without labels is an orbit under the $\relabel$ action of the group ${\S_B}{\S_L}$.
 
-	Similarly the group $S_B$ could be thought of as that tree without branch
-	labels, and $S_L$ as that tree without leaf labels.
+	Similarly a tree without leaf labels or interior labels is that of the groups $\S_L$ and $\S_B$ respectively.
+
+	In addition to this, given a tree with labels, \emph{that} tree without labels is the orbit of that tree. (Without labels, without leaf labels, without interior labels)
 \end{definition}
 
 \section{Representation}
 
-Our goal is to find measurements of trees that can identify if trees are
+Our goal is to find measurements of (operations on) trees with labels, that can identify if trees are
 relabellings of eachother, and potentially how close they are to being
 relabellings of eachother.
 
-Such a measurement would, at least, map trees with the same structure to the
-same values, and map trees with different structures to different values.
+Such a measurement would, at least, map trees which are the same without labels to the
+same values, and map trees which aren't, to different values.
 
 Hence we define the following concepts:
 
 \begin{definition} Covariance
 
-	An operation on binary trees is covariant, if it commutes with the relabel
-	group action on binary trees.
+	An operation on binary trees is covariant, if it commutes with some group actions.
 
 	I.e.\ if we map a set of trees $T$ to some set of objects $X$ via the
-	mapping $f$, then for any relabelling $\sigma \in \S_A\S_B$, it is true
+	mapping $f$, then for any relabelling $\sigma \in \S_L\S_B$, it is true
 	that $f \circ \sigma = \sigma \circ f$. (where in the LHS $\sigma$ is the
-	action of the permutation on $T$, and in the RHS it acts on $X$)
+	relabel action of the permutation on $T$, and in the RHS is some other action on $X$)
 \end{definition}
 
 If an operation is covariant then it not only forms a well defined mapping from
@@ -291,6 +290,13 @@ Not only that, the invariant maps we investigate happen to have a stronger
 failure condition as described in Matsen, which we will call ``near
 triviality'':
 
+
+It is worth noting that by taking the orbit of a tree, then applying an orbit map, immediately gives an invariant operation which will have the same injectivity properties that the original operation had.
+
+This means any injective covariant operation can be used to construct an operation with the properties we want, invariant with injective orbit maps, but we do not consider them, as the sets of objects are not capable of being used to derive a distance formula, and are not computationally scalable due to the combinatorics of large binary trees.
+
+As an extreme example we could simply take the orbit of a tree to be an invariant, injective representation of the tree, but each orbit would be a set with $n!(n-1)!$ binary trees in it.
+
 \begin{definition} Near-Trivial
 
 	An operation on binary trees is near trivial, if and only if the proportion
@@ -321,28 +327,22 @@ There is another way of representing a tree without its branch labels, which is
 by representing it as a hierarchy based on sets of leaves under a node.
 
 [briefly define hierarchies and maybe argue for their equivalence to trees
-without branch labels]
+without branch labels, along with other concepts like transitive reduction and anything else used for injectivity proofs.
+at this stage dont do these parts rigorously, it just needs to be mentioned]
 
-\chapter{Constructing Measurements of the Algebra}
+\chapter{Tree Algebras and Consequent Operations}
 
-\section{Background}
+\section{Tree Algebras}
 
-The paper ``Ubiquity of synonymity'' dealt with 3 different matrix
-representations of trees: the adjacency matrix, laplacian matrix, and distance
-matrix.
-These representations are interesting, since relabellings of the tree result
-in similar matrices, so their spectra will not change.
-This means the spectra are themselves a representation of the tree, but the
-paper shows that these representations are not fair, and in fact `approach'
-triviality as the number of leaves increases.
-
-A motivation indicated by the paper is to derive a distance function between
+A motivation indicated by the Matsen paper is to derive a distance function between
 the structure of two trees.
 Such a function would still have potential use if it was derived from an unfair
 representation, but the result that representations become near trivial means
 most trees would also have zero distance
 As such while it would be nice to have a fair representation, it is crucial
 that it is at least substantially non-trivial.
+
+[Where should this paragraph actually go]
 
 The Tas Phylo group has shown in another paper that trees can be represented as
 an algebra of matrices, and that this algebra is commutative.
@@ -427,7 +427,7 @@ The reason for this is that we can construct a hierarchy which is equivalent to 
 
 This means that if two sequences of basis matrices are different, then the trees they were constructed from must also be different, though they may simply be relabellings.
 
-It can be shown that any orbit maps that come from the action of subgroups of $\S_A\S_B$ will also be injective.
+It can be shown that any orbit maps that come from the action of subgroups of $\S_L\S_B$ will also be injective.
 
 The algebra itself will not have this full injectivity, but its orbit maps under specifically $\S_B$ will be injective.
 
@@ -448,16 +448,17 @@ We shall therefore refer to these as the Algebra's eigenvectors.
 With this in place, we consider the spectra of the matrices in the algebra.
 When representing each tree as a single matrix, comparing the spectra of these
 matrices was a simple matter of comparing the multiplicity of each eigenvalue.
+
 This could be thought of as either comparing the spectrum as a multiset, or as
 a sorted sequence of values.
-Then since the order of the eigenvectors doesn't matter, we can freely relabel
-trees without changing their representation.
-%     I keep changing my wording, I should try to stick to the original wording
-% of the reference papers. "invariance under relabelling" etc.
+
+Note that we will call these \underline{unordered} representations of the spectrum, even though the sorted list is ordered in a sense. Additionally, spectra are ordered if not specified otherwise.
+
+Then since the order of the eigenvectors doesn't matter for an unordered spectrum, we can freely relabel
+trees without changing their corresponding spectrum. (invariance)
 
 We, on the other hand, are considering a multidimensional space of matrices,
-and it might be nice to have this same property of invariance under
-relabelling.
+and it would be nice to attempt to construct an invariant operation with it.
 As such we might consider the set of sorted spectra of the whole algebra.
 
 This representation seems to be useful, but once we consider the simultaneous
@@ -479,24 +480,18 @@ vector space.
 \end{definition}
 
 
-This will not apply to the sorted image, e.g. $<1, 1> - <0, 1> = <1, 0>$
-	% <tuple> notation?
+This will not apply to the sorted image, e.g. $(1, 1) - (0, 1) = (1, 0)$
 
-This spectral space will be invariant under relabelling, up to permutation of
-the axes of the space.
+This spectral space will be covariant, with a group action that permutes the axes of the space based on the permutation's effect on leaf labels, and ignores its effect on interior labels.
 
-Additionally, since it was constructed from the algebra and not from an ordered
-basis, it will be invariant under branch relabelling.
+[Note that the ordering of the eigenvectors is free anyway, so covariance doesn't really apply since you can already permute the axes without relabelling the tree.... our spectral space isn't well defined in that way]
 
 This seems like a promising representation; if we could find a convenient
-measurement of the space to get rid of the axis labels, that would be very
+measurement of the space to get rid of the label information implicit in the ordering of the axes, that would be very
 useful.
 
 One such measurement would be the dimension, but when we consider the dimension
 we find something else about these spaces\ldots
-
-% note that it might look like we have strayed from any sense of distance formula
-% measurements later on will have potential for distance formulae
 
 \section{Subspace Triviality}
 
@@ -517,16 +512,16 @@ the following:
 
 The exact matrices are simply the above with added rows and columns of zero.
 The spectrum of any matrix in this form should be the same as any other, and in
-the sorted-list representation they will be, but our vector space will
-distinguish these, in the same way that $<0, 1>$ and $<1, 0>$ are linearly
-independent.
+unordered representations they will be, but our vector space will
+distinguish these, in the same way that $(0, 1)$ and $(1, 0)$ are linearly
+independent, but the same when sorted.
 
 This means that symmetries in the tree might have created interesting
 redundancies in the set of sorted spectra, but our vector space will not
 reflect these symmetries in the same way.
 
 In particular if we say that the number of leaves on the original tree is $n$,
-then our algebra will be generated from $n-1$ internal nodes, and will be a set
+then our algebra will be generated from $n-1$ internal vertices, and will be a set
 of $n \times n$ matrices.
 
 This means that the vector space will be an $n-1$ dimensional subspace of
@@ -571,7 +566,7 @@ the eigenvector of all 1s, since the algebra has zero row-sum.
 As such we do not lose any information by removing this column, and getting a
 square $(n-1) \times (n-1)$ matrix.
 We could do the same for the eigenvector and get an $n \times (n-1)$ matrix,
-but obviously this has the opposite effect.
+but obviously this has the opposite effect of creating an oblong matrix.
 
 These matrices are not invariant under relabelling:
 \begin{itemize}
@@ -581,11 +576,9 @@ These matrices are not invariant under relabelling:
 \end{itemize}
 
 It seems like either of these matrices on their own would be enough to
-reconstruct the algebra, and hence the tree, so on their own they are
-interesting representations of a tree.
-Further still, measurements that are invariant under the row/column
-permutations above have potential for distinguishing tree-shapes as was
-originally desired.
+reconstruct the tree, so on their own they are interesting representations of a tree.
+
+Further still, by continuing the process of applying covariant operations, we could find a method of distinguishing tree-shapes as originally desired, i.e. an invariant operation with injective orbit maps.
 
 One clear possibility is to take the determinant of either of these matrices,
 and remove the effect of row/column permutations with an absolute value.
@@ -639,11 +632,10 @@ derive here.
 
 Then if we consider a vertex in such a tree, and suppose that:
 \begin{itemize}
-	\item its descendents are in the range $(l, l + x + y]$,
-	\item its left child's descendents are in the range $(l, l + x]$,
-	\item its right child's are in the range $(l + x, l + x + y]$
+	\item its left child's descendents are in the range $[l + x]\setdifference[l]$,
+	\item its right child's are in the range $[l + x + y]\setdifference[l+x]$
 \end{itemize}
-where the above ranges are taken to be $subset \mathds{Z}$, then we can infer the following basis matrix corresponding to this vertex:
+then we can infer the following basis matrix corresponding to this vertex:
 
 \begin{definition} The $M$ form of a basis matrix
 
@@ -1126,14 +1118,15 @@ matrix form, take two trees with 4 leaves:
 	0 & 0 & 0 & -2
 \end{matrix} \right] \]
 
-\chapter{Deciding Fairness}
+\chapter{Injectivity of Orbit Maps}
 
 \section{Ubiquity in Eigenvalue Matrix}
 
-As we will see, this eigenvalue matrix can be used to reconstruct the tree \emph{with labels}, and so we would like to remove some more information to reach our goal of having a finite representation of tree shapes.
+As we will see, this eigenvalue matrix can be used to reconstruct the tree without interior labels, but \emph{with leaf labels}, and so we would like to remove some more information to reach our goal of having a finite representation of tree shapes.
 
+The first guess would be the determinant, but now that we know the eigenvalue matrix can be made upper triangular, this means we are really considering an operation on the unordered spectrum of the eigenvalue matrix.
 
-\begin{lemma} Exchange Property of Determinant
+\begin{lemma} Exchange Property of Spectrum
 
 	If two binary trees have eigenvalue matrices with the same unordered
 	spectrum, then they also have the exchange property.
@@ -1178,16 +1171,14 @@ A simple search gives these trees:
 
 So we have near-triviality.\qed
 
-The above search was done in haskell with code at the following locations:
+The above search was done in haskell with code that can be found at the following locations:
 
 \url{https://github.com/spiveeworks/treeshapes/blob/master/det_of_values.hs/}
 
 \url{https://github.com/spiveeworks/treeshapes/blob/master/Tree.hs/}
 
-One consequence of this result is that any measurement which is a symmetric
-function of the diagonal, such as the determinant or the trace, will be at
-least as likely to coincide as the spectrum itself, and so these functions will
-also be near-trivial.
+One consequence of this result is that any operation which is a symmetric
+function of the diagonal, such as the determinant or the trace, will also be near-trivial, since the spectra will already be the same most of the time.
 
 Two notable cases outside of this are, the trace of the eigenvalue matrix when
 not triangular, and the \emph{ordered} spectrum of the eigenvalue matrix.
@@ -1209,8 +1200,14 @@ to make both the trace and the determinant larger.
 
 \begin{theorem-wip} Fairness of eigenvalue matrix.
 
-	Construction of the eigenvalue matrix distinguishes and is invariant under tree shapes without leaf labels.
+	The group $\S_L$ and the operation of constructing eigenvalue matrices, give injective orbit maps.
 \end{theorem-wip}
+
+Proof.
+
+We will show this injectivity by reconstructing a partial order which will give a tree once transitively reduced.
+
+This tree will have arbitrary leaf labels which is why we can only show the orbit maps are injective.
 
 The eigenvalue matrix has 3 non-redundant sets of data in it:
 \begin{itemize}
@@ -1227,12 +1224,9 @@ So the first thing one could do is decompose the matrix into those 3 functions.
 Define $W$ to be the matrix of eigenvalues, \emph{without the zero-rowsum
 column}, and with negated (and hence positive) entries.
 
-Define $I$ to be the set of integers $1$ thru $n-1$, i.e. $\mathds{Z} \cap [1,
-n-1]$
-
-\[\mathit{Size}(i) := \max\{W_{ij} | j \in I\}\]
-\[\mathit{Col}: I \rightarrow I\]
-\[\forall i \in I, W_{i \mathit{Col}(i)} = \mathit{Size}(i)\]
+\[\mathit{Size}(i) := \max\{W_{ij} | j \in [n-1]\}\]
+\[\mathit{Col}: [n-1] \rightarrow [n-1]\]
+\[\forall i \in [n-1], W_{i \mathit{Col}(i)} = \mathit{Size}(i)\]
 \[j \preccurlyeq i \Leftrightarrow W_{i \mathit{Col}(j)} > 0\]
 
 $\mathit{Col}$ is well defined since we know $\mathit{Size}(i)$ is the unique
@@ -1248,14 +1242,14 @@ On the other hand, one can use the $\mathit{Size}$ function, by taking the two
 largest descendants as the children of each node, again supplemented with
 leaves until each node has 2 children.
 
-We know that this is in fact the original tree, as we've shown that the
-eigenvalues of each matrix correspond to the structure of the tree.
-% TODO show that the eigenvalues of each matrix correspond to the structure of
-% the tree a bit more rigorously
+We know that this would in fact be the original tree, as we've shown that the
+eigenvalues of each basis matrix correspond to the descendance relation on the tree exactly as we have reconstructed.
+
+This means that the orbit map must be injective.\qed
 
 \begin{theorem-wip} Fairness of eigenvector matrix.
 
-	Construction of the eigenvector matrix distinguishes and is invariant under tree shapes without \emph{branch} labels.
+	The group $\S_B$ and the operation of constructing eigenvector matrices, give injective orbit maps.
 \end{theorem-wip}
 
 The construction here is simple, if we use the eigenvector column indeces as
@@ -1264,7 +1258,13 @@ labels for the internal nodes, then the partial order is defined as:
 \Rightarrow V_{ij_2} > 0 \]
 
 Then as before each node neads to be supplemented with any leaves, taking their
-labels from the row indeces of $V$.
+labels from the row indeces of $V$ that each new leaf must correspond to.
+
+This should also give us the tree we want, showing that the orbit maps must be injective.\qed
+
+Without explicit definitions of transitive reduction or leaf supplementation, and without explicit proof this tree sits inside the correct orbit, or is even a tree at all, this proof is somewhat incomplete.
+
+This injectivity result has taken all of the previous work to \emph{discover}, but should this result be published it would require this completely separate set of constructions to prove, which is beyond the scope of what this project has achieved.
 
 \chapter{loose notes}
 
