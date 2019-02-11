@@ -158,9 +158,9 @@ The following definitions are not used other than to define a binary tree.
 	A graph is a binary tree, or a tree with labels, if and only if
 	\begin{itemize}
 		\item there are no cycles
-		\item every node has exactly one predecessor, except one node called
+		\item every vertex has exactly one predecessor, except one vertex called
 			the root, which has no predecessor
-		\item every node has either 0 children (a leaf) or 2 children
+		\item every vertex has either 0 children (a leaf) or 2 children
 			(an interior vertex)
 	\end{itemize}
 \end{definition}
@@ -192,7 +192,7 @@ This notation: \[[n] = \{r|r\in\Z, 1 \leq r \leq n\}\] will be used throughout t
 \end{definition}
 
 The ancestry gets its name from the fact that it is an ordered list of
-ancestors for a given node.
+ancestors for a given vertex.
 
 \begin{definition} Common Ancestry
 
@@ -298,30 +298,25 @@ It is worth noting that by taking the orbit of a tree, then applying an orbit ma
 
 This means any injective covariant operation can be used to construct an operation with the properties we want, invariant with injective orbit maps, but we do not consider them, as the sets of objects are not capable of being used to derive a distance formula, and are not computationally scalable due to the combinatorics of large binary trees.
 
-As an extreme example we could simply take the orbit of a tree to be an invariant, injective representation of the tree, but each orbit would be a set with $n!(n-1)!$ binary trees in it.
+As an extreme example we could simply take the orbit of a tree to be an invariant, injective operation on the tree, but each orbit would be a set with $n!(n-1)!$ binary trees in it.
 
 \begin{definition} Near-Trivial
 
 	An operation on binary trees is near trivial, if and only if the proportion
-	of pairs of trees that have different tree shapes but map to the same
-	result, out of all pairs with different shapes, approaches 1, as the tree
+	of pairs of trees that are different even without labels, but that give the same result,
+	out of all pairs that are different without labels, approaches 1, as the tree
 	size $n$ gets larger.
 \end{definition}
 
 \begin{definition} Exchange
 
 	Given an invariant, non-injective operation on binary trees, a pair of
-	tree structures $A$ and $B$ `exchange' if they not only map to the same
-	result under the function, but any tree that contains $A$ as a subtree will
+	trees without labels $A$ and $B$ `exchange' if they not only map to the same
+	result under the operation, but any tree that contains $A$ as a subtree will
 	map to the same result as that tree with $A$ replaced with $B$.
 \end{definition}
 
-[Note that subtrees break our assumption that branch labels are 1..n-1, and
-leaf labels are n..2n-1. It may be useful to explicitly define subtrees in
-terms of \emph{tree structure} along with this concept of ``replacing'' a
-subtree]
-
-In Matsen it was shown that if a pair of trees exchange then the function for
+In Matsen it was shown that if a pair of trees exchange then the operation for
 which they exchange will be near-trivial.
 
 \section{Additional Concepts}
@@ -334,9 +329,6 @@ We also use other graphs/relations to reconstruct trees based on our knowledge o
 
 	The symmetric group $\S_A$ is the set of maps which are bijections on the finite set $A$.
 \end{definition}
-
-There is another way of representing a tree without its branch labels, which is
-by representing it as a hierarchy based on sets of leaves under a node.
 
 There are a few group-theoretic concepts such as characters of a permutation, group actions, orbits, and row/column permutations of a matrix, which are not defined here but are crucial to many constructs described in this paper.
 
@@ -356,11 +348,8 @@ Additionally some concepts are important for explaining some of the background r
 
 A motivation indicated by the Matsen paper is to derive a distance function between
 the structure of two trees.
-Such a function would still have potential use if it was derived from an unfair
-representation, but the result that representations become near trivial means
-most trees would also have zero distance
-As such while it would be nice to have a fair representation, it is crucial
-that it is at least substantially non-trivial.
+Such a function would still have potential use if it was derived from an operation that wasn't injective, but should it be near-trivial then most trees will have zero distance.
+As such while it would be nice to have an operation with injective orbit maps, it is crucial that it isn't near-trivial.
 
 [Where should this paragraph actually go]
 
@@ -373,7 +362,7 @@ The algebra is as follows:
 
 	Given a binary tree with $n$ leaves, that tree's algebra is an
 	$n-1$-dimensional commutative algebra spanned by $n-1$ basis matrices
-	corresponding to the $n-1$ branch nodes of the tree.
+	corresponding to the $n-1$ branch verteces of the tree.
 
 	The basis matrix $r$ in a tree with $n$ leaves has the following
 	definition:
@@ -515,8 +504,6 @@ we find something else about these spaces\ldots
 
 \section{Subspace Triviality}
 
-%When looking at this vector space, the most obvious measurement we could apply
-%to it is its dimension.
 It will turn out that its dimension is always the same as the algebra, which
 seems odd when the algebra seems to contain matrices that are just relabellings
 of eachother.
@@ -552,7 +539,7 @@ eigenvector of all 1s, and an eigenvalue of zero, which means the subspace will
 simply be $\C^{n-1}$ extended by a zero, regardless of the tree in
 question.
 
-Not only is the vector space not a fair representation of the binary tree, it
+Not only is the vector space not a fair representation (operation with injective orbit maps) of the binary tree, it
 is a trivial representation.
 
 The proof of this will come later once we have the eigenvalues in closed form.
@@ -569,7 +556,7 @@ As such we shall consider the basis that was used to define the algebra.
 
 If the original tree has $n$ leaves, then we have
 \begin{itemize}
-	\item $n-1$ internal nodes
+	\item $n-1$ internal verteces
 	\item $n-1$ basis matrices
 	\item $n$ common eigenvectors
 	\item $(n-1) \times n$ eigenvalues
@@ -591,7 +578,7 @@ but obviously this has the opposite effect of creating an oblong matrix.
 These matrices are not invariant under relabelling:
 \begin{itemize}
 	\item relabelling leaves permutes the rows of the eigenvector matrix
-	\item relabelling internal nodes permutes the rows of the eigenvalue matrix
+	\item relabelling internal verteces permutes the rows of the eigenvalue matrix
 	\item relabelling eigenvectors permutes the columns of both matrices.
 \end{itemize}
 
@@ -680,7 +667,7 @@ A path ending in either $v_L$ or $v_R$ must contain $r$ penultimately, since ver
 Since such a cycle is also impossible, it must \emph{not} be the case that $j$ descends from $v_L$, and similarly we would see that $i$ does not descend from $v_R$.
 In other words, neither one is a common ancestor of $i$ and $j$, and yet $r$ \emph{is} a common ancestor, so $r$ is the most recent common ancestor.
 
-\begin{lemma} The $M$ form matrix on a node $r$ is a basis matrix
+\begin{lemma} The $M$ form matrix on a vertex $r$ is a basis matrix
 \end{lemma}
 
 	%\[ L_{ij} = \begin{cases}
@@ -736,7 +723,7 @@ So for example if we take the tree:
 
 \Tree[. 1 [. [.i [. 2 3 ] 4 ] 5 ]]
 
-Then the node marked $i$ will have
+Then the vertex marked $i$ will have
 $l=1$, $x=2$, $y=1$
 which gives
 \[ L_i = M = \left[ \begin{matrix}
@@ -799,7 +786,7 @@ vertices with more descendants:
 
 \begin{lemma} Child Eigenvalues
 
-	The basis matrix corresponding to each node, has an eigenvalue equal to the
+	The basis matrix corresponding to each vertex, has an eigenvalue equal to the
 	negative of the order of one child subtree, with an eigenspace whose
 	dimension is at least one less than the order of the other child subtree.
 	(And vice versa)
@@ -973,8 +960,8 @@ As such we define another kind of vector, related to suo vectors:
 
 \begin{definition} Leaf Vector
 
-	The leaf vector of a node is the vector whose $i$th coordinate is 1 if the
-	$i$th leaf is a descendant of the node, and 0 otherwise.
+	The leaf vector of a vertex is the vector whose $i$th coordinate is 1 if the
+	$i$th leaf is a descendant of the vertex, and 0 otherwise.
 \end{definition}
 
 \begin{lemma} Eigenvector Orthogonality
@@ -1027,7 +1014,7 @@ diagonalize the algebra. \qed
 	tree:
 	\begin{itemize}
 		\item ${L_i}{v_i} = -(x_i + y_i)v_i$ noting $v_i$ and $L_i$ come from
-			the same node
+			the same vertex
 		\item ${L_i}{v_j} = -{x_i}{v_j}$ if $j$ sits on the left subtree under
 			$i$
 		\item ${L_i}{v_j} = -{y_i}{v_j}$ if $j$ sits on the right subtree under
@@ -1051,7 +1038,7 @@ So we have the exact value of our $n$ eigenvectors and eigenvalues.
 	In other words there is a relabelling of any tree that gives it an upper triangular spectrum.
 \end{theorem}
 
-If we can order these nodes so that their children always come after them, then
+If we can order these verteces so that their children always come after them, then
 the matrix of eigenvalues will be upper triangular. (Once the zero-rowsum
 column is removed)
 
@@ -1142,7 +1129,7 @@ matrix form, take two trees with 4 leaves:
 
 \section{Ubiquity in Eigenvalue Matrix}
 
-As we will see, this eigenvalue matrix can be used to reconstruct the tree without interior labels, but \emph{with leaf labels}, and so we would like to remove some more information to reach our goal of having a finite representation of tree shapes.
+As we will see, this eigenvalue matrix can be used to reconstruct the tree without interior labels, but \emph{with leaf labels}, and so we would like to remove some more information to reach our goal of having a convenient representation of trees without labels.
 
 The first guess would be the determinant, but now that we know the eigenvalue matrix can be made upper triangular, this means we are really considering an operation on the unordered spectrum of the eigenvalue matrix.
 
@@ -1213,7 +1200,7 @@ The determinant seems quite unrelated to path lengths, but will still measure
 tree balance for similar reasons to the trace.
 
 As an example the two trees of order four have a spectrum of $(4, 2, 2)$ and
-$(4, 3, 2)$ respectively.  The larger nodes in unbalanced trees can be expected
+$(4, 3, 2)$ respectively.  The larger verteces in unbalanced trees can be expected
 to make both the trace and the determinant larger.
 
 \section{Fairness of Matrices}
@@ -1232,14 +1219,14 @@ This tree will have arbitrary leaf labels which is why we can only show the orbi
 The eigenvalue matrix has 3 non-redundant sets of data in it:
 \begin{itemize}
 	\item The most extreme number in a row indicates the number of leaves under
-		a node
+		a vertex
 	\item The column of that most extreme number indicates the eigenvector
 		labelling
-	\item Nonzero cells indicate that that column's node exists in the subtree
-		of that row's node
+	\item Nonzero cells indicate that that column's vertex exists in the subtree
+		of that row's vertex
 \end{itemize}
 
-So the first thing one could do is decompose the matrix into those 3 functions.
+So the first thing one could do is decompose the matrix into those 3 concepts.
 
 Define $W$ to be the matrix of eigenvalues, \emph{without the zero-rowsum
 column}, and with negated (and hence positive) entries.
@@ -1255,12 +1242,12 @@ eigenvalue of $L_i$.
 $\preccurlyeq$ is the original tree understood as a partial order, but with
 leaves removed.
 
-Simply reconstructing the tree from this partial order, and supplementing nodes
+Simply reconstructing the tree from this partial order, and supplementing verteces
 with leaves until it is a binary tree, should give the original tree.
 
-On the other hand, one can use the $\mathit{Size}$ function, by taking the two
-largest descendants as the children of each node, again supplemented with
-leaves until each node has 2 children.
+On the other hand, one can use the $\mathit{Size}$ map, by taking the two
+largest descendants as the children of each vertex, again supplemented with
+leaves until each vertex has 2 children.
 
 We know that this would in fact be the original tree, as we've shown that the
 eigenvalues of each basis matrix correspond to the descendance relation on the tree exactly as we have reconstructed.
@@ -1273,11 +1260,11 @@ This means that the orbit map must be injective.\qed
 \end{theorem-wip}
 
 The construction here is simple, if we use the eigenvector column indeces as
-labels for the internal nodes, then the partial order is defined as:
+labels for the internal verteces, then the partial order is defined as:
 \[j_1 \preccurlyeq j_2 \Leftrightarrow \forall i \in J, V_{ij_1} > 0
 \Rightarrow V_{ij_2} > 0 \]
 
-Then as before each node neads to be supplemented with any leaves, taking their
+Then as before each vertex needs to be supplemented with any leaves, taking their
 labels from the row indeces of $V$ that each new leaf must correspond to.
 
 This should also give us the tree we want, showing that the orbit maps must be injective.\qed
@@ -1286,90 +1273,75 @@ Without explicit definitions of transitive reduction or leaf supplementation, an
 
 This injectivity result has taken all of the previous work to \emph{discover}, but should this result be published it would require this completely separate set of constructions to prove, which is beyond the scope of what this project has achieved.
 
-\chapter{loose notes}
+\chapter{Further Notes}
 
-\section{proof notes}
+\section{Sets of Eig Matrices}
 
-theres a bunch of things that could help some of the proofs above become more
-clear.
+Our eigenvalue and eigenvector matrices are both constructed with an undefined ordering on the columns, which means there is still a set of $n!$ equivalent representations, so our original goal of removing complexity from the orbit representation of a tree shape to get something that might be suitable for a distance function, is in a sense no closer to being attained.
 
-First eigenvectors with non-zero eigenvalues have $v_{j} \neq 0 \Rightarrow$
-leaf $j$ is a descendant of node $i$
+That said one of them may still achieve this result in the future, or have another application.
 
-In particular for the most extreme/unique eigenvalue the converse is also true.
+It seems like the sorted diagonal of an upper triangular eigenvalue matrix might still be able to recover the tree without leaf labels, which could in fact reduce the size of the sets. Surely this is a known representation? Subtree sizes sorted by preorder traversal
 
-Recovering tree structure from the vectors is then simple.
-Recover the set of leaf descendants from above, then all if the descendants of
-one node are also descendants of another node, the former is a descendant of
-the latter.
+\section{Invariance}
 
-Further we know that none of these can be proportional to eachother, or they
-would belong to the same node, and hence be the same anyway.
-The exception here is the zero-rowsum eigenvector, but we know none of the
-constructed eigenvectors are proportional to that because its eigenvalue is
-always 0.
+Removing the permutation information from either of our eig matrices without creating a trivial representation is still an interesting question.
 
-Second the non-unique eigenspaces of the matrices correspond to tree structure
-as well.
-Leaves that dont descend from the node form an eigenspace on 0.
-leaves that descend from the left child, restricted to have a sum of zero, form
-An eigenspace on the size of the left subtree.
-Likewise for the right child.
+Perhaps some kind of matrix norm won't have the exchange property?
 
-Then each of the eigenvectors in our set will sit in one of these three spaces
-for all other nodes in the tree, which is very convenient.
+What could be done with the eigenvector matrix? Investigating its spectrum found that the eigenvectors are orthogonal, so the matrix is orthogonal once its columns are normalized.
 
-This gives us the structural information we need to show that the eigenvalue
-matrix is a fair representation of the original tree.
+What would happen if you split the eigenvector matrix into another orthogonal matrix transforming the basis of a sequence of 2d rotations?
 
-The fact that a binary tree can be reconstructed from the tree of its internal
-nodes is probably a reference?
-
-\section{minimum determinant}
-
-each row of a balanced tree with $2^n$ leaves, is $2^i$ lots of $2^{n-i}$\ldots
-right?
-
-\section{Meeting 2}
-
-the determinants seem to measure how balanced the trees are, from maximally
-balanced: (expr?), to maximally unbalanced: n!
-
-The original question still remains, how much could be removed from the matrix
-without breaking injectivity. Could you reconstruct the tree from an ordered
-spectrum?
-
-\section{eig matrices}
-
-why do the two matrices need leaf/branch info to recover the original? could
-you get rid of it? if you cant is it impossible to use these matrices to
-distinguish tree shapes?
-
-well chosen matrix norms of either matrix might stifle the exchange property
-matrix differences might be useful once the matrices have been sorted? but then
+matrix differences might be useful once the matrices have been sorted somehow? but then
 a tree will not have 0 distance from its own relabellings.
 
-\section{eigenvalue polynomials}
+\section{Redundancy of Root}
+
+Information at the root of a binary tree is redundant, since it is always just the parent of the two trees described in the rest of your tree representation.
+This applies to every representation we have discovered here:
+\begin{itemize}
+	\item a second column can be removed from the eigenvector matrix
+	\item a second column and a row can be removed from the eigenvalue matrix, all without removing any information.
+	\item the basis we construct of a tree's algebra always sums to a matrix of all 1s/$-(n-1)$s, so one basis matrix is redundant
+\end{itemize}
+
+If one column of the eigenvectors can be removed because the original matrices always coordinate-sum to zero, then it seems like these further columns can be removed for a reason somehow related to the eigenvectors always coordinate-summing to zero.
+
+(A neat parallel to the $V_+$, $V_-$ distinction which the later section "Symmetries under relabelling" explores.)
+
+It is not clear however that this would help our original goal. If anything it is the redundancies of our representation that seem to open up possibilities for matrix theoretic measurements of a tree.
+
+\section{Eigenvector Polynomials}
 
 the eigenvectors can be discovered through a polynomial process, by looking at
 the product of each pair of basis matrices, as a linear combination of other
-basis matrices
+basis matrices, this technique does not save any time in this case but is certainly more general to some extent.
 
-\section{hierarchies}
+\section{Geometry of Eigenvectors and Eigenvalues}
 
-the eigenvector subset argument could be quite simple if described in terms of
-hierarchies?
+We have constructed a lot of vectors in this process, do they have a geometric interpretation?
+
+Relabelling trees may transform volumes in some way.
+
+\section{General bases of the algebra}
+
+Our constructs use a specific basis of the algebra, the unique basis with 0 or 1 non-diagonal entries.
+
+Is it possible to create constructs with more general choice of basis?
+
+The determinant of the eigenvalue matrix is preserved by the special linear group acting on the original basis, for example.
 
 \section{Symmetries under relabelling}
 
-The eig spaces of the basis matrices all have a sum of zero, except the all-1
+The eigenspaces of the basis matrices all have a coordinate sum of zero, except the all-1
 eigenvector
 
-corresponds exactly to the symmetries of the tree under the action of leaf
+This corresponds exactly to the symmetries of the tree under the action of leaf
 relabellings.
 
-In particular each node is agnostic to relabellings of its left subtree, and of
-its right subtree, so each node restricts the eigenspaces only with local
+In particular each vertex is agnostic to relabellings of its left subtree, and of
+its right subtree, so each vertex restricts the eigenspaces only with local
 knowledge, until eventually the full structure of the tree has been
 represented.
 
@@ -1381,9 +1353,9 @@ permutations, but not on arbitrary value permutations.
 
 $f(X) = f(K_1XK_2)$
 
-Then we can take further restrictions like ``must be homogeneous'' or whatever.
+Then we can take further restrictions like ``must be homogeneous'' for example.
 
-Under the wrong restrictions, we should get imanant polynomials out, but
-steering clear of that might give something useful?
+Under what would be perhaps the wrong restrictions, we should get imanant polynomials out, but
+steering clear of that might give something useful.
 
 \end{document}
