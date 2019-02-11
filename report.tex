@@ -5,6 +5,9 @@
 
 % used when defining tree shapes as orbits of a group action
 \DeclareMathOperator{\relabel}{relabel}
+\DeclareMathOperator{\S}{\mathcal{S}}
+\DeclareMathOperator{\C}{\mathds{C}}
+\DeclareMathOperator{\Z}{\mathds{Z}}
 
 \newtheorem{definition}{Definition}
 \newtheorem{theorem-wip}{Theorem [Sketch]}
@@ -166,11 +169,11 @@ For convenience we will also assume that the tree is labelled with interior vert
 through to $n-1$, hence leaves are labelled $n$ through to $2n-1$.
 
 Hence define $B$ to be the set of interior vertex (`branch') labels.
-\[B := [n-1] := \{b | b \in \mathds{Z}, 1 \leq b \leq n-1\}\]
+\[B := [n-1] := \{b | b \in \Z, 1 \leq b \leq n-1\}\]
 Similarly $L$ to be the leaf labels.
 \[L := [2n-1] \setminus [n-1]\]
 
-This notation: \[[n] = \{r|r\in\mathds{Z}, 1 \leq r \leq n\}\] will be used throughout this report for dealing with sets of vertex labels and matrix indeces.
+This notation: \[[n] = \{r|r\in\Z, 1 \leq r \leq n\}\] will be used throughout this report for dealing with sets of vertex labels and matrix indeces.
 
 \section{Most Recent Common Ancestor}
 
@@ -209,8 +212,8 @@ Trees can be relabelled by injective operations on their vertex labels.
 
 \begin{definition} Relabel
 
-	We can use a permutation $\sigma \in \S_{2n-1}$ to relabel a tree by taking
-	the group action of $\S_{2n-1}$ on a graph.
+	We can use a permutation $\sigma \in \S_[2n-1]$ to relabel a tree by taking
+	the group action of $\S_[2n-1]$ on a graph.
 
 	\[
 		\relabel(\sigma, G) := \{(\sigma(i), \sigma(j)) | (i, j) \in G\}
@@ -321,14 +324,31 @@ subtree]
 In Matsen it was shown that if a pair of trees exchange then the function for
 which they exchange will be near-trivial.
 
-\section{Hierarchy}
+\section{Additional Concepts}
+
+We use permutation groups to understand the operations on binary trees which we will derive.
+
+We also use other graphs/relations to reconstruct trees based on our knowledge of which verteces are descendants of which.
+
+\begin{definition} Symmetric Group
+
+	The symmetric group $\S_A$ is the set of maps which are bijections on the finite set $A$.
+\end{definition}
 
 There is another way of representing a tree without its branch labels, which is
 by representing it as a hierarchy based on sets of leaves under a node.
 
-[briefly define hierarchies and maybe argue for their equivalence to trees
-without branch labels, along with other concepts like transitive reduction and anything else used for injectivity proofs.
-at this stage dont do these parts rigorously, it just needs to be mentioned]
+There are a few group-theoretic concepts such as characters of a permutation, group actions, orbits, and row/column permutations of a matrix, which are not defined here but are crucial to many constructs described in this paper.
+
+Additionally some concepts are important for explaining some of the background research of this project as well as for finishing the final theorems sketched in this report:
+\begin{itemize}
+	\item Immanantal polynomials of a matrix
+	\item Subtrees, subtree substitution
+	\item Trees as a hierarchy on their leaves
+	\item Trees as a partial order on their verteces
+	\item Acquiring the directed graph of a tree from the above via transitive reduction
+	\item Adding leaves to a tree which isn't binary, to form a tree which is binary.
+\end{itemize}
 
 \chapter{Tree Algebras and Consequent Operations}
 
@@ -463,7 +483,7 @@ As such we might consider the set of sorted spectra of the whole algebra.
 
 This representation seems to be useful, but once we consider the simultaneous
 diagonalization of the algebra, we see a missed opportunity to generate a
-homomorphism from the algebra to the vector space $\mathds{C}^n$.
+homomorphism from the algebra to the vector space $\C^n$.
 That is, by taking the algebra's eigenvectors under some ordering, and
 generating the spectra of matrices corresponding to these eigenvectors, we will
 get the property that the spectrum of a linear combination of matrices is the
@@ -525,11 +545,11 @@ then our algebra will be generated from $n-1$ internal vertices, and will be a s
 of $n \times n$ matrices.
 
 This means that the vector space will be an $n-1$ dimensional subspace of
-$\mathds{C}^n$.
+$\C^n$.
 
 Unfortunately since the matrices all have zero row-sum, that corresponds to an
 eigenvector of all 1s, and an eigenvalue of zero, which means the subspace will
-simply be $\mathds{C}^{n-1}$ extended by a zero, regardless of the tree in
+simply be $\C^{n-1}$ extended by a zero, regardless of the tree in
 question.
 
 Not only is the vector space not a fair representation of the binary tree, it
@@ -539,7 +559,7 @@ The proof of this will come later once we have the eigenvalues in closed form.
 
 \section{Parameter-Free Representations}
 
-While it is not useful to map the whole algebra to $\mathds{C}^n$, if we just
+While it is not useful to map the whole algebra to $\C^n$, if we just
 look at the basis it turns out to be more useful.
 % addressing the fact that other bases exist than the one the algebra was
 % defined with? once we're talking about determinants this can be dealt with
@@ -1054,7 +1074,7 @@ space:
 \begin{theorem} The spectral space is trivial.
 
 	Given a binary tree with $n$ leaves, its spectral space will always be some
-	axis relabelling of $\mathds{C}^{n-1} \times \{0\}$.
+	axis relabelling of $\C^{n-1} \times \{0\}$.
 \end{theorem}
 
 Proof.
@@ -1071,7 +1091,7 @@ first coordinate, and all other $n-1$ coordinates free.
 
 As a result the spectral space of any tree will be some axis relabelling of
 such a vector space, which means an axis relabelling of
-$\mathds{C}^{n-1}\times\{0\}$
+$\C^{n-1}\times\{0\}$
 
 \section{Eigenvalue Examples}
 
