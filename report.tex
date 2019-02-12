@@ -43,7 +43,7 @@ The adjacency matrix takes the tree as an undirected graph, represented simply
 as an adjacency matrix.
 
 The laplacian matrix is the adjacency matrix but with the diagonal changed so
-that the matrix has zero row and column sum. (i.e. the sum of each row is
+that the matrix has zero row and column sum. (i.e.\ the sum of each row is
 subtracted from the diagonal)
 
 The distance matrix is a smaller matrix where $D_{ij}$ is the length of the
@@ -59,8 +59,8 @@ will come to define as covariance.
 
 This means that the immanant and spectrum have a lot of potential as
 representations, since they can potentially give the same result under
-permutation, but different results if two trees really have different 'shapes'.
-(i.e. they aren't relabellings of eachother)
+permutation, but different results if two trees really have different `shapes'.
+(i.e.\ they aren't relabellings of eachother)
 
 Of course this does not turn out to be the case, which is the point of the
 paper.
@@ -458,7 +458,7 @@ the same way, then they will have the exact same definition:
 		\sigma(r)\\ -\sum_{k \neq i} L\prime_{ik} & i = j
 \end{cases} \]
 
-This gives us covariance.\qed
+This gives us covariance.\qed{}
 
 The construction of the algebra itself, as the span of these matrices, will
 also be covariant, which can be shown with the same reasoning.
@@ -490,8 +490,7 @@ rest of the tree is determined.
 
 The reason for this is that we can construct a hierarchy which is equivalent to
 the tree, and then apply transitive reduction to recover the tree itself.
-
-\qed
+\qed{}
 
 This means that if two sequences of basis matrices are different, then the
 trees they were constructed from must also be different, though they may simply
@@ -662,8 +661,8 @@ reconstruct the tree, so on their own they are interesting representations of a
 tree.
 
 Further still, by continuing the process of applying covariant operations, we
-could find a method of distinguishing tree-shapes as originally desired, i.e.
-an invariant operation with injective orbit maps.
+could find a method of distinguishing tree-shapes as originally desired,
+i.e.\ an invariant operation with injective orbit maps.
 
 One clear possibility is to take the determinant of either of these matrices,
 and remove the effect of row/column permutations with an absolute value.
@@ -739,7 +738,7 @@ descends from $v_L$, and similarly we would see that $i$ does not descend from
 $v_R$.
 
 In other words, neither one is a common ancestor of $i$ and $j$, and yet $r$
-\emph{is} a common ancestor, so $r$ is the most recent common ancestor.\qed
+\emph{is} a common ancestor, so $r$ is the most recent common ancestor.\qed{}
 
 \begin{lemma} The $M$ form matrix on a vertex $r$ is a basis matrix
 \end{lemma}
@@ -905,7 +904,7 @@ Further still, we can get $x-1$ of the former and $y-1$ of the latter by moving
 the -1 coordinate to any other row $\leq$ x, and the above argument would still
 apply.
 
-Then the spans of these vectors gives eigenspaces of the size we require.\qed
+Then the spans of these vectors gives eigenspaces of the size we require.\qed{}
 
 
 This gives $x-1$ repeated eigenvalues of $-y$, $y-1$ repeated eigenvalues of
@@ -994,13 +993,13 @@ This is our last eigenvalue, corresponding to the following eigenvector:
 
 $\langle y, y\ldots y, -x, -x\ldots -x\rangle$
 
-where $y$ is repeated $x$ times, and $-x$ is repeated $y$ times.\qed
+where $y$ is repeated $x$ times, and $-x$ is repeated $y$ times.\qed{}
 
 \begin{theorem} The Basis Matrices are Diagonalizable \end{theorem}
 
 The previous lemmas mean that all of our basis vectors are fully
 diagonalizable, as we have $x+y$ nontrivial eigenvectors, plus $n-x+y$ empty
-rows, giving a total of $n$ eigenvectors.\qed
+rows, giving a total of $n$ eigenvectors.\qed{}
 
 \section{Simultaneous Diagonalization}
 
@@ -1028,7 +1027,7 @@ eigenvectors corresponding to the simple eigenvalues of the suo vectors.
 
 This implies that the suo vectors are all proportional to one of these
 eigenvectors, which in turn implies that the suo vectors are themselves
-eigenvectors of the whole algebra. \qed
+eigenvectors of the whole algebra. \qed{}
 
 These vectors have a few interesting properties, such as coordinates adding up
 to zero, and subtrees' leaves having equal coordinates.
@@ -1067,7 +1066,7 @@ non-zero coordinates, so their product will be zero.
 Finally if one vector is the zero-rowsum vector, then again the product will
 simply be the sum of the other vector's coordinates, which is zero.
 
-Therefore all the eigenvectors we have constructed are orthogonal. \qed
+Therefore all the eigenvectors we have constructed are orthogonal. \qed{}
 
 \begin{theorem} Simultaneous Diagonalization
 
@@ -1082,7 +1081,7 @@ Additionally they are orthogonal to eachother, and hence clearly not linearly
 dependent.
 
 As such we have $n$ linearly independent eigenvectors and can simultaneously
-diagonalize the algebra. \qed
+diagonalize the algebra. \qed{}
 
 \begin{lemma} Structural Eigenvalues
 
@@ -1128,7 +1127,7 @@ definition satisfies this requirement.
 So if the interior vertices are labelled 1 through to n by one of the preorder
 traversals of the tree, and the eigenvectors are given the same labels as the
 vertex they correspond to, then the matrix of eigenvalues we construct will be
-upper triangular.\qed
+upper triangular.\qed{}
 
 One consequence of this is that the determinant will simply be
 
@@ -1244,7 +1243,7 @@ One of the subtrees is already the same in both $T_1\prime$ and $T_2\prime$,
 and the order of the whole tree is the same, so by assuming that the other
 subtree has the same spectrum in each of $T_1\prime$ and $T_2\prime$ as an
 inductive hypothesis, then clearly the spectrum of the whole trees will be the
-same as well.\qed
+same as well.\qed{}
 
 \begin{theorem} Near Triviality of Determinant
 
@@ -1260,7 +1259,7 @@ A simple search gives these trees:
 \Tree[.    [. [. 1 2 ] [. 3 4 ]] [. 5   [. [. 6 [. 7 [. 8 9 ]]]]]]
 \Tree[. [. [. [. 1 2 ] [. 3 4 ]]    5 ] [. [. 6 [. 7 [. 8 9 ]]]]]
 
-So we have near-triviality.\qed
+So we have near-triviality.\qed{}
 
 The above search was done in haskell with code that can be found at the
 following locations:
@@ -1342,7 +1341,7 @@ We know that this would in fact be the original tree, as we've shown that the
 eigenvalues of each basis matrix correspond to the descendance relation on the
 tree exactly as we have reconstructed.
 
-This means that the orbit map must be injective.\qed
+This means that the orbit map must be injective.\qed{}
 
 \begin{theorem-wip} Fairness of eigenvector matrix.
 
@@ -1360,7 +1359,7 @@ their labels from the row indeces of $V$ that each new leaf must correspond
 to.
 
 This should also give us the tree we want, showing that the orbit maps must be
-injective.\qed
+injective.\qed{}
 
 Without explicit definitions of transitive reduction or leaf supplementation,
 and without explicit proof this tree sits inside the correct orbit, or is even
@@ -1425,7 +1424,7 @@ removed for a reason somehow related to the eigenvectors always
 coordinate-summing to zero.
 
 (A neat parallel to the $V_+$, $V_-$ distinction which the later section
-"Symmetries under relabelling" explores.)
+``Symmetries under relabelling'' explores.)
 
 It is not clear however that this would help our original goal. If anything it
 is the redundancies of our representation that seem to open up possibilities
@@ -1484,13 +1483,14 @@ polynomials out, but steering clear of that might give something useful.
 \section{References}
 
 \begin{enumerate}
-	\item Matsen FA and Evans SN: Ubiquity of synonymity: almost all large
+	\item Matsen FA and Evans SN\@: Ubiquity of synonymity: almost all large
 		binary trees are not uniquely identified by their spectra or their
 		immanantal polynomials. \textit{Algorithms for Molecular Biology} 2012,
 		7:14
 	\item Work not yet published, by Tasmania Phylogeny group
-	\item Steel M: Phylogeny, Discrete and Random Processes in Evolution. p53.
-		\textit{University of Canterbury Christchurch, New Zealand} 2016
+	\item Steel M\@: Phylogeny, Discrete and Random Processes in Evolution.\ 
+		page 53. \textit{University of Canterbury Christchurch, New Zealand}
+		2016
 \end{enumerate}
 
 \end{document}
