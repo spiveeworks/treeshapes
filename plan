@@ -37,3 +37,37 @@ the eigenvalues and eigenvectors can be used to reconstruct the tree
 i think ill blindly just prepare this section of the presentation and work
 backwards once its been prepared.
 
+
+
+results:
+
+
+1.
+Any non-overlapping basis of the matrix algebra contains enough information to
+recover the tree itself.
+It's interesting that the algebra is virtually just as much of a binary tree as
+a graph of connected points is.
+
+2. each basis element is just a rectangle of 1s, with x coords being one
+subtree and y coords being another (too technical?)
+
+3. Each basis matrix has one simple eigenvalue, and so all of our eigenvectors
+correspond to a vertex on the tree in some way
+ - requires explanation of simultaneous diag
+
+4. The eigenvalue of each matrix/vector pair correspond to the location of the
+eigenvector relative to the matrix
+
+5. Since we are representing the eigenvalues as a matrix, this structural
+relation can be used to make the matrix upper triangular, without changing its
+spectrum or determinant
+once we do this its trace becomes the sackin index, a measurement of tree
+balance
+
+6. the eigenvectors are orthogonal, so measurements such as angle between
+vectors is trivial
+
+7. the eigenvalues and eigenvectors can each be used to reconstruct the tree
+so we have an unexpected and very novel representation of a tree!
+
+
