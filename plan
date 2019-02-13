@@ -37,7 +37,71 @@ the eigenvalues and eigenvectors can be used to reconstruct the tree
 i think ill blindly just prepare this section of the presentation and work
 backwards once its been prepared.
 
+intro:
 
+This project was ultimately about measuring binary trees.
+
+When dealing with binary trees there is a conflict, in that our concrete
+representations, typically as a graph, contain extra information, which we
+don't always want to measure.
+
+For example (pictures of balanced and unbalanced 4-tree) the distinction
+between a balanced tree, and an unbalanced tree, should not depend on the
+content within the verteces of the tree.
+
+Conceptually we can 'remove' labels from a graph, by taking the set of trees
+with the same label (picture from meeting, trees becoming the same shape)
+
+So back to tree measurements, when we define a measurement of tree shape such
+as balance, we typically define them as functions of a particular graph (tree
+being mapped to a number /\/\ |-> 2), so the property that we want, "invariance
+under relabelling", is that regardless of how you label the tree, you get the
+same result.
+Once you do this, your function can actually act on our unlabelled trees as
+well. (again /\/\ |-> 2)
+
+ubiquity:
+
+The project was in large part following the model of a 2012 paper: "Ubiquity of
+Synonymity: almost all large trees are not distinguished by theire spectra or
+immanantal polynomials"
+
+This paper was checking for an additional property of maps, that they are not
+only invariant, but also were able to distinguish between trees.
+(picture of trees with same measurement?)
+It found that the maps were so bad at distinguishing trees that the proportion
+of trees with the same spectrum or immanantal polynomial approached 1!
+
+Algebra:
+
+The other inspiration for this project was a small part of the work of
+Tasmania's phylogenetics group. As such some of the people here will be
+familiar with the representations used.
+
+The representation we were using was an algebra of matrices that essentially
+kept track of the pairs of leaves that had the same common ancestor. (3-tree
+example?) (do they need this info?)
+
+In this representation, we still have label-like information, in that we can
+swap the rows and columns to get trees that have the same structure but
+different representations (3-tree example)
+From an algebraic perspective though, these will be isomorphic, so that is
+promising.
+Ultimately what we want to do is remove this information somehow.
+
+Additionally this algebra is commutative, which gives us a very interesting
+property that when we take the eigenvalues of any matrix in the algebra, we can
+do it with a consistent set of eigenvectors.
+This is where the inspiration for the project came from, that by looking at the
+spectrum of an algebra of matrices, we could get a new representation of binary
+trees.
+(diagonalization examples in algebra?)
+
+The results of the project centred around this diagonalization, constructed as
+2 matrices
+(picture of matrices)
+in this one each column is an eigenvector, in this one each row is the spectrum
+of a basis matrix, and so each entry is an eigenvalue.
 
 results:
 
@@ -48,26 +112,24 @@ recover the tree itself.
 It's interesting that the algebra is virtually just as much of a binary tree as
 a graph of connected points is.
 
-2. each basis element is just a rectangle of 1s, with x coords being one
-subtree and y coords being another (too technical?)
-
-3. Each basis matrix has one simple eigenvalue, and so all of our eigenvectors
+2. Each basis matrix has one simple eigenvalue, and so all of our eigenvectors
 correspond to a vertex on the tree in some way
  - requires explanation of simultaneous diag
 
-4. The eigenvalue of each matrix/vector pair correspond to the location of the
+3. The eigenvalue of each matrix/vector pair correspond to the location of the
 eigenvector relative to the matrix
 
-5. Since we are representing the eigenvalues as a matrix, this structural
+4. Since we are representing the eigenvalues as a matrix, this structural
 relation can be used to make the matrix upper triangular, without changing its
 spectrum or determinant
 once we do this its trace becomes the sackin index, a measurement of tree
 balance
+Unfortunately almost all large trees end up having the same spectrum
 
-6. the eigenvectors are orthogonal, so measurements such as angle between
+5. the eigenvectors are orthogonal, so measurements such as angle between
 vectors is trivial
 
-7. the eigenvalues and eigenvectors can each be used to reconstruct the tree
+6. the eigenvalues and eigenvectors can each be used to reconstruct the tree
 so we have an unexpected and very novel representation of a tree!
 
 
