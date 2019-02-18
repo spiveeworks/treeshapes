@@ -8,3 +8,5 @@ formatVectors
 *.dvi
 *.log
 *.out
+
+.\~*#

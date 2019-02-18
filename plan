@@ -1,0 +1,40 @@
+
+It seems like the structure ive been suggested boils down to:
+
+3 sections that all:
+explain existing terms and discoveries
+explain why they matter
+explain our goal
+explain why it matters
+
+say what i achieved
+
+which has the effect of explaining what i achieved and why it matters
+
+
+so the actual structure is:
+
+1. whats a binary tree, whats a shape, whats a measurement
+2. what did matsen do
+3. what are the algebras im interested in, how do we use it
+4. what did i find out
+
+but i think that the end is the most important thing, everything else should be
+instrumental to that
+
+so first im going to write what i found out:
+
+the basis can be used to reconstruct the tree
+the basis is essentially just 2 rectangles of 1s
+there is an eigenvector corresponding to each vertex
+eigenvalues correspond to the side of the subtree the eigenvector corresponds
+  to
+the eigenvalues can be arranged to be upper triangular
+the eigenvectors are orthogonal
+the eigenvalues and eigenvectors can be used to reconstruct the tree
+ - nice link back to first discovery hey!
+
+i think ill blindly just prepare this section of the presentation and work
+backwards once its been prepared.
+
+(full notes written in presentation)

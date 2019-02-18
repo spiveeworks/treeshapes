@@ -1,0 +1,130 @@
+\documentclass{article}
+
+\usepackage{amsmath, amssymb, dsfont, qtree}
+
+\begin{document}
+
+\section{Trees With Labels}
+
+\Tree[. [. 1 2 ] [. 3 4 ] ]
+
+\Tree[. [. [. 1 2 ] 3 ] 4 ]
+
+\Tree[. 1 [. [. 2 3 ] 4 ] ]
+
+\Tree[. 1 [. 2 [. 3 4 ] ] ]
+
+\section{Trees Without Labels}
+
+[just edit the previous diagrams]
+
+\section{Measuring Shape}
+
+\Tree[. [. [. 1 2 ] 3 ] 4 ]
+$\mapsto 3$
+
+[edit it also for tree shape]
+
+\section{Ubiquity (1)}
+
+\Tree[. [. 3 4 ] 5 ]
+
+\[ \left[ \begin{matrix}
+	0 & 1 & 0 & 0 & 1\\
+	1 & 0 & 1 & 1 & 0\\
+	0 & 1 & 0 & 0 & 0\\
+	0 & 1 & 0 & 0 & 0\\
+	1 & 0 & 0 & 0 & 0
+\end{matrix} \right] \]
+
+\section{Covariance}
+
+\Tree[. 3 [. 4 5 ] ]
+
+\[ \left[ \begin{matrix}
+	0 & 1 & 1 & 0 & 0\\
+	1 & 0 & 0 & 1 & 1\\
+	1 & 0 & 0 & 0 & 0\\
+	0 & 1 & 0 & 0 & 0\\
+	0 & 1 & 0 & 0 & 0
+\end{matrix} \right] \]
+
+\section{Ubiquity (2)}
+
+[the matrix would have 13 rows???]
+
+\section{MRCA Algebra}
+
+\Tree[. [. 1 2 ] 3 ]
+
+\[ \left[ \begin{matrix}
+	-1 & 0  & 1\\
+	0  & -1 & 1\\
+	1  & 1  & -2
+\end{matrix} \right] \]
+
+\[ \left[ \begin{matrix}
+	-1 & 1  & 0\\
+	1  & -1 & 0\\
+	0  & 0  & 0
+\end{matrix} \right] \]
+
+\section{Covariance in MRCA Algebra}
+
+\Tree[. [. 1 2 ] 3 ]
+
+\[ \left[ \begin{matrix}
+	-(a+b) & a  & b\\
+	a  & -(a+b) & b\\
+	b  & b  & -2b
+\end{matrix} \right] \]
+
+\Tree[. 1 [. 2 3 ] ]
+
+\[ \left[ \begin{matrix}
+	-2b & b  & b\\
+	b  & -(a+b) & a\\
+	b  & a  & -(a+b)
+\end{matrix} \right] \]
+
+\section{Commuting}
+
+\[
+	\left[ \begin{matrix}
+		-(a+b) & a  & b\\
+		a  & -(a+b) & b\\
+		b  & b  & -2b
+	\end{matrix} \right]
+	\left[ \begin{matrix}
+		1 &  1 &  1\\
+		1 &  1 & -1\\
+		1 & -2 &  0
+	\end{matrix} \right]
+	=
+	\left[ \begin{matrix}
+		1 &  1 &  1\\
+		1 &  1 & -1\\
+		1 & -2 &  0
+	\end{matrix} \right]
+	\left[ \begin{matrix}
+		0 & 0  & 0\\
+		0  & -3b & 0\\
+		0  & 0  & -2a-b
+	\end{matrix} \right]
+\]
+
+\section{Eig Matrices}
+
+\[ \left[ \begin{matrix}
+	1 &  1 &  1\\
+	1 &  1 & -1\\
+	1 & -2 &  0
+\end{matrix} \right] \]
+\[ \left[ \begin{matrix}
+	0 & -3 & -1\\
+	0 &  0 & -2\\
+\end{matrix} \right] \]
+
+
+
+\end{document}
